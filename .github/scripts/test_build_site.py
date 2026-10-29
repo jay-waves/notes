@@ -45,13 +45,13 @@ class BuildTest(unittest.TestCase):
             entries = [{"source": "math/a&b/note.md", "url": "math/a&b/note.html", "kind": "Markdown"}]
             pages_index.generate(root, entries, build_site.PAGES)
             page = (root / "index.html").read_text(encoding="utf-8")
-            self.assertIn('href="_directory/math/"', page)
+            self.assertIn('href="math/"', page)
             self.assertNotIn("note.md", page)
-            child = (root / "_directory/math/index.html").read_text(encoding="utf-8")
+            child = (root / "math/index.html").read_text(encoding="utf-8")
             self.assertIn('href="a%26b/"', child)
-            nested = (root / "_directory/math/a&b/index.html").read_text(encoding="utf-8")
-            self.assertIn('href="../../../math/a%26b/note.html"', nested)
-            self.assertIn('href="../../../"', nested)
+            nested = (root / "math/a&b/index.html").read_text(encoding="utf-8")
+            self.assertIn('href="note.html"', nested)
+            self.assertIn('href="../../"', nested)
             self.assertNotIn('type="search"', page)
 
     def test_site_check(self):
@@ -71,6 +71,8 @@ class BuildTest(unittest.TestCase):
             build_site.plan([Path("a.md"), Path("a.typ")])
         with self.assertRaisesRegex(ValueError, "collision"):
             build_site.plan([Path("a.typ"), Path("a")])
+        with self.assertRaisesRegex(ValueError, "collision"):
+            build_site.plan([Path("a.typ"), Path("a/note.md")])
 
     def test_build_and_keep_previous_on_failure(self):
         with tempfile.TemporaryDirectory() as tmp:

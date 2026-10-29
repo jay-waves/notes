@@ -31,9 +31,13 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: jay-waves/ypst-template
-          ref: 0cd3b2358c0cdbebe13a7934c30d82f2ce531d63
           path: .github/.ypst-template
           persist-credentials: false
+      - name: Record Typst template commit
+        run: |
+          template_sha=$(git -C .github/.ypst-template rev-parse HEAD)
+          echo "TEMPLATE_COMMIT=$template_sha" >> "$GITHUB_ENV"
+          echo "Typst template commit: $template_sha"
       - name: Install Typst
         run: |
           curl -fsSL -o "$RUNNER_TEMP/typst.tar.xz" https://github.com/typst/typst/releases/download/v0.15.1/typst-x86_64-unknown-linux-musl.tar.xz
@@ -47,12 +51,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download 0.5.2 --repo jay-waves/lib.ts --pattern 'lib.comrak*linux*x86_64*.tar.xz' --dir "$RUNNER_TEMP"
-          archive=("$RUNNER_TEMP"/lib.comrak*linux*x86_64*.tar.xz)
-          test "${#archive[@]}" -eq 1
-          sha256sum "${archive[0]}"
+          gh api repos/jay-waves/lib.ts/releases/latest > "$RUNNER_TEMP/comrak-release.json"
+          tag=$(jq -er '.tag_name' "$RUNNER_TEMP/comrak-release.json")
+          asset=$(jq -er '[.assets[] | select(.name | test("^lib\\.comrak.*linux-x86_64\\.tar\\.xz$"))] | if length == 1 then .[0].name else error("expected exactly one Linux lib.comrak asset") end' "$RUNNER_TEMP/comrak-release.json")
+          digest=$(jq -er --arg name "$asset" '.assets[] | select(.name == $name) | .digest | select(startswith("sha256:")) | ltrimstr("sha256:")' "$RUNNER_TEMP/comrak-release.json")
+          [[ "$digest" =~ ^[0-9a-f]{64}$ ]]
+          gh release download "$tag" --repo jay-waves/lib.ts --pattern "$asset" --dir "$RUNNER_TEMP"
+          archive="$RUNNER_TEMP/$asset"
+          printf '%s  %s\n' "$digest" "$archive" | sha256sum --check
+          echo "lib.comrak release: $tag, asset SHA-256: $digest"
           mkdir "$RUNNER_TEMP/comrak"
-          tar -xJf "${archive[0]}" -C "$RUNNER_TEMP/comrak"
+          tar -xJf "$archive" -C "$RUNNER_TEMP/comrak"
           executable=$(find "$RUNNER_TEMP/comrak" -type f -name lib.comrak -print)
           test -n "$executable"
           test "$(printf '%s\n' "$executable" | wc -l)" -eq 1

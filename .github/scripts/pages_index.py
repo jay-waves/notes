@@ -16,7 +16,7 @@ def generate(root, entries, template_dir):
     template = (template_dir / "index.html").read_text(encoding="utf-8")
 
     def page_url(path):
-        return "_directory/" + "/".join(path) + "/" if path else ""
+        return "/".join(path) + "/" if path else ""
 
     def link(target, current):
         value = posixpath.relpath(target or ".", current or ".")

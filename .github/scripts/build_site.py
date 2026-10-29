@@ -22,6 +22,7 @@ MARKER = ".notes-site-output"
 def cache_fingerprint(args):
     """Fingerprint the compilers and template files that affect output."""
     digest = hashlib.sha256(b"notes-site-cache-v1\0")
+    digest.update(os.environ.get("TEMPLATE_COMMIT", "").encode("ascii"))
     paths = [Path(args.comrak).resolve(), Path(args.typst_wrapper).resolve(), Path(__file__).resolve()]
     typst = shutil.which("typst")
     if not typst:
@@ -82,8 +83,6 @@ def plan(files):
     claimed = {"index.html": "site index", "404.html": "site 404", MARKER: "site marker"}
     article_paths = {}
     for path in files:
-        if path.parts[0].casefold() == "_directory":
-            raise ValueError(f"Reserved site directory: {path}")
         ext = path.suffix.lower()
         kind = "Markdown" if ext in (".md", ".markdown") else "Typst" if ext == ".typ" else "Raw"
         if kind != "Raw":
@@ -97,6 +96,16 @@ def plan(files):
             raise ValueError(f"Output collision: {path} and {claimed[key]} -> {dest}")
         claimed[key] = path
         result.append((path, dest, kind))
+    directories = set()
+    for path in files:
+        parent = path.parent
+        while parent.as_posix() != ".":
+            directories.add(parent.as_posix().casefold())
+            parent = parent.parent
+    for directory in directories:
+        index = directory + "/index.html"
+        if index in claimed:
+            raise ValueError(f"Directory index collision: {directory}/ and {claimed[index]}")
     keys = set(claimed)
     for key in keys:
         parent = Path(key).parent
