@@ -30,14 +30,14 @@ def generate(root, entries, template_dir):
         for name, child in sorted(directory["directories"].items(), key=lambda item: item[0].casefold()):
             child_path = path + [name]
             url = link(page_url(child_path), current)
-            rows.append(f'<li class="directory"><a href="{url}">{html.escape(name)}/</a><span>Directory</span></li>')
+            rows.append(f'<li class="directory"><a href="{url}">{html.escape(name)}/</a></li>')
             render(child, child_path)
         for name, entry in sorted(directory["files"], key=lambda item: item[0].casefold()):
             relative = posixpath.relpath(entry["url"], current or ".")
             if entry["url"].endswith("/"):
                 relative += "/"
             url = html.escape(quote(relative, safe="/."), quote=True)
-            rows.append(f'<li class="file"><a href="{url}">{html.escape(name)}</a><span>{html.escape(entry["kind"])}</span></li>')
+            rows.append(f'<li class="file"><a href="{url}">{html.escape(name)}</a></li>')
         body = f'<ul>{"".join(rows)}</ul>' if rows else '<p class="muted">No files to display.</p>'
         crumbs = [f'<a href="{link("", current)}">notes</a>']
         for index, name in enumerate(path):
