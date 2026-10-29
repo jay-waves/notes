@@ -3,13 +3,13 @@
 
 #import theme: template, sidenote, theorem
 
-#show: template
-
 #set document(
   title: "经典力学",
   date: datetime.today(),
   keywords: ("robotics", "kinematics")
 )
+
+#show: template
 
 = kinematics 
 

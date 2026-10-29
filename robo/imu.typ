@@ -1,13 +1,13 @@
 #import "@local/ypst-template:0.1.0" as theme
 #import theme: theorem, definition, diagram, node, edge
 
-#show: theme.template
-
 #set document(
   title: [IMU Driven Systems],
   date: datetime.today(),
   keywords: ("robotics", "imu", "kinematics", "quaternion")
 )
+
+#show: theme.template
 
 #let bmat(..args) = math.mat(delim: "[", ..args)
 #let vecb(x) = math.upright(math.bold(x))

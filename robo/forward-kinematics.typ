@@ -2,13 +2,13 @@
 
 #import theme: template, sidenote, theorem
 
-#show: template
-
 #set document(
   title: "机器人运动学",
   date: datetime.today(),
   keywords: ("robotics", "kinematics")
 )
+
+#show: template
 
 #import "@preview/physica:0.9.8": pdv
 
