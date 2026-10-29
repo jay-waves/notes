@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 
 from pages_index import generate
 
@@ -81,6 +82,7 @@ def build(args):
         stage.mkdir()
         manifest = []
         failures = []
+        durations = []
         for source, dest, kind in entries:
             target = stage / dest
             if kind == "Raw":
@@ -94,7 +96,9 @@ def build(args):
                     if args.typst_font_path:
                         command.extend(["--font-path", str(Path(args.typst_font_path).resolve())])
                 print(f"Compiling {source}", flush=True)
+                started = time.monotonic()
                 result = subprocess.run(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace")
+                durations.append({"source": source.as_posix(), "kind": kind, "seconds": round(time.monotonic() - started, 3)})
                 if result.stdout:
                     print(result.stdout, end="", flush=True)
                 if result.stderr:
@@ -125,7 +129,7 @@ def build(args):
     print(f"Built site in {output}")
     report = Path(args.report).resolve() if args.report else output.parent / "site-build-report.json"
     report.parent.mkdir(parents=True, exist_ok=True)
-    report.write_text(json.dumps({"published": len(manifest), "failed": failures}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    report.write_text(json.dumps({"published": len(manifest), "failed": failures, "durations": durations}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Published {len(manifest)} files; skipped {len(failures)} failed documents. Report: {report}")
     return failures
 

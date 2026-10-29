@@ -73,6 +73,10 @@ jobs:
           for item in report["failed"]:
               name = item["source"].replace("|", "\\|").replace("\n", " ")
               print(f"- `{name}`: {item['reason']}")
+          print("\n### Slowest documents")
+          for item in sorted(report.get("durations", []), key=lambda item: item["seconds"], reverse=True)[:10]:
+              name = item["source"].replace("\n", " ")
+              print(f"- `{name}`: {item['seconds']:.2f}s")
           PY
       - name: Upload build report
         uses: actions/upload-artifact@v4
@@ -105,7 +109,7 @@ jobs:
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.API_TOKEN }}
           CLOUDFLARE_PAGES_PROJECT: ${{ vars.PAGES }}
         run: |
           test -n "$CLOUDFLARE_ACCOUNT_ID"
