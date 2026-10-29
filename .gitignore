@@ -18,6 +18,7 @@
 /.typst/
 /_site/
 /.notes-site-build-*/
+/site-build-report.json
 __pycache__/
 
 # 系统文件

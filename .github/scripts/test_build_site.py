@@ -1,6 +1,7 @@
 import argparse
 import tempfile
 import unittest
+import subprocess
 from pathlib import Path
 from unittest.mock import patch
 
@@ -34,15 +35,16 @@ class BuildTest(unittest.TestCase):
             (root / "b.typ").write_text("hello", encoding="utf-8")
             (root / "raw.txt").write_text("raw", encoding="utf-8")
             output = root / "_site"
-            args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None)
+            args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None, report=None)
             files = [Path("a.md"), Path("b.typ"), Path("raw.txt")]
 
-            def compile_stub(command, cwd, check):
+            def compile_stub(command, **kwargs):
                 stage = Path(command[command.index("--site-root") + 1])
                 source = Path(command[2] if command[0] == "comrak" else command[3])
                 page = stage / (source.stem + ".html") if command[0] == "comrak" else stage / source.stem / "index.html"
                 page.parent.mkdir(parents=True, exist_ok=True)
                 page.write_text("compiled", encoding="utf-8")
+                return subprocess.CompletedProcess(command, 0, "", "")
 
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=files), patch.object(build_site.subprocess, "run", side_effect=compile_stub):
                 build_site.build(args)
@@ -52,6 +54,22 @@ class BuildTest(unittest.TestCase):
                     with self.assertRaises(OSError):
                         build_site.build(args)
                 self.assertTrue((output / "a.html").is_file())
+
+    def test_failed_article_is_reported_and_omitted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            output = root / "_site"
+            args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None, report=None)
+            files = [Path("broken.typ"), Path("raw.txt")]
+            (root / "broken.typ").write_text("broken", encoding="utf-8")
+            (root / "raw.txt").write_text("raw", encoding="utf-8")
+            with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=files), patch.object(build_site.subprocess, "run", return_value=subprocess.CompletedProcess([], -11, "", "segmentation fault")):
+                failures = build_site.build(args)
+            self.assertEqual(failures[0]["source"], "broken.typ")
+            self.assertIn("-11", failures[0]["reason"])
+            self.assertNotIn("broken.typ", (output / "index.html").read_text(encoding="utf-8"))
+            self.assertTrue((output / "raw.txt").exists())
+            self.assertTrue((root / "site-build-report.json").exists())
 
 
 if __name__ == "__main__":

@@ -60,7 +60,27 @@ jobs:
           python3 .github/scripts/build_site.py \
             --comrak "$COMRAK_PATH" \
             --typst-wrapper .github/.ypst-template/typst.py \
-            --typst-font-path .github/.ypst-template/fonts
+            --typst-font-path .github/.ypst-template/fonts \
+            --report "$RUNNER_TEMP/site-build-report.json"
+      - name: Summarize skipped documents
+        run: |
+          python3 - "$RUNNER_TEMP/site-build-report.json" >> "$GITHUB_STEP_SUMMARY" <<'PY'
+          import json
+          import sys
+          report = json.load(open(sys.argv[1], encoding="utf-8"))
+          print("## Site build")
+          print(f"Published: {report['published']} · Skipped: {len(report['failed'])}")
+          for item in report["failed"]:
+              name = item["source"].replace("|", "\\|").replace("\n", " ")
+              print(f"- `{name}`: {item['reason']}")
+          PY
+      - name: Upload build report
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-build-report
+          path: ${{ runner.temp }}/site-build-report.json
+          if-no-files-found: error
+          retention-days: 7
       - name: Check generated URLs
         run: python3 .github/scripts/check_site.py _site
       - name: Upload preview

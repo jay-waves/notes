@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build a static notes site from Git-tracked and non-ignored files."""
 import argparse
+import json
 import os
 from pathlib import Path
 import shutil
@@ -79,6 +80,7 @@ def build(args):
         stage = Path(temporary) / "site"
         stage.mkdir()
         manifest = []
+        failures = []
         for source, dest, kind in entries:
             target = stage / dest
             if kind == "Raw":
@@ -92,9 +94,17 @@ def build(args):
                     if args.typst_font_path:
                         command.extend(["--font-path", str(Path(args.typst_font_path).resolve())])
                 print(f"Compiling {source}", flush=True)
-                subprocess.run(command, cwd=ROOT, check=True)
-                if not target.is_file():
-                    raise ValueError(f"Compiler did not create expected output: {target}")
+                result = subprocess.run(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace")
+                if result.stdout:
+                    print(result.stdout, end="", flush=True)
+                if result.stderr:
+                    print(result.stderr, end="", file=sys.stderr, flush=True)
+                if result.returncode != 0 or not target.is_file():
+                    reason = f"exit code {result.returncode}" if result.returncode else "expected output missing"
+                    failures.append({"source": source.as_posix(), "kind": kind, "reason": reason, "diagnostic": result.stderr[-4000:]})
+                    print(f"Skipping {source}: {reason}", file=sys.stderr, flush=True)
+                    target.unlink(missing_ok=True)
+                    continue
             url = dest.parent.as_posix() + "/" if kind == "Typst" else dest.as_posix()
             manifest.append({"source": source.as_posix(), "url": url, "kind": kind})
         shared = stage / "_shared" / "site"
@@ -112,7 +122,12 @@ def build(args):
             if backup.exists():
                 backup.rename(output)
             raise
-    print(f"Built {len(entries)} files in {output}")
+    print(f"Built site in {output}")
+    report = Path(args.report).resolve() if args.report else output.parent / "site-build-report.json"
+    report.parent.mkdir(parents=True, exist_ok=True)
+    report.write_text(json.dumps({"published": len(manifest), "failed": failures}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    print(f"Published {len(manifest)} files; skipped {len(failures)} failed documents. Report: {report}")
+    return failures
 
 
 def main():
@@ -121,6 +136,7 @@ def main():
     parser.add_argument("--comrak", default="lib.comrak", help="path to the site-mode lib.comrak executable")
     parser.add_argument("--typst-wrapper", default=os.environ.get("TYPST_WRAPPER", "E:/typst-template/typst.py"), help="path to typst.py")
     parser.add_argument("--typst-font-path", help="path to additional Typst fonts")
+    parser.add_argument("--report", help="path to JSON build report")
     args = parser.parse_args()
     try:
         build(args)
