@@ -6,7 +6,7 @@ on:
       deploy:
         description: Deploy a successful build to Cloudflare Pages
         type: boolean
-        default: false
+        default: true
       full_build:
         description: Recompile every document (including after resource changes)
         type: boolean
@@ -17,6 +17,10 @@ on:
 
 permissions:
   contents: read
+
+concurrency:
+  group: pages-build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -130,7 +134,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy))
     runs-on: ubuntu-latest
     environment: cloudflare-pages
     timeout-minutes: 15
