@@ -3,14 +3,23 @@
 import json
 import os
 import sys
+from urllib.error import HTTPError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 
 def api(url, token, method="GET"):
     request = Request(url, method=method, headers={"Authorization": f"Bearer {token}"})
-    with urlopen(request, timeout=30) as response:
-        result = json.load(response)
+    try:
+        with urlopen(request, timeout=30) as response:
+            result = json.load(response)
+    except HTTPError as error:
+        body = error.read().decode("utf-8", errors="replace")
+        try:
+            details = json.loads(body).get("errors", body)
+        except ValueError:
+            details = body
+        raise RuntimeError(f"Cloudflare {method} {url} failed (HTTP {error.code}): {details}") from error
     if not result.get("success"):
         raise RuntimeError(f"Cloudflare API request failed: {result.get('errors')}")
     return result
@@ -42,7 +51,7 @@ def main():
     deployments = []
     page = 1
     while True:
-        result = api(f"{base}/deployments?env=production&per_page=100&page={page}", token)
+        result = api(f"{base}/deployments?env=production&page={page}", token)
         deployments.extend(result["result"])
         if page >= result["result_info"]["total_pages"]:
             break

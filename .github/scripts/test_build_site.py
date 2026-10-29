@@ -1,10 +1,12 @@
 import argparse
+import io
 import json
 import tempfile
 import unittest
 import subprocess
 from pathlib import Path
 from unittest.mock import patch
+from urllib.error import HTTPError
 
 import build_site
 import check_site
@@ -13,6 +15,33 @@ import prune_deployments
 
 
 class BuildTest(unittest.TestCase):
+    def test_cleanup_reports_cloudflare_http_error_details(self):
+        error = HTTPError("https://example.org", 400, "Bad Request", {},
+                          io.BytesIO(b'{"errors":[{"code":1000,"message":"Invalid pagination"}]}'))
+        with patch.object(prune_deployments, "urlopen", side_effect=error):
+            with self.assertRaisesRegex(RuntimeError, "GET .*HTTP 400.*Invalid pagination"):
+                prune_deployments.api("https://example.org", "secret")
+
+    def test_cleanup_uses_default_page_size_and_reads_all_pages(self):
+        def deployment(id, date):
+            return {"id": id, "created_on": date, "environment": "production",
+                    "latest_stage": {"name": "deploy", "status": "success"}}
+        responses = [
+            {"result": {"canonical_deployment": {"id": "new"}}},
+            {"result": [deployment("new", "2026-03"), deployment("previous", "2026-02")],
+             "result_info": {"total_pages": 2}},
+            {"result": [deployment("old", "2026-01")], "result_info": {"total_pages": 2}},
+            {"success": True},
+        ]
+        env = {"CLOUDFLARE_ACCOUNT_ID": "account", "CLOUDFLARE_PAGES_PROJECT": "notes",
+               "CLOUDFLARE_API_TOKEN": "secret"}
+        with patch.dict(prune_deployments.os.environ, env), patch.object(prune_deployments, "api", side_effect=responses) as api:
+            prune_deployments.main()
+        self.assertTrue(api.call_args_list[1].args[0].endswith("?env=production&page=1"))
+        self.assertTrue(api.call_args_list[2].args[0].endswith("?env=production&page=2"))
+        self.assertTrue(api.call_args_list[3].args[0].endswith("/deployments/old"))
+        self.assertEqual(api.call_args_list[3].args[2], "DELETE")
+
     def test_deployment_cleanup_retains_current_and_previous_success(self):
         def deployment(id, date, status="success", env="production"):
             return {"id": id, "created_on": date, "environment": env,
