@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check that generated pages use deployable URLs for shared resources."""
 import ipaddress
+import posixpath
 from html.parser import HTMLParser
 from pathlib import Path
 import sys
@@ -37,7 +38,12 @@ def check(root):
             if parsed.scheme or parsed.netloc or not parsed.path:
                 continue
             path = unquote(parsed.path)
-            resolved = (root / path.lstrip("/") if path.startswith("/") else page.parent / path).resolve()
+            page_dir = page.parent.relative_to(root).as_posix()
+            if path.startswith("/"):
+                url_path = posixpath.normpath(path)
+            else:
+                url_path = posixpath.normpath("/" + page_dir + "/" + path)
+            resolved = (root / url_path.lstrip("/")).resolve()
             try:
                 resolved.relative_to(root)
             except ValueError:

@@ -7,6 +7,10 @@ on:
         description: Deploy a successful build to Cloudflare Pages
         type: boolean
         default: false
+      full_build:
+        description: Recompile every document (including after resource changes)
+        type: boolean
+        default: false
   pull_request:
   push:
     branches: [main]
@@ -21,6 +25,8 @@ jobs:
     steps:
       - name: Checkout notes
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - name: Checkout Typst template
         uses: actions/checkout@v6
         with:
@@ -55,13 +61,25 @@ jobs:
           "$executable" --help
       - name: Test build scripts
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+      - name: Restore compiled pages
+        uses: actions/cache/restore@v4
+        with:
+          path: .site-cache
+          key: notes-pages-v1-${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            notes-pages-v1-${{ runner.os }}-
       - name: Build site
+        env:
+          FULL_BUILD: ${{ inputs.full_build }}
         run: |
+          full=()
+          if [[ "$FULL_BUILD" == "true" ]]; then full+=(--full); fi
           python3 .github/scripts/build_site.py \
             --comrak "$COMRAK_PATH" \
             --typst-wrapper .github/.ypst-template/typst.py \
             --typst-font-path .github/.ypst-template/fonts \
-            --report "$RUNNER_TEMP/site-build-report.json"
+            --report "$RUNNER_TEMP/site-build-report.json" \
+            --cache-dir .site-cache "${full[@]}"
       - name: Summarize skipped documents
         run: |
           python3 - "$RUNNER_TEMP/site-build-report.json" >> "$GITHUB_STEP_SUMMARY" <<'PY'
@@ -69,7 +87,7 @@ jobs:
           import sys
           report = json.load(open(sys.argv[1], encoding="utf-8"))
           print("## Site build")
-          print(f"Published: {report['published']} · Skipped: {len(report['failed'])}")
+          print(f"Published: {report['published']} · Reused: {report.get('reused', 0)} · Skipped: {len(report['failed'])}")
           for item in report["failed"]:
               name = item["source"].replace("|", "\\|").replace("\n", " ")
               print(f"- `{name}`: {item['reason']}")
@@ -87,6 +105,12 @@ jobs:
           retention-days: 7
       - name: Check generated URLs
         run: python3 .github/scripts/check_site.py _site
+      - name: Save compiled pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/cache/save@v4
+        with:
+          path: .site-cache
+          key: notes-pages-v1-${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Upload preview
         uses: actions/upload-artifact@v4
         with:

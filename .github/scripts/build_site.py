@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build a static notes site from Git-tracked and non-ignored files."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -16,6 +17,42 @@ from pages_index import generate
 ROOT = Path(__file__).resolve().parents[2]
 PAGES = ROOT / ".github" / "pages"
 MARKER = ".notes-site-output"
+
+
+def cache_fingerprint(args):
+    """Fingerprint the compilers and template files that affect output."""
+    digest = hashlib.sha256(b"notes-site-cache-v1\0")
+    paths = [Path(args.comrak).resolve(), Path(args.typst_wrapper).resolve(), Path(__file__).resolve()]
+    typst = shutil.which("typst")
+    if not typst:
+        raise ValueError("Typst executable not found")
+    paths.append(Path(typst).resolve())
+    template = Path(args.typst_wrapper).resolve().parent
+    for name in ("lib.typ", "typst.toml", "html", "fonts", "tools"):
+        path = template / name
+        paths.extend(sorted(path.rglob("*")) if path.is_dir() else [path])
+    if args.typst_font_path:
+        path = Path(args.typst_font_path).resolve()
+        paths.extend(sorted(path.rglob("*")) if path.is_dir() else [path])
+    for path in paths:
+        if path.is_file():
+            digest.update(str(path.relative_to(template) if path.is_relative_to(template) else path.name).encode("utf-8"))
+            with path.open("rb") as file:
+                while chunk := file.read(1024 * 1024):
+                    digest.update(chunk)
+    return digest.hexdigest()
+
+
+def cached_changes(cache, fingerprint):
+    try:
+        metadata = json.loads((cache / "metadata.json").read_text(encoding="utf-8"))
+        if metadata["fingerprint"] != fingerprint or not (cache / "site" / "_shared").is_dir():
+            return None
+        result = subprocess.run(["git", "diff", "--no-renames", "--name-only", "-z", metadata["commit"], "--"], cwd=ROOT, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        untracked = subprocess.run(["git", "ls-files", "-z", "--others", "--exclude-standard"], cwd=ROOT, check=True, stdout=subprocess.PIPE)
+        return {os.fsdecode(item).replace("\\", "/") for item in (result.stdout + untracked.stdout).split(b"\0") if item}
+    except (OSError, KeyError, ValueError, subprocess.CalledProcessError):
+        return None
 
 
 def inputs(output):
@@ -78,19 +115,37 @@ def build(args):
         raise ValueError(f"Refusing to replace an unmanaged output directory: {output}")
     files = inputs(output)
     entries = plan(files)
+    cache = Path(args.cache_dir).resolve() if getattr(args, "cache_dir", None) else None
+    fingerprint = cache_fingerprint(args) if cache else None
+    changed = cached_changes(cache, fingerprint) if cache and not getattr(args, "full", False) else None
+    if changed is not None:
+        print(f"Incremental build: {len(changed)} changed paths", flush=True)
+    elif cache:
+        print("Full build: cache unavailable, incompatible, or explicitly bypassed", flush=True)
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix=".notes-site-build-", dir=output.parent) as temporary:
         stage = Path(temporary) / "site"
         stage.mkdir()
+        if changed is not None and (cache / "site" / "_shared").is_dir():
+            shutil.copytree(cache / "site" / "_shared", stage / "_shared", dirs_exist_ok=True)
         manifest = []
         failures = []
         durations = []
+        reused = 0
         for source, dest, kind in entries:
             target = stage / dest
             if kind == "Raw":
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(ROOT / source, target)
             else:
+                cached_page = cache / "site" / dest if changed is not None else None
+                if cached_page is not None and source.as_posix() not in changed and cached_page.is_file():
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(cached_page, target)
+                    reused += 1
+                    url = dest.parent.as_posix() + "/" if kind == "Typst" else dest.as_posix()
+                    manifest.append({"source": source.as_posix(), "url": url, "kind": kind})
+                    continue
                 if kind == "Markdown":
                     command = [args.comrak, "compile", str(ROOT / source), "--root", str(ROOT), "--site-root", str(stage)]
                 else:
@@ -129,10 +184,28 @@ def build(args):
                 backup.rename(output)
             raise
     print(f"Built site in {output}")
+    if cache:
+        commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, check=True, stdout=subprocess.PIPE, text=True).stdout.strip()
+        cache.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix="next-", dir=cache) as temporary:
+            next_cache = Path(temporary) / "site"
+            next_cache.mkdir()
+            shared_output = output / "_shared"
+            if shared_output.is_dir():
+                shutil.copytree(shared_output, next_cache / "_shared")
+            for source, dest, kind in entries:
+                if kind != "Raw" and (output / dest).is_file():
+                    (next_cache / dest).parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(output / dest, next_cache / dest)
+            old = cache / "site"
+            if old.exists():
+                shutil.rmtree(old)
+            next_cache.rename(old)
+        (cache / "metadata.json").write_text(json.dumps({"commit": commit, "fingerprint": fingerprint}) + "\n", encoding="utf-8", newline="\n")
     report = Path(args.report).resolve() if args.report else output.parent / "site-build-report.json"
     report.parent.mkdir(parents=True, exist_ok=True)
-    report.write_text(json.dumps({"published": len(manifest), "failed": failures, "durations": durations}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    print(f"Published {len(manifest)} files; skipped {len(failures)} failed documents. Report: {report}")
+    report.write_text(json.dumps({"published": len(manifest), "failed": failures, "durations": durations, "reused": reused}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    print(f"Published {len(manifest)} files; reused {reused}; skipped {len(failures)} failed documents. Report: {report}")
     return failures
 
 
@@ -143,6 +216,8 @@ def main():
     parser.add_argument("--typst-wrapper", default=os.environ.get("TYPST_WRAPPER", "E:/typst-template/typst.py"), help="path to typst.py")
     parser.add_argument("--typst-font-path", help="path to additional Typst fonts")
     parser.add_argument("--report", help="path to JSON build report")
+    parser.add_argument("--cache-dir", help="directory for incremental build state")
+    parser.add_argument("--full", action="store_true", help="recompile every document")
     args = parser.parse_args()
     try:
         build(args)
