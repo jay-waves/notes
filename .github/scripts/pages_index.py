@@ -1,6 +1,7 @@
 """Generate a catalogue from the build manifest."""
 import html
 import posixpath
+from datetime import datetime, timezone
 from urllib.parse import quote
 
 
@@ -48,7 +49,8 @@ def generate(root, entries, template_dir):
         stylesheet = html.escape(quote(posixpath.relpath("_shared/site/theme.css", current or "."), safe="/."), quote=True)
         content = (template.replace("<!-- CONTENT -->", body)
                    .replace("<!-- BREADCRUMBS -->", " / ".join(crumbs))
-                   .replace("<!-- STYLESHEET -->", stylesheet))
+                   .replace("<!-- STYLESHEET -->", stylesheet)
+                   .replace("<!-- UPDATED -->", datetime.now(timezone.utc).strftime("%b. %Y")))
         output = root / current / "index.html"
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(content, encoding="utf-8", newline="\n")

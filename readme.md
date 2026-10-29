@@ -6,7 +6,7 @@
 | ai          | intelligence            | 人工智能     |
 | *appx*      | appendices              | 附录         |
 | *assets*    | attachments             | 附件         |
-| db          | databases               | 分布式系统   |
+| db          | databases               | 数据库       |
 | econ        | economics               | 经济学       |
 | hw          | hardware                | 体系架构     |
 | langs       | languages               | 编程与编译   |
