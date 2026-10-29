@@ -45,6 +45,8 @@ def plan(files):
     claimed = {"index.html": "site index", "404.html": "site 404", MARKER: "site marker"}
     article_paths = {}
     for path in files:
+        if path.parts[0].casefold() == "_directory":
+            raise ValueError(f"Reserved site directory: {path}")
         ext = path.suffix.lower()
         kind = "Markdown" if ext in (".md", ".markdown") else "Typst" if ext == ".typ" else "Raw"
         if kind != "Raw":

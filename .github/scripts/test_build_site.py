@@ -7,9 +7,25 @@ from unittest.mock import patch
 
 import build_site
 import check_site
+import pages_index
 
 
 class BuildTest(unittest.TestCase):
+    def test_index_browses_one_directory_at_a_time(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            entries = [{"source": "math/a&b/note.md", "url": "math/a&b/note.html", "kind": "Markdown"}]
+            pages_index.generate(root, entries, build_site.PAGES)
+            page = (root / "index.html").read_text(encoding="utf-8")
+            self.assertIn('href="_directory/math/"', page)
+            self.assertNotIn("note.md", page)
+            child = (root / "_directory/math/index.html").read_text(encoding="utf-8")
+            self.assertIn('href="a%26b/"', child)
+            nested = (root / "_directory/math/a&b/index.html").read_text(encoding="utf-8")
+            self.assertIn('href="../../../math/a%26b/note.html"', nested)
+            self.assertIn('href="../../../"', nested)
+            self.assertNotIn('type="search"', page)
+
     def test_site_check(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
