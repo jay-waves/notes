@@ -9,9 +9,21 @@ from unittest.mock import patch
 import build_site
 import check_site
 import pages_index
+import prune_deployments
 
 
 class BuildTest(unittest.TestCase):
+    def test_deployment_cleanup_retains_current_and_previous_success(self):
+        def deployment(id, date, status="success", env="production"):
+            return {"id": id, "created_on": date, "environment": env,
+                    "latest_stage": {"name": "deploy", "status": status}}
+        entries = [deployment("new", "2026-03"), deployment("previous", "2026-02"),
+                   deployment("old", "2026-01"), deployment("failed", "2026-04", "failure"),
+                   deployment("preview", "2026-01", env="preview")]
+        self.assertEqual({d["id"] for d in prune_deployments.select_deletions(entries, "new")}, {"old", "failed"})
+        with self.assertRaises(ValueError):
+            prune_deployments.select_deletions(entries, "previous")
+
     def test_site_check_clamps_parent_paths_at_url_root(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -143,8 +155,12 @@ class BuildTest(unittest.TestCase):
             root = Path(tmp)
             output, cache = root / "_site", root / "cache"
             (cache / "site" / "_shared").mkdir(parents=True)
+            (cache / "site" / "_shared" / "typst" / "used").mkdir(parents=True)
+            (cache / "site" / "_shared" / "typst" / "stale").mkdir()
+            (cache / "site" / "_shared" / "site").mkdir()
+            (cache / "site" / "_shared" / "site" / "stale.js").write_text("old", encoding="utf-8")
             (cache / "site" / "unchanged").mkdir()
-            (cache / "site" / "unchanged" / "index.html").write_text("cached", encoding="utf-8")
+            (cache / "site" / "unchanged" / "index.html").write_text('<link href="../_shared/typst/used/theme.css">', encoding="utf-8")
             for name in ("unchanged.md", "changed.md", "raw.txt"):
                 (root / name).write_text(name, encoding="utf-8")
             args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None, report=None, cache_dir=str(cache), full=False)
@@ -163,7 +179,10 @@ class BuildTest(unittest.TestCase):
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=files), patch.object(build_site, "cache_fingerprint", return_value="v1"), patch.object(build_site, "cached_changes", return_value={"changed.md", "raw.txt"}), patch.object(build_site.subprocess, "run", side_effect=run_stub):
                 build_site.build(args)
             self.assertEqual(compiled, ["changed.md"])
-            self.assertEqual((output / "unchanged" / "index.html").read_text(), "cached")
+            self.assertIn("_shared/typst/used/theme.css", (output / "unchanged" / "index.html").read_text())
+            self.assertTrue((output / "_shared/typst/used").is_dir())
+            self.assertFalse((output / "_shared/typst/stale").exists())
+            self.assertFalse((output / "_shared/site/stale.js").exists())
             self.assertEqual((output / "raw.txt").read_text(), "raw.txt")
             self.assertTrue((cache / "site" / "changed" / "index.html").exists())
 

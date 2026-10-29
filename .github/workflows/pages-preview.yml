@@ -139,6 +139,7 @@ jobs:
     environment: cloudflare-pages
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v6
       - uses: actions/download-artifact@v4
         with:
           name: pages-preview
@@ -153,3 +154,9 @@ jobs:
           test -n "$CLOUDFLARE_API_TOKEN"
           test -n "$CLOUDFLARE_PAGES_PROJECT"
           npx --yes wrangler@4 pages deploy _site --project-name "$CLOUDFLARE_PAGES_PROJECT" --branch main
+      - name: Remove old production deployments
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.API_TOKEN }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.PAGES }}
+        run: python3 .github/scripts/prune_deployments.py
