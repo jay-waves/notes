@@ -73,6 +73,27 @@ class BuildTest(unittest.TestCase):
             build_site.plan([Path("a.typ"), Path("a")])
         with self.assertRaisesRegex(ValueError, "collision"):
             build_site.plan([Path("a.typ"), Path("a/note.md")])
+        with self.assertRaisesRegex(ValueError, "collision"):
+            build_site.plan([Path("a.c"), Path("a.c.html")])
+
+    def test_code_viewer_preserves_raw_and_escapes_content(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "nested" / "a.c"
+            source.parent.mkdir()
+            source.write_text('int x = 1 < 2;\n', encoding="utf-8")
+            output = root / "_site"
+            args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None, report=None)
+            with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=[Path("nested/a.c")]):
+                build_site.build(args)
+            self.assertEqual((output / "nested/a.c").read_text(encoding="utf-8"), source.read_text(encoding="utf-8"))
+            self.assertIn('href="a.c.html"', (output / "nested/index.html").read_text(encoding="utf-8"))
+            viewer = (output / "nested/a.c.html").read_text(encoding="utf-8")
+            self.assertIn('int x = 1 &lt; 2;', viewer)
+            self.assertIn('class="language-c"', viewer)
+            self.assertIn('src="../_shared/site/highlight.min.js"', viewer)
+            self.assertTrue((output / "_shared/site/highlight.min.js").is_file())
+            self.assertEqual(check_site.check(output), [])
 
     def test_build_and_keep_previous_on_failure(self):
         with tempfile.TemporaryDirectory() as tmp:
