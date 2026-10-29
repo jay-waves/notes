@@ -58,7 +58,7 @@ WHERE p1.vend_id = p2.vend_id AND p2.prod_id = 'hello';
 
 ## 2. Aggregation
 
-### 2.1 HAVING 
+### 2.1 GROUP BY ... HAVING 
 
 ```sql
 SELECT department, COUNT(*) AS cnt
@@ -66,6 +66,8 @@ SELECT department, COUNT(*) AS cnt
     GROUP BY department
     HAVING COUNT(*) > 5; -- HAVING 用于分组后筛选分组（过滤组）
 ```
+
+### 2.2 Aggregation Funcion
 
 聚合函数 | 作用 
 -------|------
@@ -76,6 +78,52 @@ SELECT department, COUNT(*) AS cnt
 `MAX(), MIN()` |
 `STDDEV()` | 计算标准差
 `VARIANCE()` | 计算方差
+
+### 2.3 GROUPING SETS
+
+自定义分组，如：
+
+```sql
+SELECT category, year, SUM(revenue)
+FROM movies
+GROUP BY GROUPING SETS (
+    (category, year), -- 每个类别、每年收入分组
+    (category),       -- 每个类别的总收入
+    ()                -- 所有电影的总收入
+);
+``` 
+
+等价于，逐级汇总 (ROLLUP): 
+
+```sql
+SELECT category, year, SUM(revenue)
+FROM movies
+GROUP BY ROLLUP (category, year);
+```
+
+同时得到明细、小计和总计：
+
+```
+category year revenue
+Action	2023	100
+Action	2024	200
+Action	NULL	300
+Comedy	2023	50
+Comedy	2024	80
+Comedy	NULL	130
+NULL	NULL	430
+```
+
+`GROUPING()` 用于返回某一列是否参数了当前分组 (`1` 表示没有参与当前分组，已经被汇总掉）。
+使用 `GROUPING` 判断，比用 `is NULL` 准确，因为原数据也可能有 `NULL`
+
+GROUPING SETS | GROUPING(category) | GROUPING(year) 
+-----|-------------|-------------
+(category, year) | 0 | 0
+(decade) | 0 | 1
+() | 1 | 1
+
+排序时也有用： `ORDER BY GROUPING(year), year`
 
 ## 3. UNION
 

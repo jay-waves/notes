@@ -22,7 +22,17 @@ ORDER BY ...
 逻辑与 | `WHERE xxx AND yyy`
 逻辑或 | `WHERE xxx OR yyy`
 集合 | `WHERE xxx (NOT) IN xxx`
-存在 | `WHERE xxx (NOT) exists`
+存在 | `WHERE () (NOT) exists ()`
+
+## FILTER 
+
+筛选，但是不过滤（删除）
+
+```sql
+SELECT
+    COUNT(*) FILTER (WHERE revenue > 10000) AS hits
+FROM ...
+```
 
 ## ORDER BY
 

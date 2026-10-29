@@ -82,9 +82,7 @@ Retina (视网膜) is covered by light receptors (i.e., cones & rods, 视锥细�
 
 ## 文本任务（非 LLM）
 
-* 翻译（LLM 前身）
-* 文本分类
-* 用户意图识别
+见 ai/nlp
 
 ## 传感器与时许任务
 

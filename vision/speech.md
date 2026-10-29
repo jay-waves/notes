@@ -1,7 +1,8 @@
 
 ## Acoustics
 
-Sound is a mechanical wave produced by vibrations.
+Sound is a mechanical wave produced by vibrations. 可以理解为多个连在一起的弹簧弹簧，声压是振幅，
+频率就是弹簧震动频率，第一个弹簧的震动会向后继续传递，就是声速。
 
 *Decibels (dB)* is a log unit expressing the ratio between two quantities, rather than an absolute 
 value. Sound Pressure Level (SPL, 声压级别):

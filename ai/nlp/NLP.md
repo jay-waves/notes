@@ -1,22 +1,47 @@
-自然语言处理 (NLP).
 
-**基本问题**
-- 形态 (Morphology, 词法): 研究词 (word) 由词素 (morphemes) 的构成问题, 词素包括屈折变化和构词法.
-- 语法 (Syntax): 语句结构及其变化.
-- 语义 (Semantics): 语句意义.
-- 语用 (Pragmatics): 研究上下文语境 (context).
-- 语音
+## LLM Training Pipline
 
-**主要困难**
-- 歧义 (ambiguity): 词法, 词性, 结构, 语义歧义
-- 未知语言现象: 新词: 流行词, 人名, 地名, 术语; 新含义, 新用法.
+Translation task (en -> zh_tr)
+* Pretraining: teaching the model to predict the next token in a sequence using a large bilingual 
+    corpus of text data
+* Supervised Fine-Tuning (SFT): refining the models's translation capabilities in general domains
+* Low-Rank Adaptation (LoRA): Efficientlly adapting the model's translation capabilities to 
+    specific domains (finance) without full fine-tuning
+* Direct Preference Optimization (DPO): further improving capabilities using pairs of choose/reject 
+    responses
 
-**研究方法**
-- 基于规则
-- 基于统计
+## NLP tasks
+
+NLP 主要指自然语言文本的处理。语言分析主要分为几个层次：词法、语法、语义、语用 (Lexical, Syntax, 
+Semantic、Pragmatics). [^1]
+
+[^1]: 这里略过 Morphology (形态学) 和 Lexicology (词汇学） 等传统语言学
+
+NLP 的主要困难是，词法、词义、结构都存在大量歧义 (ambiguity), 并且，语言本身也在不断发展，
+出现新的语言现象（流行词、术语、新含义或用法）。
+
+NLP 常见的任务：
+
+* 分词 (Tokenize)
+    * Tokenization and Word Embedding
+    * Lingua 短文本的语言识别
+    * BudouX 让中日韩文本在合适的语义位置换行
+    * SaT 没有可靠标点或换行混乱（OCR或转写处理后）的文本切分
+    * [flashtext](https://github.com/vi3k6i5/flashtex) 关键词识别替换
+* 语法与句法分析
+    * 词性标注
+    * 依存句法分析
+    * 共指消解 (Coreference Resolution)
+    * 关系抽取 (Relation Extraction)
+* 语义理解（分类、识别）
+    * 文本分类
+    * 语义相似度 (Semantic Textual Similarity STS)
+    * ftfy 乱码修复
+    * NER (Named Entity Recognition)
+* 检索和排序 (Retrieval)
+* Sqeuence-to-Sequence
+    * 翻译 (Machine Translation, MT)
+    * 文本纠错
+    * 文本摘要
 
 
-**基础知识**
-- [形式语言](../../math/toc/形式语言.md)
-- [概率论](../../math/prob/贝叶斯定理.md)
-- [信息论](../../math/infoth/熵.md)

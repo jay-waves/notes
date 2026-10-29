@@ -1,8 +1,28 @@
 
 > 感谢 GPT, :)
 
+## GPT Indexing & RAG
 
-Wizard Words: (GPT Prompts)
+> Retrieval is not ranking
+> 
+> When ChatGPT searches, it doesn't just copy Google's top 10. It rewrites your prompt into its own sub-queries (called fanout queries), pulls candidates from its search sources and its own cache, reranks them, and then opens a handful of pages to ground the answer. 
+> A page can be invisible on Google and still perform well in every one of those LLM steps.
+>
+> The fake data certainly didn't become true, but every citation made it look more trustworthy.
+>
+> LLMs have a strong preference for seeking out statistics when asked to write articles
+> A search-grounded piece of LLM-written content has a tight budget for latency and cost. The system fetches a few pages, pulls the relevant passages, and starts to write. 
+> Fact-checking doesn’t happen anywhere in the process.
+>
+> [Publish stats, get cited: The tactic that put my data all over the web - Peec AI](https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web)
+
+如何确保内容被网络服务商采集：
+* Google Search Console
+* AI bot activity (`?utm_source=xxx`)
+* Citation and visibility tracking
+* 
+
+## Wizard Words: (GPT Prompts)
 
 ### Coder: 
 

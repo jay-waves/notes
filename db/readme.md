@@ -1,5 +1,5 @@
 
-## 数据库系统
+## DBMS
 
 Database Management Systems (DBMS): 
 
@@ -22,7 +22,7 @@ Data Processing:
     decision support, batch and complex analytical queries (ad hoc. full table scans and large data query)
 * Vectors
 
-## 数据密集型程序
+## Data-Intensive Program
 
 数据密集型程序：
 
@@ -35,14 +35,42 @@ Data Processing:
 
 <img src="../assets/db/ddis-f1-1.avif" alt="ddis-f1-1" width="500">
 
-## Data Models 
+## Data (Storage) Models 
 
-* 关系型数据模型：SQL 
-* 文档型数据模型：Json (Self-Contained, Schema-less)
-* 对象型数据模型：Graph-based
+其他常见的数据存储与交换格式：
+* `*.sqlite, *.db` 各类 DBMS 的独占格式，存储关系型数据，一般按行存储 (row-oriented)。
+* `*.parquet` 按列存储 (column-oriented), 也适用关系型数据库，针对 OLAP 场景
+* `*.yaml, *.json` Self-Contained, Scheme-less. 存储文档型数据，信息局部性最好，文本，树形。 
+* `*.xml` 文本，复杂树形
+* `*.csv`, `*.excel` 文本
+* Graph-based (图数据库)
 
-SQL 和 NoSQL 的核心区别是：SQL 可以通过 [Normalization](../relational-theory/normalization.md) 来减少信息冗余，加速搜索、修改，适合多对多关系。而 NoSQL 直接存储文本，信息的局部性更高（对人类阅读更友好），但不利于索引，适合一对多关系。
+### Row-oriented Storage
 
+```
++-----------------------------------+
+| Row 1: | ID=1 | Name=Alice | Age=25 |
+| Row 2: | ID=2 | Name=Bob   | Age=30 |
+| Row 3: | ID=3 | Name=Carol | Age=28 |
++-----------------------------------+
+
+Physical layout:
+[1, Alice, 25] [2, Bob, 30] [3, Carol, 28]
+```
+
+### Column-oriented Storage
+
+```
++-----------------------------------+
+| ID:   | 1     | 2   | 3     |
+| Name: | Alice | Bob | Carol |
+| Age:  | 25    | 30  | 28    |
++-----------------------------------+
+
+Physical layout:
+[1, 2, 3] [Alice, Bob, Carol] [25, 30, 28]
+ <-- ID -->  <---- Name ---->  <-- Age -->
+```
 
 ### JSON 
 

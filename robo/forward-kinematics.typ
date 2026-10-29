@@ -513,7 +513,6 @@ or body coordinates.
 
 == Inverse Velocity Kinematics
 
-
 = Closed-chain Kinematics
 
 详见 @lynch2019 ，此处略

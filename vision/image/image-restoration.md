@@ -3,10 +3,9 @@
 | 思想 | 1.不考虑降质原因<br>2.不一定逼近原图像 |  1.建立降质模型<br>2.建立评判复原效果的客观标准    |
 | 目的 | [可懂度](图像基础概念.md#图像质量评价)      | [保真度](图像基础概念.md#图像质量评价)        |
 | 方法 |  灰度修正(时域), 滤波(频域)   | 线性滤波复原 |
+| 场景 / 灰度修正、平滑去噪、锐化、Retinex | 运动模糊 | 
 
-## 图像增强
-
-### 1 灰度修正
+## 灰度修正
 
 灰度修正(灰度变换)方法:
 - 增加图像对比度. 解决图像曝光问题: *图像过曝*, *曝光不足*.
@@ -21,19 +20,11 @@
 
 <img src="../../assets/vision/vision-image-processing-histogram-equalization.avif" alt="" width="300">
 
-同态增晰:
+同态增晰:（在频域进行滤波）
 
 <img src="../../assets/vision/vision-image-processing-homomorphic-enhancement-1.avif" alt="" width="200"><img src="../../assets/vision/vision-image-processing-homomorphic-enhancement-2.avif" alt="" width="200">
 
-### 2 图像平滑
-
-见 [图像去噪](图像去噪.md)
-
-### 3 图像锐化
-
-详见 [图像锐化](图像锐化.md)
-
-### 4 几何校正
+## 几何校正
 
 假设 $f(\alpha, \beta)$ 是几何畸变图像, $g(x,y)$ 是校正后的图像. 即 $g(x,y)$ 通过 $h_{1},h_{2}$ 线性变换为 $f(\alpha, \beta)$.
 
@@ -48,13 +39,34 @@ $$\begin{cases}
 
 $h_{1},h_{2}$ 通常通过线程方程求解, 如假设 $h_{1}=ax+by+c$
 
-## 图像复原
+## Retinex
 
-图像降质与复原模型:
+从照明和反射的关系出发 $I(x,y) = R(x,y)L(x,y)$
 
-$f(x,y)$ $\Rightarrow$ 退化函数H $\Rightarrow$ 添加噪声 $\eta(x,y)$ $\Rightarrow$ $g(x,y)$ $\Rightarrow$ 复原滤波 $\Rightarrow$ $\hat{f}(x,y)$
+其中 $R$ 是反射分量，$L$ 是照明分量。Retinex 算法削弱照明变化的影响，以突出物体细节。一般
+用于去雾和暗光增强。
 
-即 $g=H[f]+\eta\rightarrow g(x,y)=h*f+\eta\rightarrow G(u,v)=H\cdot F+N$
+## 运动降质复原
+
+运动降质有几种原因：
+* 摄像头运动 （也受快门和曝光时间影响）。直接用滤波模型。
+* 物体本身快速运动。*需要先对物体进行识别和分割，然后分别应用滤波模型*。
+
+图像受已知某模糊原因影响导致降低质量，建模为：
+
+$$
+g(x,y)=h*f+\eta\rightarrow G(u,v)=H\cdot F+N
+$$
+
+其中 $H$ 是退化函数，$N$ 是噪声。图像复原滤波的目的，就是从 $g$ 还原 $f$
+
+针对相机运动降质的退化函数为：
+
+$$
+H(u, v) = \frac{T}{\eta}\cdot \sin(\eta) e^{-j\eta}, \eta = \pi \cdot (u a + v b)
+$$
+
+这其实代表了时域空间中的一个向量位移。其中 $a, b$ 表示运动向量，$T$ 是相机曝光时间。
 
 ### 1 逆滤波
 
@@ -93,13 +105,6 @@ $$\hat{F}(u,v)=\left[ \frac{\overline{H}(u,v)}{\vert H(u,v)\vert^{2}+K} \right]\
 
 其中 $\overline{H}$ 是 $H$ 的共轭, $\overline{H}=\vert H\vert^{2}/H$
 
-### 3 运动降质模型
-
-运动降质模型通常用于模拟图像由于相机运动活物体运动而产生的模糊效果, 其频域公式实际是由时域一个向量位移 (length+angle) 变换而来的:
-
-$$H(u,v)=\frac{T}{\eta}\cdot sin(\eta)e^{-j\eta},\ \eta=\pi \cdot (ua+vb)$$
-
-其中 a 和 b 表示运动的方向和长度, T 是曝光时间的长度. u 和 v 是频域坐标.
 
 | 原图像                                                      | 运动降质图像                                                | 维纳滤波                                                    |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |

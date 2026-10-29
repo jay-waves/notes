@@ -50,15 +50,17 @@ User ---> Inetrnet ---> [Reverse Proxy ---> Web Servers]
 [LAN]
 ```
 
+### SSE (Server-Sent Events)
+
+允许 Server 不断推送输入，而不是依赖客户端反复请求。（不需要 WebSocket 协议）
+
+```http
+Content-Type: text/event-stream
+```
+
 ### CI
 
 *CI/CD (Continous Integration/Continous Delivery)*
-
-1. 开发者提交代码到 Git 
-2. CI 服务检测到代码修改, 自动构建
-3. 代码测试 (单元测试 + 集成测试), 并报告测试结果.
-4. 若测试成功, 当前环境被保存. 否则环境回退到上一个版本.
-5. CD 将代码修改部署到实际产品中.
 
 ## Architecture Patterns 
 

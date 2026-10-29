@@ -60,4 +60,9 @@ Data Definition (DDL) | `CREATE, ALTER, DROP` | Define and modify database struc
 Trasaction Control (TCL) | `BEGIN, COMMIT, ROLLBACK` | Manage transactions
 Access Control (DCL) | `GRANT, REVOKE` | Manage permissions
 
+Execution Order:
 
+`FROM / JOIN .. ON` > `WHERE` > `GROUP BY .. HAVING` > Window Function 
+        > `SELECT` > `QUALIFY` > `DISTINCT` > `ORDER BY` > `LIMIT`
+
+获取表 > 筛选行 > 分组 > 筛选组 > 窗 > 选择列 > 筛选窗 > 去重 > 排序 > 截断

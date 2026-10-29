@@ -1,0 +1,94 @@
+name: Build Pages preview
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy a successful build to Cloudflare Pages
+        type: boolean
+        default: false
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout notes
+        uses: actions/checkout@v6
+      - name: Checkout Typst template
+        uses: actions/checkout@v6
+        with:
+          repository: jay-waves/ypst-template
+          ref: 0cd3b2358c0cdbebe13a7934c30d82f2ce531d63
+          path: .github/.ypst-template
+          persist-credentials: false
+      - name: Install Typst
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/typst.tar.xz" https://github.com/typst/typst/releases/download/v0.15.1/typst-x86_64-unknown-linux-musl.tar.xz
+          tar -xJf "$RUNNER_TEMP/typst.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
+      - name: Install template and Python dependencies
+        run: |
+          python3 -m pip install -r .github/.ypst-template/requirements.txt
+          python3 .github/.ypst-template/install.py
+      - name: Download lib.comrak
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download 0.5.2 --repo jay-waves/lib.ts --pattern 'lib.comrak*linux*x86_64*.tar.xz' --dir "$RUNNER_TEMP"
+          archive=("$RUNNER_TEMP"/lib.comrak*linux*x86_64*.tar.xz)
+          test "${#archive[@]}" -eq 1
+          sha256sum "${archive[0]}"
+          mkdir "$RUNNER_TEMP/comrak"
+          tar -xJf "${archive[0]}" -C "$RUNNER_TEMP/comrak"
+          executable=$(find "$RUNNER_TEMP/comrak" -type f -name lib.comrak -print)
+          test -n "$executable"
+          test "$(printf '%s\n' "$executable" | wc -l)" -eq 1
+          chmod +x "$executable"
+          echo "COMRAK_PATH=$executable" >> "$GITHUB_ENV"
+          "$executable" --help
+      - name: Test build scripts
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+      - name: Build site
+        run: |
+          python3 .github/scripts/build_site.py \
+            --comrak "$COMRAK_PATH" \
+            --typst-wrapper .github/.ypst-template/typst.py \
+            --typst-font-path .github/.ypst-template/fonts
+      - name: Check generated URLs
+        run: python3 .github/scripts/check_site.py _site
+      - name: Upload preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-preview
+          path: _site/
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: cloudflare-pages
+    timeout-minutes: 15
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: pages-preview
+          path: _site
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.API_KEY }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.PAGES }}
+        run: |
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_PAGES_PROJECT"
+          npx --yes wrangler@4 pages deploy _site --project-name "$CLOUDFLARE_PAGES_PROJECT" --branch main

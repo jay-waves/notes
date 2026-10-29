@@ -14,7 +14,8 @@
 | --- | --------- | ----------------- | ----- | -------------------- | ----------------- | ------------- |
 | URL | `http://` | `www.xxxsite.com` | `:80` | `/path/to/page.html` | `?product=camera` | `#somewhrere` |
 
-查询参数（query）会被发送给服务器；而片段标识符（Fragment）则被浏览器前端处理，自动跳转到页面内元素。
+查询参数（query）会被发送给服务器，js 中名称为 `location.search`；
+而片段标识符（Fragment）则被浏览器前端处理，自动跳转到页面内元素，js 中名称为 `location.hash`。
 
 ## 方法
 

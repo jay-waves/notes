@@ -16,6 +16,9 @@
 *.drawio.dtmp
 
 /.typst/
+/_site/
+/.notes-site-build-*/
+__pycache__/
 
 # 系统文件
 .DS_Store
@@ -26,3 +29,8 @@ desktop.ini
 # Local-only study notes
 /robo/modo/
 /ai/udl/
+
+# HTML/PDF are ignored by default; use git add -f to include explicitly.
+*.[hH][tT][mM][lL]
+*.[pP][dD][fF]
+!/.github/pages/*.html
