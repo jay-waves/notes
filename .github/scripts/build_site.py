@@ -12,7 +12,6 @@ import subprocess
 import sys
 import tempfile
 import time
-from urllib.parse import quote
 
 from pages_index import generate
 
@@ -26,13 +25,26 @@ CODE_LANGUAGES = {".c": "c", ".h": "c", ".cpp": "cpp", ".cc": "cpp", ".hpp": "cp
 def code_page(source, target, site_root):
     text = source.read_text(encoding="utf-8")
     name = html.escape(source.name)
-    raw = html.escape(quote(source.name, safe=""), quote=True)
     language = CODE_LANGUAGES[source.suffix.lower()]
     script = posixpath.relpath("_shared/site/highlight.min.js", target.parent.relative_to(site_root).as_posix())
     page = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>{name}</title>
-<style>body {{ max-width: 1000px; margin: 2rem auto; padding: 0 1rem; font-family: sans-serif; color: light-dark(#292929,#dedede); background: light-dark(#fafafa,#202020); color-scheme: light dark }} a {{ color: inherit }} pre, code {{ font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace }} pre {{ overflow-x: auto; padding: 1rem; background: light-dark(#eee,#292929); line-height: 1.5 }} .hljs-comment {{ color: light-dark(#777,#999) }} .hljs-keyword, .hljs-selector-tag {{ color: light-dark(#77535c,#d3a6b0) }} .hljs-string, .hljs-number {{ color: light-dark(#586772,#a9bdcb) }} .hljs-title, .hljs-function {{ font-weight: bold }}</style></head>
-<body><p><a href="./">← Directory</a> · <a href="{raw}">Raw file</a></p><h1>{name}</h1><pre><code class="language-{language}">{html.escape(text)}</code></pre>
+<style>
+:root {{ color-scheme: light dark; --ink: #24292f; --paper: #fff; --comment: #57606a; --keyword: #cf222e; --string: #0a3069; --number: #0550ae; --title: #8250df; --variable: #953800; }}
+@media (prefers-color-scheme: dark) {{
+  :root {{ --ink: #e6edf3; --paper: #0d1117; --comment: #8b949e; --keyword: #ff7b72; --string: #a5d6ff; --number: #79c0ff; --title: #d2a8ff; --variable: #ffa657; }}
+}}
+body {{ margin: 0; padding: 1rem; color: var(--ink); background: var(--paper); }}
+pre, code {{ font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }}
+pre {{ margin: 0; font-size: 14px; line-height: 1.6; tab-size: 4; }}
+.hljs-comment, .hljs-quote {{ color: var(--comment); }}
+.hljs-keyword, .hljs-selector-tag, .hljs-literal {{ color: var(--keyword); }}
+.hljs-string, .hljs-regexp, .hljs-doctag {{ color: var(--string); }}
+.hljs-number, .hljs-built_in, .hljs-type, .hljs-attr {{ color: var(--number); }}
+.hljs-title, .hljs-section {{ color: var(--title); }}
+.hljs-variable, .hljs-symbol, .hljs-meta {{ color: var(--variable); }}
+</style></head>
+<body><pre><code class="language-{language}">{html.escape(text)}</code></pre>
 <script src="{script}" defer onload="hljs.highlightAll()"></script></body></html>
 '''
     target.write_text(page, encoding="utf-8", newline="\n")
