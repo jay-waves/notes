@@ -90,7 +90,7 @@ def plan(files):
             if article in article_paths:
                 raise ValueError(f"Article URL collision: {path} and {article_paths[article]}")
             article_paths[article] = path
-        dest = path.with_suffix(".html") if kind == "Markdown" else path.with_suffix("") / "index.html" if kind == "Typst" else path
+        dest = path.with_suffix("") / "index.html" if kind != "Raw" else path
         key = dest.as_posix().casefold()
         if key in claimed:
             raise ValueError(f"Output collision: {path} and {claimed[key]} -> {dest}")
@@ -152,7 +152,7 @@ def build(args):
                     target.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(cached_page, target)
                     reused += 1
-                    url = dest.parent.as_posix() + "/" if kind == "Typst" else dest.as_posix()
+                    url = dest.parent.as_posix() + "/"
                     manifest.append({"source": source.as_posix(), "url": url, "kind": kind})
                     continue
                 if kind == "Markdown":
@@ -175,7 +175,7 @@ def build(args):
                     print(f"Skipping {source}: {reason}", file=sys.stderr, flush=True)
                     target.unlink(missing_ok=True)
                     continue
-            url = dest.parent.as_posix() + "/" if kind == "Typst" else dest.as_posix()
+            url = dest.parent.as_posix() + "/" if kind != "Raw" else dest.as_posix()
             manifest.append({"source": source.as_posix(), "url": url, "kind": kind})
         shared = stage / "_shared" / "site"
         shared.mkdir(parents=True, exist_ok=True)

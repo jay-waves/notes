@@ -87,7 +87,7 @@ class BuildTest(unittest.TestCase):
             def compile_stub(command, **kwargs):
                 stage = Path(command[command.index("--site-root") + 1])
                 source = Path(command[2] if command[0] == "comrak" else command[3])
-                page = stage / (source.stem + ".html") if command[0] == "comrak" else stage / source.stem / "index.html"
+                page = stage / source.stem / "index.html"
                 page.parent.mkdir(parents=True, exist_ok=True)
                 page.write_text("compiled", encoding="utf-8")
                 return subprocess.CompletedProcess(command, 0, "", "")
@@ -95,11 +95,11 @@ class BuildTest(unittest.TestCase):
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=files), patch.object(build_site.subprocess, "run", side_effect=compile_stub):
                 build_site.build(args)
                 self.assertEqual((output / "raw.txt").read_text(), "raw")
-                self.assertIn('href="a.html"', (output / "index.html").read_text(encoding="utf-8"))
+                self.assertIn('href="a/"', (output / "index.html").read_text(encoding="utf-8"))
                 with patch.object(build_site.subprocess, "run", side_effect=OSError("compiler failed")):
                     with self.assertRaises(OSError):
                         build_site.build(args)
-                self.assertTrue((output / "a.html").is_file())
+                self.assertTrue((output / "a" / "index.html").is_file())
 
     def test_failed_article_is_reported_and_omitted(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -122,7 +122,8 @@ class BuildTest(unittest.TestCase):
             root = Path(tmp)
             output, cache = root / "_site", root / "cache"
             (cache / "site" / "_shared").mkdir(parents=True)
-            (cache / "site" / "unchanged.html").write_text("cached", encoding="utf-8")
+            (cache / "site" / "unchanged").mkdir()
+            (cache / "site" / "unchanged" / "index.html").write_text("cached", encoding="utf-8")
             for name in ("unchanged.md", "changed.md", "raw.txt"):
                 (root / name).write_text(name, encoding="utf-8")
             args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None, report=None, cache_dir=str(cache), full=False)
@@ -134,15 +135,16 @@ class BuildTest(unittest.TestCase):
                     return subprocess.CompletedProcess(command, 0, "abc\n")
                 compiled.append(Path(command[2]).name)
                 stage = Path(command[command.index("--site-root") + 1])
-                (stage / "changed.html").write_text("new", encoding="utf-8")
+                (stage / "changed").mkdir()
+                (stage / "changed" / "index.html").write_text("new", encoding="utf-8")
                 return subprocess.CompletedProcess(command, 0, "", "")
 
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=files), patch.object(build_site, "cache_fingerprint", return_value="v1"), patch.object(build_site, "cached_changes", return_value={"changed.md", "raw.txt"}), patch.object(build_site.subprocess, "run", side_effect=run_stub):
                 build_site.build(args)
             self.assertEqual(compiled, ["changed.md"])
-            self.assertEqual((output / "unchanged.html").read_text(), "cached")
+            self.assertEqual((output / "unchanged" / "index.html").read_text(), "cached")
             self.assertEqual((output / "raw.txt").read_text(), "raw.txt")
-            self.assertTrue((cache / "site" / "changed.html").exists())
+            self.assertTrue((cache / "site" / "changed" / "index.html").exists())
 
 
 if __name__ == "__main__":
