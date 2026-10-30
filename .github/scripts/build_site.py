@@ -68,7 +68,7 @@ def code_page(source, target, site_root):
 @media (prefers-color-scheme: dark) {{
   :root {{ --ink: #e6edf3; --paper: #0d1117; --comment: #8b949e; --keyword: #ff7b72; --string: #a5d6ff; --number: #79c0ff; --title: #d2a8ff; --variable: #ffa657; }}
 }}
-body {{ margin: 0; padding: 1rem; color: var(--ink); background: var(--paper); }}
+body {{ width: min(95%, 920px); margin: 32px auto; color: var(--ink); background: var(--paper); }}
 pre, code {{ font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }}
 pre {{ margin: 0; font-size: 14px; line-height: 1.6; tab-size: 4; }}
 .hljs-comment, .hljs-quote {{ color: var(--comment); }}
