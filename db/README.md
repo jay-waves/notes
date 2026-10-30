@@ -84,7 +84,7 @@ Physical layout:
 
 ### Graph-Based 
 
-当多对多关系复杂时，单次查询就需要多个 JOIN 语句，SQL 需要缓存大量索引来解决性能瓶颈。此时可以使用 Graph-based Data Models，更利于信息遍历和存储“关系”。[邻接表图](../../algo/graph/readme.md)，可用两个关系表表示（节点表和边表），如下：
+当多对多关系复杂时，单次查询就需要多个 JOIN 语句，SQL 需要缓存大量索引来解决性能瓶颈。此时可以使用 Graph-based Data Models，更利于信息遍历和存储“关系”。[邻接表图](../../algo/graph/README.md)，可用两个关系表表示（节点表和边表），如下：
 
 ```sql
 CREATE TABLE vertices (

@@ -63,7 +63,7 @@
 ### Reference
 
 - 仓库整体使用 [CC-BY](license.md) 许可证，部分摘录文章或原创文章使用不同版权许可的，在文章开头标明
-- 引用格式：`[Bjarne Stroustrup, 2014, p22]`, `@yayvyn2012` 皆可，可缩写，完整信息存放在 `references.bib` 文件中。
+- 引用格式：`[Bjarne Stroustrup, 2014, p22]`, `@yayvyn2012` 皆可，可缩写，完整信息存放在 `BIBLIO.bib` 文件中。
 
 ### Attachments 
 

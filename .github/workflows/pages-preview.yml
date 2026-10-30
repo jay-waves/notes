@@ -68,6 +68,8 @@ jobs:
           chmod +x "$executable"
           echo "COMRAK_PATH=$executable" >> "$GITHUB_ENV"
           "$executable" --help
+      - name: Install related notes dependency
+        run: python3 -m pip install -r .github/scripts/requirements-related.txt
       - name: Test build scripts
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
       - name: Restore compiled pages

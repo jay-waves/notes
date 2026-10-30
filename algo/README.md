@@ -42,7 +42,7 @@
 - sort, 排序
 - swap, 交换两元素在内存中的位置.
 
-[^1]: 详见 [readme](../langs/cpp/data-types/stl/readme.md)d)
+[^1]: 详见 [readme](../langs/cpp/data-types/stl/README.md)d)
 
 ### 数据结构列表
 

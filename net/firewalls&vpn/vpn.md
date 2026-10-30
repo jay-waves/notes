@@ -56,7 +56,7 @@ Tor:
 >       be needed to conceal the ultimate destination as the message
 >       travels through the open Internet (see: onion routing).
 > 
-> A [TFC](../../sec/readme.md) service can be either full or partial:
+> A [TFC](../../sec/README.md) service can be either full or partial:
 >       -  "Full TFC": This type of service conceals all traffic
 >          characteristics.
 >       -  "Partial TFC": This type of service either (a) conceals some

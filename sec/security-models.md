@@ -37,7 +37,7 @@
 
 ## OSIRM
 
-见 [OSI Reference Model 安全模型](../readme.md)
+见 [OSI Reference Model 安全模型](../README.md)
 
 ## TCSEC
 
@@ -94,7 +94,7 @@ TCSEC/TDI 安全级别划分:
 - 公开, Public, P
 
 保密性规则 (MAC-BLP):
-- 下读 (read down): 用户级别高于或等于文件级别的读操作. 
+- 下读 (read down): 用户级别高于或等于文件级别的读操作.
 - 上写 (write up): 用户级别低于或等于文件级别的写操作.
 
 数据完整性规则 (MAC-Biba):
@@ -103,7 +103,7 @@ TCSEC/TDI 安全级别划分:
 
 #### Bell-LaPadula 模型
 
-Bell-Lapadula 模型 (BLP 模型, David Bell & Leonard Lapadula, 1973) 是基于**强制访问控制**的安全模型, 用于保护 **[机密性](../readme.md#安全服务及安全机制)**. 广泛用于军事和政府的安全系统.
+Bell-Lapadula 模型 (BLP 模型, David Bell & Leonard Lapadula, 1973) 是基于**强制访问控制**的安全模型, 用于保护 **[机密性](../README.md#安全服务及安全机制)**. 广泛用于军事和政府的安全系统.
 
 有两个核心规则:
 - 简单安全原则 (Simple Security Property), 也叫**不上读原则**. 用户不能读取比自己权限更高的信息.
@@ -130,7 +130,7 @@ Bell-LaPadula model
 
 #### Biba 模型
 
-Biba 模型 (1977) 是和 BLP 模型对立的概念, 保护 **[完整性](../readme.md)** 而不是机密性, 旨在确保数据在修改时不受低完整性主体的污染, 防止系统引入不可靠的数据. 
+Biba 模型 (1977) 是和 BLP 模型对立的概念, 保护 **[完整性](../README.md)** 而不是机密性, 旨在确保数据在修改时不受低完整性主体的污染, 防止系统引入不可靠的数据.
 
 有两个核心规则:
 - 简单安全规则 (Simple Integrity Property), 也叫**不下读原则**. 用户不能读取比自己完整性等级更低的数据.

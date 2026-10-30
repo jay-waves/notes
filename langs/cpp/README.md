@@ -58,9 +58,9 @@ C++23
 操作系统相关跨平台库:
 - [gulrak/filesystem](https://github.com/gulrak/filesystem)
 
-序列化: 见 [C++/开发工具](../../tools/readme.md)
+序列化: 见 [C++/开发工具](../../tools/README.md)
 
-错误处理: 见 [C++/开发工具](../../tools/readme.md)
+错误处理: 见 [C++/开发工具](../../tools/README.md)
 
 GUI:
 - QT 
