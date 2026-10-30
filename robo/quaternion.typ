@@ -43,7 +43,7 @@ $
 
 设经过原点的旋转轴 $vecb(u) = (x, y, z)^T$ 满足 $norm(vecb(u)) = 1$，给定向量 $vecb(v)$，使其沿着旋转轴转动 $theta$ 角度，得到 $vecb(v)'$。这里使用右手系统来定义旋转正方向。
 
-轴角旋转有三个#link("rigid-bodies.md")[自由度]：一个表示 $theta$，两个表示单位向量 $vecb(u)$。
+轴角旋转有三个#link("https://notes.jay-waves.cn/robo/rigid-bodies/")[自由度]：一个表示 $theta$，两个表示单位向量 $vecb(u)$。
 
 #image("../assets/robo/robo-quaternion-axis-rotation.webp", width: 70%)
 
@@ -141,7 +141,7 @@ $
 
 == 代数结构
 
-四元数空间是一个#link("../math/linalg/向量分析/线性变换.md")[线性空间]，满足：
+四元数空间是一个#link("https://notes.jay-waves.cn/math/linalg/vectors/linear-transform/")[线性空间]，满足：
 
 $
 HH equiv RR plus.o "Im"(HH) equiv RR^4
@@ -245,7 +245,7 @@ $
 
 为了走“最短路径”，会先求夹角，取 $pi$ 内旋转。
 
-每一个固定旋转轴的单位四元数，可以生成一个子群。这个子群与复指数 $e^(i theta) = cos theta + i sin theta$ 是同构的。#footnote[复指数相关知识见 #link("../math/calculus/复数.md")[复数]、#link("../math/calculus/三角函数.md")[三角函数]。] 复指数表示一个平面的旋转。
+每一个固定旋转轴的单位四元数，可以生成一个子群。这个子群与复指数 $e^(i theta) = cos theta + i sin theta$ 是同构的。#footnote[复指数相关知识见 #link("https://notes.jay-waves.cn/math/calculus/complex-numbers/")[复数]、#link("https://notes.jay-waves.cn/math/calculus/trigonometric/")[三角函数]。] 复指数表示一个平面的旋转。
 
 $
 upright("Sp")(1) equiv upright("SU")(2)
@@ -329,7 +329,7 @@ $h(t) = 2 t (1 - t)$ 是一个对称的抛物线权重函数。
 
 = 四元数与李群
 
-2D、3D 旋转矩阵都是#link("../math/linalg/othogonal-matrix.typ")[_正交矩阵（Orthogonal Matrix）_]，它们的行列式值为 $1$，代表着旋转；$-1$ 代表反射。
+2D、3D 旋转矩阵都是#link("https://notes.jay-waves.cn/math/linalg/othogonal-matrix/")[_正交矩阵（Orthogonal Matrix）_]，它们的行列式值为 $1$，代表着旋转；$-1$ 代表反射。
 
 特殊正交群 $"SO"(n)$ (Special Orthogonal Group) 是一种李群，定义为：
 

@@ -39,7 +39,7 @@ $
   [$V$ 的后 $n-r$ 列],
 )
 
-其中, 存在两对#link("../向量分析/直和与投影.typ")[直和与投影]:
+其中, 存在两对#link("https://notes.jay-waves.cn/math/linalg/vectors/direct-sums-and-proj/")[直和与投影]:
 - 在 $bb(R)^n$ 中, $upright("Ker") ( A ) = ( upright("Im") ( A^top )^tack.t$, 即零空间为行空间的正交补.
 - 在 $bb(R)^m$ 中, $upright("Ker") ( A^top ) = ( upright("Im") ( A ) )^tack.t$, 即左零空间为列空间的正交补.
 

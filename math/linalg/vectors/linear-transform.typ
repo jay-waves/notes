@@ -80,7 +80,7 @@ $
 
 = 亏加秩定理
 
-也称为#link("../线性方程组/线性代数基本定理.typ")[线性代数基本定理]:
+也称为#link("https://notes.jay-waves.cn/math/linalg/linear-systems/theorem-of-linear-algebra/")[线性代数基本定理]:
 
 $upright("dim") N ( T ) + upright("dim") R ( T ) = upright("dim") V$
 

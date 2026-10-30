@@ -10,7 +10,7 @@
 
 棣莫弗 (de Moivre's) 公式: $ cos(phi theta) + i sin(theta phi) = e^(i phi theta) = (e^(i theta))^phi = (cos theta + i sin theta)^phi $
 
-该公式可以用#link("../linalg/矩阵相合.md")[旋转矩阵]描述: $ R = mat(delim: "(", cos theta, - sin theta; sin theta, cos theta) $
+该公式可以用#link("https://notes.jay-waves.cn/math/linalg/congruence/")[旋转矩阵]描述: $ R = mat(delim: "(", cos theta, - sin theta; sin theta, cos theta) $
 
 === 三角平方和公式
 $ e^(i x) dot e^(- i x) = 1 = ( cos x + i sin x ) ( cos(- x) + i sin(- x) ) = cos^2 x + sin^2 x $

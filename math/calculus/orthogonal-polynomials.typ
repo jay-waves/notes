@@ -10,7 +10,7 @@
 
 如果 $phi_k(x)$ 是 $k$ 次多项式, 则称 $lr({phi_i(x)})$ 为正交多项系.
 
-对 $f , g in C [ a , b ]$ , $( f , g ) = integral_a^b rho(x) f(x) g(x) thin d x$ 是一种#link("../linalg/向量分析/内积空间.md")[内积关系]. 其中 $rho(x)$ 是权函数, 大概性质是: 非负, 可积, 没有连续零点.
+对 $f , g in C [ a , b ]$ , $( f , g ) = integral_a^b rho(x) f(x) g(x) thin d x$ 是一种#link("https://notes.jay-waves.cn/math/linalg/vectors/inner-product/")[内积关系]. 其中 $rho(x)$ 是权函数, 大概性质是: 非负, 可积, 没有连续零点.
 
 === 性质
 正交多项式系 $lr({phi_i(x)})$ 是线性无关的函数系.

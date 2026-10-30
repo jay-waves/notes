@@ -4,7 +4,7 @@
 
 = 叉乘
 
-在#link("内积空间.typ")[三维欧几里得空间]中，定义*叉乘（cross product）*： $arrow(a) times arrow(b)$ ，结果是一个向量，方向垂直于 $accent(a \, b, ⃗)$ ，由右手定则确定。（右手从 $a$ 握向 $b$）
+在#link("https://notes.jay-waves.cn/math/linalg/vectors/inner-product/")[三维欧几里得空间]中，定义*叉乘（cross product）*： $arrow(a) times arrow(b)$ ，结果是一个向量，方向垂直于 $accent(a \, b, ⃗)$ ，由右手定则确定。（右手从 $a$ 握向 $b$）
 
 
 

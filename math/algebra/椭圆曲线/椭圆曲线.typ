@@ -111,7 +111,7 @@ $
   $
 ]
 
-蒙哥马利算法类似#link("../../numth/快速模幂算法.md")[快速模幂算法]. 计算 $[n]P$ 时, 复杂度约为 $cal(O)(M(n) dot log n)$.
+蒙哥马利算法类似#link("https://notes.jay-waves.cn/math/numth/%E5%BF%AB%E9%80%9F%E6%A8%A1%E5%B9%82%E7%AE%97%E6%B3%95/")[快速模幂算法]. 计算 $[n]P$ 时, 复杂度约为 $cal(O)(M(n) dot log n)$.
 
 ```txt
 R0 = P
@@ -171,7 +171,7 @@ $
 
 ECC 选择 $G$ 时, 需选一个阶比较大的点, 以保证有足够的私钥 $d$.
 
-见 #link("../../../sec/cryptography/public-key-crypto/ECC/ECC.md")[ECC].
+见 #link("https://notes.jay-waves.cn/sec/cryptography/public-key-crypto/ecc/ECC/")[ECC].
 
 子群阶 to be continue...
 

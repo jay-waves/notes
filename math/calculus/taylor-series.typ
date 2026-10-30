@@ -37,7 +37,7 @@ $ f(x) = f(0) + integral_0^x f'(t) thin d t thin thin thin =^(t mapsto x - t) th
 
 $b(x)$ 是可导的, 在 $x = 1$ 处的所有阶导数皆为0, 即泰勒展开 $b'(x) equiv 0$.
 
-借助#link("中值定理.typ")[拉格朗日微分中值定理], 可以#strong[求解余项(误差)]#footnote[该余项也被称为拉格朗日型余项, 但实际是由柯西推出的. #link("https://zh.wikipedia.org/wiki/%E6%B3%B0%E5%8B%92%E5%85%AC%E5%BC%8F")[wiki]]
+借助#link("https://notes.jay-waves.cn/math/calculus/mean-value-theorem/")[拉格朗日微分中值定理], 可以#strong[求解余项(误差)]#footnote[该余项也被称为拉格朗日型余项, 但实际是由柯西推出的. #link("https://zh.wikipedia.org/wiki/%E6%B3%B0%E5%8B%92%E5%85%AC%E5%BC%8F")[wiki]]
 
 $ f(x) = f(a) + f'(a) ( x - a ) + frac(f^(( 2 )) ( a ), 2 !) ( x - a )^2 + dots.h + frac(f^(( n )), n !) ( x - a )^n + frac(f^(( n + 1 )) ( xi ), ( n + 1 ) !) ( x - a )^(( n + 1 )) , xi in(a , x) $
 

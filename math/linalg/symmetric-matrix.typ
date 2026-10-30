@@ -83,7 +83,7 @@ $
 #linebreak()
 
 设向量 $upright(bold(x))$, 经过 $A$ 线性变换后, 可以表示为 $A upright(bold(x)) = Q^top Lambda Q upright(bold(x))$, 这说明, 实对称矩阵存在一组正交特征向量基底，在这组基底下，其作用表现为沿着各特征方向放缩。 
-通过旋转 ($Q upright(bold(x))$) 将向量从#link("向量分析/空间基底变换.typ")[默认标准正交单位基底]调整为新的正交单位基底, 然后进行正交变换 ($Lambda upright(bold(x))$), 然后再变换回旧基底 ($Q^top upright(bold(x))$). 
+通过旋转 ($Q upright(bold(x))$) 将向量从#link("https://notes.jay-waves.cn/math/linalg/vectors/change-of-basis/")[默认标准正交单位基底]调整为新的正交单位基底, 然后进行正交变换 ($Lambda upright(bold(x))$), 然后再变换回旧基底 ($Q^top upright(bold(x))$). 
 
 #linebreak()
 

@@ -61,7 +61,7 @@ $ bmat(
 $ bmat(upright(bold(I))_(n times n), upright(bold(b'))_(n times 1)) $
 
 === LU 分解
-用高斯消除法求解#link("../linalg/线性方程组/线性方程组的解.md")[非齐次线性方程组] $A dot x = b$, 也被称为矩阵 $L dot U$ 分解. 每一步高斯消去, 等价于用一个单位下三角矩阵 $L_k^(- 1)$ 左乘 $A$, 将所有行变换操作连乘, 得到 $L^(- 1) A = U$, 即 $A = L U$.
+用高斯消除法求解#link("https://notes.jay-waves.cn/math/linalg/linear-systems/linear-system-solutions/")[非齐次线性方程组] $A dot x = b$, 也被称为矩阵 $L dot U$ 分解. 每一步高斯消去, 等价于用一个单位下三角矩阵 $L_k^(- 1)$ 左乘 $A$, 将所有行变换操作连乘, 得到 $L^(- 1) A = U$, 即 $A = L U$.
 
 高斯消去法的充要条件是*所有顺序主子式都非零*, 即每一步都不会遇到零主元 (对角元). 如果某步主元为零 (或者非常小, 为了数值稳定性), 需要将其与非零行交换, 引入置换矩阵 $P$: $P A = L U$.
 
@@ -115,7 +115,7 @@ x = N^(- 1) P x + N^(- 1) b = G x + d $
 迭代式为: $ upright(bold(x))^(( k + 1 )) = upright(bold(G x))^(( k )) + upright(bold(d)) $
 
 ==== 迭代法的收敛条件
-#strong[定理一: 迭代法的收敛, 当且仅当, #link("../linalg/对称矩阵.md")[谱半径]满足 $rho(G) < 1$]
+#strong[定理一: 迭代法的收敛, 当且仅当, #link("https://notes.jay-waves.cn/math/linalg/symmetric-matrix/")[谱半径]满足 $rho(G) < 1$]
 
 #strong[定理二: 如果矩阵 $G$ 的某种矩阵范数满足 $norm(G) < 1$, 那么迭代法也收敛且解唯一]. 此时有误差估计公式:
 
@@ -133,7 +133,7 @@ Jacobi 有一个额外的#strong[收敛定理]:
 #strong[若矩阵 $upright(bold(A))$ 是按行/按列严格占优阵] ($| a_(i i) | > sum_(i eq.not j) | a_(i j) |$), #strong[那么 Jacobi 迭代法必然收敛, 同时 $A$ 近似非奇异矩阵.]
 
 #quote(block: true)[
-证明可以参考 #link("矩阵特征计算.typ")[盖尔圆盘定理].
+证明可以参考 #link("https://notes.jay-waves.cn/math/numerical/eigenvalue-problems/")[盖尔圆盘定理].
 ]
 
 === Gauss-Seidel (GS) 迭代方法

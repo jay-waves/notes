@@ -106,7 +106,7 @@ $ Z_x = { t[Z] | t in R, t[X] = x } $
 - 笛卡尔积：$R times S$，两个关系的笛卡尔积。
 - 交：$R inter S = R - (R - S)$。
 
-详见 #link("../../math/algebra/集合.md")[集合]。
+详见 #link("https://notes.jay-waves.cn/math/algebra/%E9%9B%86%E5%90%88/")[集合]。
 
 == 选择
 

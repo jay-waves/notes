@@ -20,7 +20,7 @@ FFT 有四个关键思想: - 估值和插值相互转换. - 在对称点进行�
 
 要计算 $A(x) = a_0 + a_1 x + dots.h + a_n x^n$ 和 $B(x) = b_0 + b_1 x + dots.h + b_n x^n$ 的乘积 $C(x) = A(x) dot B(x)$. 除了用 O(n^2) 时间计算 $arrow(A) dot arrow(B)^T$, 还可以以 O(n) 计算 $hat(A) dot hat(B)$.
 
-该方法的瓶颈在于, 如何用 $arrow(A)$ 计算 $hat(A)$ (估值运算); 求出 $hat(A)$ 后, 如何用 $hat(A)$ 计算 $arrow(A)$ (#link("插值与多项式逼近.typ")[插值]操作): $arrow(A) , arrow(B) arrow.r hat(A) , hat(B) arrow.r hat(C) arrow.r arrow(C)$
+该方法的瓶颈在于, 如何用 $arrow(A)$ 计算 $hat(A)$ (估值运算); 求出 $hat(A)$ 后, 如何用 $hat(A)$ 计算 $arrow(A)$ (#link("https://notes.jay-waves.cn/math/numerical/interpolation-and-approximation/")[插值]操作): $arrow(A) , arrow(B) arrow.r hat(A) , hat(B) arrow.r hat(C) arrow.r arrow(C)$
 
 === 对称点估值
 不妨设 n 是 $2^k$.

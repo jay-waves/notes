@@ -46,7 +46,7 @@ $ S(x) = sum_(n = 0)^oo a_n x^n = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + dots.c $
 
   $ R = frac(1, limsup_(n arrow.r oo) root(n, | a_n |)) . $
 
-常见幂级数见 #link("泰勒级数.typ")[泰勒级数].
+常见幂级数见 #link("https://notes.jay-waves.cn/math/calculus/taylor-series/")[泰勒级数].
 
 如 对数函数: $ln(1 + x) = sum_(n = 1)^oo(- 1)^(n + 1) x^n / n , quad | x | < 1$
 

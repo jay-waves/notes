@@ -18,7 +18,7 @@ $F = #GF($p^n$)$ 是有限域.
   域的特征只能是 0 或某个素数 $p$.
   若 $upright("GF")$ 的特征为 0, 则 $upright("GF")$ 有素子域 $bb(Z)$, 从而 $upright("GF")$ 必为无限域, 矛盾.
   于是 $upright("char")(F) = p$.
-  由#link("域扩张.typ")[有限扩张]的定义, $F \/ #ZZ$ 是有限扩张.
+  由#link("https://notes.jay-waves.cn/math/algebra/%E5%9F%9F/%E5%9F%9F%E6%89%A9%E5%BC%A0/")[有限扩张]的定义, $F \/ #ZZ$ 是有限扩张.
 ]
 
 #corollary[

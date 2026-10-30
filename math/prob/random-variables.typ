@@ -46,7 +46,7 @@ $ P(A | B) = frac(P(A B), P(B)) $
 
 $P(A_1 A_2 A_3 dots.c) = P(A_1) dot P(A_2 | A_1) dot P(A_3 | A_2 A_1) dots.c$
 
-#link("贝叶斯定理.typ")[贝叶斯公式与全概率公式]
+#link("https://notes.jay-waves.cn/math/prob/bayes/")[贝叶斯公式与全概率公式]
 
 == 古典概型
 样本空间满足: 1. 有限个样本点 2. 每个样本点的可能性一样

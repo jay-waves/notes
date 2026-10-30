@@ -38,7 +38,7 @@ q_k = alpha_k - sum_(i = 1)^(k - 1) frac(chevron.l alpha_k \, q_i chevron.r, che
 $
 
 
-其中 $chevron.l u \, v chevron.r$ 表示向量内积, $chevron.l u \, u chevron.r$ 表示#link("内积空间.typ")[向量范数] $bar.v.double u bar.v.double$.
+其中 $chevron.l u \, v chevron.r$ 表示向量内积, $chevron.l u \, u chevron.r$ 表示#link("https://notes.jay-waves.cn/math/linalg/vectors/inner-product/")[向量范数] $bar.v.double u bar.v.double$.
 
 如果需要正交单位向量组, 可以将每个正交向量 $q_k$ 再单位化: 
 $
@@ -89,4 +89,4 @@ $
 
 则称 $x$ 是 $alpha$ 在子线性空间 $W$ 的最佳逼近向量. 
 
-最小二乘问题详见 #link("../线性方程组/线性方程组的最小二乘解.typ")[线性方程组的最小二乘解].
+最小二乘问题详见 #link("https://notes.jay-waves.cn/math/linalg/linear-systems/least-squares/")[线性方程组的最小二乘解].

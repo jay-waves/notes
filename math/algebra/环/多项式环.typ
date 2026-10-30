@@ -37,7 +37,7 @@ $
 
 == 拉格朗日插值形式
 
-见#link("../../numerical/interpolation-and-approximation.typ")[插值与多项式逼近].
+见#link("https://notes.jay-waves.cn/math/numerical/interpolation-and-approximation/")[插值与多项式逼近].
 
 $
 P(x) = sum_(i = 1)^n P(x_i) product_(j != i) frac(x - x_j, x_i - x_j)
@@ -50,7 +50,7 @@ $
 P(x) = a_0 + a_1 x + a_2 x^2 + dots.c + a_n x^n
 $
 
-对于点集 $(x_0, x_1, dots.c, x_n)$, 有多项式值集 $bold(b) = V_(n + 1) dot bold(a)$, 其中 $V$ 是#link("../../linalg/determinant.typ")[范德蒙行列式].
+对于点集 $(x_0, x_1, dots.c, x_n)$, 有多项式值集 $bold(b) = V_(n + 1) dot bold(a)$, 其中 $V$ 是#link("https://notes.jay-waves.cn/math/linalg/determinant/")[范德蒙行列式].
 
 $
 bold(b) = mat(delim: "(", P(x_0); P(x_1); dots.v; P(x_n))

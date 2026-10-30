@@ -45,7 +45,7 @@ $ U^H A U = T $
 
 *算法*:
 
-对矩阵 $A$ 执行一次 #link("./vectors/direct-sums-and-proj.typ")[QR] 分解: $A = Q R$, 然后构造 $A_1 = R Q$.
+对矩阵 $A$ 执行一次 #link("https://notes.jay-waves.cn/math/linalg/vectors/direct-sums-and-proj/")[QR] 分解: $A = Q R$, 然后构造 $A_1 = R Q$.
 
 接着不断 QR 迭代: 
 

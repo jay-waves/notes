@@ -18,7 +18,7 @@
 对于一个 $n$ 点求积公式, 含有 $n$ 个节点 $x_i$ 和 $n$ 个权 $A_i$, 共计 $2 n$ 个未知数. 要求它对多项式 $lr({1, x, x^2, dots.h, x^m})$ 都精准, 至少要满足 $m + 1$ 个独立方程. 也就是说, 至少 $m + 1 > 2 n$, 这限制了求积公式的最高代数精度.
 
 == 插值型求积公式
-用 #link("插值与多项式逼近.typ")[Lagrange 插值系数]构造积分系数: $ lambda_k^(( n )) = integral_a^b L_k(x) upright(d) x = integral_a^b product_(i = 0 , i eq.not k)^n frac(x - x_i, x_k - x_i) upright(d) x $
+用 #link("https://notes.jay-waves.cn/math/numerical/interpolation-and-approximation/")[Lagrange 插值系数]构造积分系数: $ lambda_k^(( n )) = integral_a^b L_k(x) upright(d) x = integral_a^b product_(i = 0 , i eq.not k)^n frac(x - x_i, x_k - x_i) upright(d) x $
 
 此时, 原积分可表示为数值形式: $ integral_a^b f(x) thin d x approx integral_a^b sum_(i = 0)^n f(x_i) dot L_i(x) thin d x = sum_(i = 0)^n f(x_i) integral_a^b L_i(x) thin d x $
 
@@ -76,7 +76,7 @@ $ integral_a^b f(x) d x approx h / 2 [ f(a) + f(b) + 2 sum_(k = 1)^(n - 1) f(a +
 == Gauss 型积分公式
 定义高斯求积: $ Q(f) = sum_(i = 0)^n A_i f(x_i) , quad A_i = integral_a^b rho(x) L_i(x) thin d x $ 其中 $x_i$ 是 $n$ 次正交多项式 $phi(x)$ 的互异实根. $L_i$ 是以 $x_i$ 为节点的拉格朗日基函数.
 
-注意, $phi(x)$ 是定义在关于权函数 $rho(x)$ 的#link("../calculus/正交多项式.typ")[正交多项式系]上的: $ integral_a^b rho med phi_m phi_n thin d x = 0 , quad m eq.not n $
+注意, $phi(x)$ 是定义在关于权函数 $rho(x)$ 的#link("https://notes.jay-waves.cn/math/calculus/orthogonal-polynomials/")[正交多项式系]上的: $ integral_a^b rho med phi_m phi_n thin d x = 0 , quad m eq.not n $
 
 #strong[定理: Gauss 积分公式的代数精度为 $2 n - 1$, 是 $n$ 节点求积公式中的最高代数精度].
 

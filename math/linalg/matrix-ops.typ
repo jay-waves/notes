@@ -34,8 +34,8 @@ $ bmat(1; 0) dot x_1 + bmat(0; 1) dot x_2 = bmat(x_1; x_2) $
 #sidenote[
   可以发现矩阵 $A = [ vec(alpha) \, vec(alpha) ]$ 将基底变换为 $alpha = ( a \, c )$ 和 $beta = ( b \, d )$, 张成 (线性组合成) 子空间记为 $bb(C) ( A )$. 注意, $x \, med y$ 仍是新基底下的坐标, 而新基底 $alpha = ( a \, c )$ 和 $beta = ( b \, d )$ 是用单位基底表示的.
 ][
-  除了#link("向量分析/空间基底变换.typ")[空间基底变换]过程, 
-  线性变换的另一个形象体现是#link("mat-congruence.md")[二次型形状变换], 本质也是基底变换.
+  除了#link("https://notes.jay-waves.cn/math/linalg/vectors/change-of-basis/")[空间基底变换]过程, 
+  线性变换的另一个形象体现是#link("https://notes.jay-waves.cn/math/linalg/congruence/")[二次型形状变换], 本质也是基底变换.
 ]
 
 #image("../../assets/math/math-linalg-linear-transformation.webp", width: 60%)

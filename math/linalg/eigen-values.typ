@@ -40,7 +40,7 @@ $ m_A ( x ) | chi_A ( x ) $
 $
 m_A ( x ) = product_(i = 1)^r ( x - lambda_i )^(k_i)
 $
-, 其中 $lambda$ 是所有不同特征值, $k_i$ 是特征值对应的最大 #link("jordan.typ")[Jordan 块]大小.
+, 其中 $lambda$ 是所有不同特征值, $k_i$ 是特征值对应的最大 #link("https://notes.jay-waves.cn/math/linalg/jordan-matrix/")[Jordan 块]大小.
 
 
 几何重数的上限是空间维度, 而代数重数是没有上限的. (Jordan 标准型和这个有关)

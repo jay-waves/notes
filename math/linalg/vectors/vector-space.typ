@@ -12,7 +12,7 @@
 - 乘法单位元 (multiplicative identity): $forall upright(bold(v)) in bb(V) \, 1 upright(bold(v)) = upright(bold(v))$
 - 分配律 (distributive properties): $a ( upright(bold(u + v)) ) = a upright(bold(u)) + a upright(bold(v)) \, ( a + b ) upright(bold(v)) = a upright(bold(v)) + b upright(bold(v))$
 
-上述条件中 $( bb(V) \, + )$ 构成了#link("../../algebra/群/阿贝尔群.typ")[交换群], 向量空间 $( bb(V) \, + \, dot.op )$ 构成了特殊的*模*代数结构 (模不要求系数环为域).
+上述条件中 $( bb(V) \, + )$ 构成了#link("https://notes.jay-waves.cn/math/algebra/%E7%BE%A4/%E9%98%BF%E8%B4%9D%E5%B0%94%E7%BE%A4/")[交换群], 向量空间 $( bb(V) \, + \, dot.op )$ 构成了特殊的*模*代数结构 (模不要求系数环为域).
 
 > *向量空间*, 也称为*线性空间*. 线性空间是苏系译法.
 
@@ -36,4 +36,4 @@ $
 
 === 向量内积
 
-向量内积见 #link("内积空间.typ")[内积空间]. 在内积空间上, 可以定义距离 (范数) 和角度的度量.
+向量内积见 #link("https://notes.jay-waves.cn/math/linalg/vectors/inner-product/")[内积空间]. 在内积空间上, 可以定义距离 (范数) 和角度的度量.

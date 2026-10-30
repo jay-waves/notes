@@ -26,14 +26,11 @@
 
 ## Workflow
 
-笔记库采用 Typst + Markdown 混合排版。
+笔记库采用 Typst + Markdown 混合排版，最终输出格式为 html。模板见 [ypst-template](https://github.com/jay-waves/yst-template) 
 
-- Markdown 文档的推荐样式见 [theme.css](https://github.com/jay-waves/yst-template/blob/main/html/theme.css)，不包含代码块与数学样式。
-- Typst 文档的样式模板见 [yst-template](https://github.com/jay-waves/yst-template)
-
-个人博客不在此仓库，详见[个人主页](https://jay-waves.cn)。
-
-所有图片附件与笔记一起由 Git 管理，位于仓库根目录的 `./assets/`。
+* [个人主页](https://jay-waves.cn)
+* [博客](https://jay-waves.cn/blogs)
+* [知识库](https://notes.jay-waves.cn)
 
 ## Guidelines
 
@@ -44,6 +41,7 @@
 - 文章篇幅不宜过长，5 个以内三级标题为宜。
 - 为了排版美观，不再要求中文强制使用英文标点，但混排时优先使用英文标点。
 - 中文（全角）和任意半角符号间应隔一个半角空格，括号内侧除外。
+- 行长度尽量控制在 100 显示宽度以内。
 
 ### Markdown
 

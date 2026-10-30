@@ -34,7 +34,7 @@ https://wuli.wiki/online/ltrJor.html
 
 https://blog.csdn.net/Insomnia_X/article/details/128796288
 
-矩阵不一定能#link("矩阵相似.typ")[相似对角化], 但是一定能化为若当标准型. 当矩阵几何重数等于代数重数时, 若当标准型就是对角矩阵.
+矩阵不一定能#link("https://notes.jay-waves.cn/math/linalg/similarity/")[相似对角化], 但是一定能化为若当标准型. 当矩阵几何重数等于代数重数时, 若当标准型就是对角矩阵.
 
 = 若当标准化
 
@@ -83,7 +83,7 @@ $
 
 对应若当链为 $v_1 \, v_2 \, v_3$. 
 
-类比 #link("矩阵相似.typ")[矩阵相似对角化] 中的形式, 若当标准化的局部为 
+类比 #link("https://notes.jay-waves.cn/math/linalg/similarity/")[矩阵相似对角化] 中的形式, 若当标准化的局部为 
 $
 A dot.op P ( lambda_i ) = P ( lambda_i ) dot.op J_3 ( lambda_i ) = mat(v_1, v_2, v_3) mat(lambda_i, 1; 0, lambda_i, 1; 0, 0, lambda_i) = ( lambda_i v_1 \, med v_1 + lambda_i v_2 \, med v_2 + lambda_i v_3 )
 $
@@ -95,7 +95,7 @@ A v_2 = v_1 + lambda_i v_2 med arrow.l.r.double med ( A - lambda_i E ) v_2 = v_1
 $
 
 
-*由 #link("矩阵的特征.typ")[Hamilton-Cayley 定理]可知, 若当链的长度上限, 是矩阵最小多项式中 $lambda_i$ 项对应的指数.*
+*由 #link("https://notes.jay-waves.cn/math/linalg/eigen-values/")[Hamilton-Cayley 定理]可知, 若当链的长度上限, 是矩阵最小多项式中 $lambda_i$ 项对应的指数.*
 
 == Smith-Frobenius 结构定理
 

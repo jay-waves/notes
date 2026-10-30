@@ -24,7 +24,7 @@ y = r times sin(phi) $
 定义幅值为 $| z | = r = sqrt(x^2 + y^2)$
 
 ==== 复平面单位根
-根据#link("../algebra/环/多项式环.typ")[代数基本定理], $ x^n = 1 $ 在复数域上有 $n$ 个解, 分别为: $ exp [frac(2 k pi i, n)] = cos (frac(2 k pi, n)) + i dot sin (frac(2 k pi, n)) , quad k = 0 , 1 , 2 , dots.h , n - 1 $ 这些根都在复平面的单位元上, 将圆平均切分为 $n$ 份.
+根据#link("https://notes.jay-waves.cn/math/algebra/%E7%8E%AF/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%8E%AF/")[代数基本定理], $ x^n = 1 $ 在复数域上有 $n$ 个解, 分别为: $ exp [frac(2 k pi i, n)] = cos (frac(2 k pi, n)) + i dot sin (frac(2 k pi, n)) , quad k = 0 , 1 , 2 , dots.h , n - 1 $ 这些根都在复平面的单位元上, 将圆平均切分为 $n$ 份.
 
 ==== 复平面旋转
 $e^(phi dot i) = cos(phi) + i dot sin(phi)$, 表示复平面单位圆周上的点.

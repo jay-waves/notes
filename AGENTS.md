@@ -1,18 +1,51 @@
-# lib.comrak D3 charts
 
-When creating a `viz` chart for lib.comrak:
+Do not modify or delete the user's knowledge content unless explicitly requested.
 
-- Put the chart in a local JavaScript ES module. Place a complete tag in its own Markdown block, with its path relative to the Markdown file:
+Write clearly, accurately and concisely, with sound logic and restrained detail. 
+Avoid excessive caveats, defensive language, and unnecessary assumptions. 
+
+# Repository guidelines
+
+- This repository contains Markdown and Typst notes organized by subject. Follow the writing, 
+    naming, citation, and license guidelines in README.md; see appx/personal-coding-styles.md 
+    for code style.
+- Store images under `assets/<subject>/` and references in the subject's `references.bib`. Preserve 
+    third-party attribution and license information.
+- Use spaces for indentation, with an indent size of 4.
+- Aim for 100 display columns in prose, counting full-width characters as two; 
+    allow longer lines when wrapping would break syntax or readability.
+- Use Markdown hard line breaks and standard syntax. 
+- Use lowercase and hyphens for ordinary file and directory names 
+
+## Site Workflow (.github)
+
+- Markdown: use `lib.comrak.exe`; supported extensions include tables, KaTeX, footnotes,
+  YAML front matter, HTML, Mermaid, and D3 `<viz>` charts.
+- Typst: use `@local/ypst-template:0.1.0` and its `typst.py` wrapper for HTML export.
+  Use native Typst syntax and the template's helpers; see the template README.
+- Build the site with `.github/scripts/build_site.py`; its CLI options are listed in `--help`.
+- Changes to images, bibliographies, Typst imports, charts, and other dependencies do not 
+    automatically recompile notes; use the workflow's `full_build` when rendered output must be 
+    refreshed.
+
+## Markdown 
+
+- Compile with `lib.comrak`. It renders math with KaTeX, code with highlight.js,
+  charts with D3, and Mermaid with Pele.
+- Use `<mermaid>...</mermaid>` or `<mermaid src="charts/flow.mmd"></mermaid>`
+  for diagrams.
+- Use a standalone tag for D3 charts:
 
   ```html
-  <viz src="charts/example.js" width="75%" caption="Chart description"></viz>
+  <viz src="charts/example.js" width="75%" caption="Description"></viz>
   ```
 
-- `width` and `caption` are optional; width accepts integer percentages (1–100) or pixels (1–10000). The default is centered at up to 640px. Mermaid diagrams use `<mermaid src="charts/flow.mmd" caption="Flow"></mermaid>` or inline source between `<mermaid>` and `</mermaid>`. Mermaid code fences still work but produce a warning.
-- Import only `d3` (`import * as d3 from 'd3'`). Inline the data; other module imports and remote modules are unsupported. Keep the chart file inside the compilation `--root`.
-- Default-export a synchronous `render(container)` that draws into the supplied container. It runs at compile time in QuickJS and LinkeDOM: use explicit dimensions and an SVG `viewBox`; do not depend on layout measurement, network access, Canvas, timers, animation, or browser-only globals. Output is cached by module source, so avoid time and unseeded randomness. Keep module top-level code compatible with this environment.
-- For interaction, also export `hydrate(container)`. The browser calls only `hydrate` on the pre-rendered container; attach event handlers and use browser-only APIs there. D3 bound data is not preserved by SVG serialization: rebind data in `hydrate` before callbacks use it. Without this export, the chart is static and its JavaScript is not included in the HTML. Scope selections to `container` and prefix any SVG IDs with `container.id`.
-- Match the document theme with the separate D3 stylesheet's basic palette, typography, axes, grids, and common mark classes. `.series-1` through `.series-4` are subdued data colors; `.accent` / `.series-5` and `.accent-2` / `.series-6` are emphasis colors. Use emphasis selectively. `--viz-accent`, `--viz-accent-2`, `--viz-muted`, and `--viz-grid` are available. Apply `.axis`, `.grid`, `.bar`, `.point`, `.line`, `.area`, `.slice`, `.cell`, `.box`, `.whisker`, `.median`, `.outlier`, `.error-bar`, `.reference`, `.legend`, or `.caption` to suitable SVG elements. Specialized forms such as heatmaps, Sankey diagrams, violin plots, and contours should define their own geometry and any chart-specific styling in the chart module. Give charts a descriptive SVG title or accessible label, and support keyboard interaction when applicable.
-- Compile the Markdown with `lib.comrak compile note.md output.html` (add `--root` if needed). Report compile errors and ask the user to check actual browser rendering and interactions. Use `--standalone` for a self-contained preview.
+  The path is relative to the Markdown file. See `./github/examples/viz` for details.
+- Run `lib.comrak compile note.md --standalone` to check a document.
 
-See `examples/viz/boxplot.js` and `examples/viz/note.md` for an interactive example.
+## Typst
+
+- Import `template` and any needed helpers from `@local/ypst-template:0.1.0`, then use
+    `#show: template`. Place `#set document(...)` before the show rule.
+- `typst.py` html export allows you to use *pele.js* to render mermaid charts.
+- Use absolute #link(https://notes.jay-waves.cn/..) URLs for links between Typst notes. 

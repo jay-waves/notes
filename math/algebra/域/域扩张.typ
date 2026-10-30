@@ -5,7 +5,7 @@
 = 作为向量空间的扩域
 
 1. $K, F$ 是两个域, $F \/ K$ 是个域扩张, $F$ 是 $K$ 的扩域, $K$ 是 $F$ 的子域.
-2. 若 $F \/ K$ 是个域扩张, 则 $F$ 是 $K$ 上的#link("../../linalg/vectors/vector-space.typ")[向量空间].
+2. 若 $F \/ K$ 是个域扩张, 则 $F$ 是 $K$ 上的#link("https://notes.jay-waves.cn/math/linalg/vectors/vector-space/")[向量空间].
 3. 域扩张 $F \/ K$ 的次数是 $K$ 上线性空间 $F$ 的维数, 记作 $dim_K F$ 或 $[F : K]$.
   - 有限扩张: $[F : K] < infinity$.
   - 无穷扩张: $[F : K] = infinity$.

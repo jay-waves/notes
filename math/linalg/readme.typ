@@ -62,9 +62,9 @@
     ..rows.flatten(),
   )
 ][
-  矩阵等价，详见 #link("./mat-equivalence.typ")[math/linalg/mat-equivalence.typ],\
-  矩阵相似，详见 #link("./mat-similarity.typ")[math/linalg/mat-similarity.typ],\
-  矩阵合同，详见 #link("./mat-congruence.md")[math/lialg/mat-congruence.md]
+  矩阵等价，详见 #link("https://notes.jay-waves.cn/math/linalg/equivalence/")[math/linalg/mat-equivalence.typ],\
+  矩阵相似，详见 #link("https://notes.jay-waves.cn/math/linalg/similarity/")[math/linalg/mat-similarity.typ],\
+  矩阵合同，详见 #link("https://notes.jay-waves.cn/math/linalg/congruence/")[math/lialg/mat-congruence.md]
 ]
 
 #image("../../assets/math/mat-relation.webp", width: 60%)

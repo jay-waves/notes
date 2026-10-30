@@ -65,7 +65,7 @@
 ]
 
 #proof[
-  #link("linear-systems/solutions-of-linear-systems.typ")[线性方程组] $B vec(x) = 0$ 的解空间, 属于 $A B vec(x) = 0$ 的解空间, 即 $nothing_B subset.eq nothing_(A B)$.  
+  #link("https://notes.jay-waves.cn/math/linalg/linear-systems/linear-system-solutions/")[线性方程组] $B vec(x) = 0$ 的解空间, 属于 $A B vec(x) = 0$ 的解空间, 即 $nothing_B subset.eq nothing_(A B)$.  
   当 $A B vec(x) = 0$ 的解不是 $B vec(x) = 0$ 的解, 即 $B vec(x) eq.not 0$, 则 $B vec(x)$ 属于 $A vec(x) = 0$ 的解空间.  
   因此 $r ( nothing_(A B) ) - r ( nothing_B ) lt.eq r ( nothing_A )$.
 ]

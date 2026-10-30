@@ -6,7 +6,7 @@
 #let vmat(..args) = $mat(delim: "|", ..args)$
 
 == 几何分布
-几何分布 ($upright("Ber") - E_oo$) 指#link("二项分布.typ")[伯努利试验中]某事件首次出现的概率. 假设共进行 $k$ 次伯努利试验, 在第 $k$ 次试验时发生该事件, 这里包含第 $k$ 次试验的概率 $p$.
+几何分布 ($upright("Ber") - E_oo$) 指#link("https://notes.jay-waves.cn/math/prob/distributions/binomial/")[伯努利试验中]某事件首次出现的概率. 假设共进行 $k$ 次伯努利试验, 在第 $k$ 次试验时发生该事件, 这里包含第 $k$ 次试验的概率 $p$.
 
 记为 $X tilde.op G(p)$
 
