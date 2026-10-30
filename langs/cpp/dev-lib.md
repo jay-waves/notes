@@ -77,7 +77,7 @@ SCENARIO("xxxxx") {
 
 ## linalg & BLAS
 
-BLAS (Basic Linear Algebra Subprograms) 是指线性代数接口的事实标准，[linalg](../../math/linalg/ReadMe.md) 将于 C++26 加入标准库，实现这一系列接口。
+BLAS (Basic Linear Algebra Subprograms) 是指线性代数接口的事实标准，[linalg](../../math/linalg/README.md) 将于 C++26 加入标准库，实现这一系列接口。
 
 #### level 1 BLAS 
 

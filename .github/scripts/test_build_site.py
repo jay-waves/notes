@@ -15,6 +15,31 @@ import prune_deployments
 
 
 class BuildTest(unittest.TestCase):
+    def test_related_refreshes_cached_pages_and_uses_relative_urls(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage = root / "site"
+            entries = [
+                {"source": "os/a.md", "url": "os/a/", "kind": "Markdown"},
+                {"source": "other/b.typ", "url": "other/b/", "kind": "Typst"},
+            ]
+            for entry in entries:
+                source = root / entry["source"]
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_text("虚拟内存 共享页面", encoding="utf-8")
+                page = stage / entry["url"] / "index.html"
+                page.parent.mkdir(parents=True, exist_ok=True)
+                page.write_text("<html><body>article</body></html>", encoding="utf-8")
+            with patch.object(build_site, "ROOT", root):
+                build_site.add_related(stage, entries)
+                build_site.add_related(stage, entries)
+                page = (stage / "os/a/index.html").read_text(encoding="utf-8")
+                self.assertEqual(page.count('class="related-notes"'), 1)
+                self.assertIn('href="../../other/b/"', page)
+                self.assertIn('src="../../_shared/site/related-notes.js"', page)
+                build_site.add_related(stage, entries[:1])
+                self.assertNotIn('class="related-notes"', (stage / "os/a/index.html").read_text(encoding="utf-8"))
+
     def test_cleanup_reports_cloudflare_http_error_details(self):
         error = HTTPError("https://example.org", 400, "Bad Request", {},
                           io.BytesIO(b'{"errors":[{"code":1000,"message":"Invalid pagination"}]}'))

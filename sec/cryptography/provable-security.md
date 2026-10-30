@@ -32,7 +32,7 @@ Perfect Secrecy is that **the [posteriori probability](https://notes.jay-waves.c
 
 #### Def. [^1]
 
-[^1]: For an explanation of the abbreviated form, see [../../math/readme](../../math/readme.md#数学证明)
+[^1]: For an explanation of the abbreviated form, see [../../math/readme](../../math/README.md#数学证明)
 
 *An encryption scheme $(Gen, Enc, Dec)$ with message space $\mathcal{M}$ is perfectly secret if:*
 
