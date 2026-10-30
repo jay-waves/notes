@@ -16,7 +16,6 @@ import time
 
 from pages_index import generate
 from related_notes import is_recommendable, related
-from urllib.parse import quote
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -26,12 +25,17 @@ CODE_LANGUAGES = {".c": "c", ".h": "c", ".cpp": "cpp", ".cc": "cpp", ".hpp": "cp
 
 
 def add_related(stage, manifest):
-    """Refresh recommendations even when compiled pages came from the cache."""
+    """Write recommendation data and add a stable loader to article pages."""
     articles = {entry["url"]: entry for entry in manifest
                 if entry["kind"] != "Raw" and is_recommendable(entry["source"])}
     documents = {url: (ROOT / entry["source"]).read_text(encoding="utf-8")
                  for url, entry in articles.items()}
     recommendations = related(documents)
+    data = {url: [{"url": target, "source": articles[target]["source"]}
+                  for target in targets] for url, targets in recommendations.items()}
+    (stage / "_shared" / "site" / "related-notes.json").write_text(
+        json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n",
+        encoding="utf-8", newline="\n")
     for entry in manifest:
         if entry["kind"] == "Raw":
             continue
@@ -39,16 +43,9 @@ def add_related(stage, manifest):
         page = stage / url / "index.html"
         content = page.read_text(encoding="utf-8")
         content = re.sub(r"<!-- related-notes:start -->.*?<!-- related-notes:end -->", "", content, flags=re.S)
-        links = []
-        for target in recommendations.get(url, []):
-            name = Path(articles[target]["source"]).stem
-            relative = posixpath.relpath(target, url) + "/"
-            links.append(f'<li><a href="{html.escape(quote(relative, safe="/."), quote=True)}">{html.escape(name)}</a></li>')
-        if links:
+        if url in articles:
             assets = posixpath.relpath("_shared/site", url)
             block = (f'<!-- related-notes:start --><link rel="stylesheet" href="{assets}/related-notes.css">'
-                     '<details class="related-notes"><summary>相关文章 <span>继续向下滚动或点击展开</span></summary>'
-                     f'<ul>{"".join(links)}</ul></details>'
                      f'<script src="{assets}/related-notes.js" defer></script><!-- related-notes:end -->')
             if re.search(r"</body\s*>", content, flags=re.I):
                 content = re.sub(r"</body\s*>", lambda match: block + match.group(), content, count=1, flags=re.I)

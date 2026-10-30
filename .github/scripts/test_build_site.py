@@ -31,14 +31,17 @@ class BuildTest(unittest.TestCase):
                 page.parent.mkdir(parents=True, exist_ok=True)
                 page.write_text("<html><body>article</body></html>", encoding="utf-8")
             with patch.object(build_site, "ROOT", root):
+                (stage / "_shared/site").mkdir(parents=True)
                 build_site.add_related(stage, entries)
+                before = (stage / "os/a/index.html").read_text(encoding="utf-8")
                 build_site.add_related(stage, entries)
                 page = (stage / "os/a/index.html").read_text(encoding="utf-8")
-                self.assertEqual(page.count('class="related-notes"'), 1)
-                self.assertIn('href="../../other/b/"', page)
+                self.assertEqual(page, before)
                 self.assertIn('src="../../_shared/site/related-notes.js"', page)
+                data = json.loads((stage / "_shared/site/related-notes.json").read_text(encoding="utf-8"))
+                self.assertEqual(data["os/a/"], [{"url": "other/b/", "source": "other/b.typ"}])
                 build_site.add_related(stage, entries[:1])
-                self.assertNotIn('class="related-notes"', (stage / "os/a/index.html").read_text(encoding="utf-8"))
+                self.assertEqual(before, (stage / "os/a/index.html").read_text(encoding="utf-8"))
 
     def test_cleanup_reports_cloudflare_http_error_details(self):
         error = HTTPError("https://example.org", 400, "Bad Request", {},
