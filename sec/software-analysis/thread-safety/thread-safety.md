@@ -1,8 +1,8 @@
 
 ## 并发缺陷分类
 
-- [数据竞争](数据竞争.md)
-- [原子性违反](原子性违反.md), Atomicity Violation. 原子性事务被打断. 属于语义上的错误.
+- [数据竞争](data-race.md)
+- [原子性违反](atomicity-violation.md), Atomicity Violation. 原子性事务被打断. 属于语义上的错误.
 - 偏序性违反, Order Violation. 两个事务的顺序被颠倒. 比如释放后使用, 初始化前使用.
 - [死锁, Deadlock](../../../os/proc/thread-sync.md)
 
@@ -17,7 +17,7 @@
 ### 外部中断 [^1]
 
 中断不会导致数据竞争, 因为中断会 (在指令边界) 打断当前控制流. 
-中断会导致[原子性违反](原子性违反.md). 
+中断会导致[原子性违反](atomicity-violation.md). 
 为了提高系统的整体响应性, 在大部分架构上, 中断允许嵌套, 即允许更高优先级的中断打断当前的低优先级中断. 
 
 另一种缺陷是: 在初始化之前或资源销毁后, 未正确关闭中断, 导致中断使用了未定义数据. 
@@ -43,7 +43,7 @@ Carmen Torres Lopez, Stefan Marr, Elisa Gonzalez Boix, and Hanspeter Mössen bö
 观察点检测 (watchpoint detection) 设置程序中观察点或断点, 暂停某一线程执行, 观察是否有其他线程也访问了同一内存位置, 并且符合数据竞争模式.
 
 * 通过 gdb, lldb. 在用户态, 有内核调度介入, 可能效果不好.
-* 直接在内核态做: [windows data-collider](data%20collider.md), [linux-kcsan](../工具/sanitizers.md)
+* 直接在内核态做: [windows data-collider](data%20collider.md), [linux-kcsan](../tools/sanitizers.md)
 
 ### 锁集分析
 
@@ -56,7 +56,7 @@ Carmen Torres Lopez, Stefan Marr, Elisa Gonzalez Boix, and Hanspeter Mössen bö
 发生序关系 (Happens-Before Relation) 关注程序中多个事件的偏序关系. Happens-Before 算法是动态检测算法, 理论上没有误报. (但是数据竞争大部分是无害的)
 
 - Vector Clocks, [M, 1988](Vector%20Clocks.md)
-- Happens Before, [Lamport, 1978](happens%20before.md), [Flanagan, 2009](FastTrack.md)
+- Happens Before, [Lamport, 1978](happens-before.md), [Flanagan, 2009](FastTrack.md)
 
 ```
 Data Race:

@@ -46,7 +46,7 @@ Powershell 中想要直接使用 CMD 中命令, 而不是别名, 请加上 `.exe
 
 ### Invoke-WebRequest
 
-Powershell 中 `curl` 实际是 `Invoke-WebRequest` 的别名 (不是[原来的工具](../tracing&perf/net-stat.md#`curl`)), **参数**有变化 (真的坑):
+Powershell 中 `curl` 实际是 `Invoke-WebRequest` 的别名 (不是[原来的工具](../os/perf/net-stat.md#`curl`)), **参数**有变化 (真的坑):
 
 - `-Uri` 
 - `-Proxy` --> `-x`
@@ -70,7 +70,7 @@ Powershell 的命令替换和字符串转义非常难用，建议不要手写。
 
 ## Q&A 1
 
-管道和重定向编码问题: Powershell7 默认支持 [UTF-8](../../hw/char-encoding.md), 但是不同平台上的一些功能又依赖于平台本身的语言设置. 在 Windows 上, 默认中文编码使用了非 UTf-8 编码, 导致使用管道出现乱码.
+管道和重定向编码问题: Powershell7 默认支持 [UTF-8](../hw/char-encoding.md), 但是不同平台上的一些功能又依赖于平台本身的语言设置. 在 Windows 上, 默认中文编码使用了非 UTf-8 编码, 导致使用管道出现乱码.
 
 <https://github.com/PowerShell/PowerShell/issues/17523> 解决办法如下:
 

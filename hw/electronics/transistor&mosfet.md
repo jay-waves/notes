@@ -2,7 +2,7 @@
 
 ### 双极性晶体管
 
-<img src="../../assets/hw/bjt.avif" alt="" width="300">
+<img src="../../attach/img/hw/bjt.avif" alt="" width="300">
 
 双极性晶体管 (Bipolar Junction Transistor, BJT) 是电流控制型器件, 通过基极电流 $I_{B}$ 控制集电极到发射极的电流 $I_{C}$ . 有三个引脚: *发射极 (Emitter), 基极 (Base), 集电极 (Collector)*. 由硅制成, 相邻区域形成两个 PN 结 (Base-Emitter, Base-Collector).
 
@@ -23,7 +23,7 @@
 
 ### 场效应晶体管
 
-<img src="../../assets/hw/mosfet.avif" alt="" width="300">
+<img src="../../attach/img/hw/mosfet.avif" alt="" width="300">
 
 *场效应晶体管 (Field-Effect Transistor, FET)*, 是电压控制型器件. 主要类型是 *MOSFET (金属氧化物半导体 FET)*. FET 有三个引脚: *源极 (Source), 栅级 (Gate), 漏极 (Drain)*, 通过栅极电压 $V_{GS}$ 控制源级到漏级的电流 $I_{DS}$.
 

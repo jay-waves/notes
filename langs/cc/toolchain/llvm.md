@@ -1,6 +1,6 @@
 llvm 架构始于 2002-12. 目标是通过更统一清晰的接口与中间抽象层, 更多重用编译器库代码, 让 "多平台支持, 代码优化, 代码分析" 等编译器开发工作可直接基于 llvm. 可以是静态编译器 (如 gcc, free pascal), 也可以是运行时编译器 (如 vm, [jit](../../compiler-techniques.md)), 灵活强大.
 
-![](../../../assets/langs/langs-llvm-architecture.avif)
+![](../../../attach/img/langs/langs-llvm-architecture.avif)
 
 LLVM IR 中间代码表示有三种格式:
 - `.ll` 文件: 可读 IR, 类似汇编但更易读, 称为 *llvm 汇编码*.
@@ -11,7 +11,7 @@ LLVM IR 中间代码表示有三种格式:
 
 传统三阶段编译器架构包括: 前端, 优化器, 后端. 通过使用同一中间层, 方便了编译器支持更多高级语言和目标架构, 架构分离带来更多可能性 (如激进优化), 降低整体开发难度, 让社区更加繁荣. 
 
-![](../../../assets/langs/simple-compiler.avif)
+![](../../../attach/img/langs/simple-compiler.avif)
 
 实践中这种编译器结构很少被完全实现, 前端后端难分离, 没有标准的中间代码形式, 导致各个语言的代码和优化几乎不能互相复用. 有三种实现该结构的努力:
 1. Java and .Net 虚拟机. 提供 JIT 执行程序的 bytecode, [其他语言](http://en.wikipedia.org/wiki/List_of_JVM_languages) 编译为该格式即可被解释执行. 但这种方式必须使用: JIT runtime, garbage collection, particular object model. 这导致了和这种模型差异较大的语言(如C)仅有较低的执行效率.
@@ -22,7 +22,7 @@ LLVM IR 是独立完备的, 相比之下, GCC 的 GIMPLE 中间表示并不是�
 
 因此, llvm 分离前后端较为彻底, 原本支持 $m$ 中高级语言到 $n$ 中目标平台代码需要 $m\times n$ 种编译器实现, 现在只需要分别实现前后端到 IR 的转换, 即 $m+n$ 种实现, 大大简化了开发难度.
 
-![](../../../assets/langs/llvm-compiler1.avif)
+![](../../../attach/img/langs/llvm-compiler1.avif)
 
 > [!tip] 
 > There are multiple reasons why pieces of GCC cannot be reused
@@ -88,9 +88,9 @@ llvmGetPassPluginInfo() {
 
 llvm 仅链接入所需要的 Pass.o, 无关 Pass.o 不会产生开销. 这也是模块化的优点.
 
-![](../../../assets/langs/llvm-passlinkage.avif)
+![](../../../attach/img/langs/llvm-passlinkage.avif)
 
-![](../../../assets/langs/llvm-lto.avif)
+![](../../../attach/img/langs/llvm-lto.avif)
 
 ## 源码路径说明
 

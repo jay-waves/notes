@@ -58,7 +58,7 @@ class BuildTest(unittest.TestCase):
             root = Path(tmp)
             page = root / "ai" / "nlp" / "note.html"
             page.parent.mkdir(parents=True)
-            page.write_text('<img src="../../../assets/example.png">', encoding="utf-8")
+            page.write_text('<img src="../../../attach/img/example.png">', encoding="utf-8")
             self.assertEqual(check_site.check(root), [])
 
     def test_git_diff_tracks_edits_deletions_and_untracked(self):

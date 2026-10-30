@@ -11,7 +11,7 @@ SSH, Secure Shell, 是一种远程登录会话安全协议, 支持身份认证�
 ssh 协议建立远程连接的步骤:
 1. **建立 TCP 连接**
 2. **协商协议版本号, 协商密码算法**
-3. **密钥建立**: 用 [DH](../../sec/cryptography/public-key-crypto/DiffieHellman.md) 或 [ECDH](../../sec/cryptography/public-key-crypto/ECC/ECC.md) 密钥交换算法生成会话密钥 $K$, 会话 ID. $K$ 用于保密后续的认证和数据传输.
+3. **密钥建立**: 用 [DH](../../sec/cryptography/public-key-crypto/diffie-hellman.md) 或 [ECDH](../../sec/cryptography/public-key-crypto/ECC/ECC.md) 密钥交换算法生成会话密钥 $K$, 会话 ID. $K$ 用于保密后续的认证和数据传输.
 4. **服务器认证用户**: 口令 (Password) 认证或公钥认证, 若成功则继续
 5. **加密通信**: 使用 $K$ 进行加密通信, 对称加密 TCP 的载荷部分.
 

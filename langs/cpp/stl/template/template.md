@@ -59,4 +59,4 @@ Substitution Failure Is Not An Error: 一般指模板特化.
 
 ## CRTP 
 
-详见 [设计模式/MixIn](../object-oriented/mixin.md)
+详见 [设计模式/MixIn](../../object-oriented/mixin.md)

@@ -24,11 +24,11 @@ Karnaugh Map (K-Map) 是一种化简复杂布尔逻辑的方法. 一般能处理
 
 ### 逻辑门
 
-详见 [门电路](门电路.md)
+详见 [门电路](logic-gates.md)
 
 #### NOT
 
-![](../../assets/hw/logic-gate-not.avif)
+![](../../attach/img/hw/logic-gate-not.avif)
 
 | In1 | NOT |
 | --- | --- |
@@ -37,7 +37,7 @@ Karnaugh Map (K-Map) 是一种化简复杂布尔逻辑的方法. 一般能处理
 
 #### AND
 
-![](../../assets/hw/logic-gate-and.avif)
+![](../../attach/img/hw/logic-gate-and.avif)
 
 真值表:
 
@@ -50,7 +50,7 @@ Karnaugh Map (K-Map) 是一种化简复杂布尔逻辑的方法. 一般能处理
 
 #### OR
 
-![](../../assets/hw/logic-gate-or.avif)
+![](../../attach/img/hw/logic-gate-or.avif)
 
 用 AND 门表示 OR 门, 需要使用德摩根定理 (De Morgan's laws): $$\lnot (A \wedge B)=\lnot A\vee \lnot B$$
 
@@ -65,7 +65,7 @@ Karnaugh Map (K-Map) 是一种化简复杂布尔逻辑的方法. 一般能处理
 
 ### 加法器
 
-详见 [算术电路](算术电路.md)
+详见 [算术电路](arithmetic-ckt.md)
 
 ### 多路复用器 (Multiplexer, Mux)
 

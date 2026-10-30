@@ -41,12 +41,12 @@ $( d x , d y , d z )$ 极小, 近似于在 $( x , y , z )$ 的切平面上, 因�
     align: (auto,auto,auto,),
     table.header([$z = x^2 - y^2$ 图像], [梯度 $( frac(partial z, partial x) , frac(partial z, partial y) )$], [等高线 $x^2 - y^2 = C$],),
     table.hline(),
-    [#box(image("../../../assets/math/math-analytic-geometry-gradient-surface.webp"))], [#box(image("../../../assets/math/math-analytic-geometry-gradient-vector.webp"))], [#box(image("../../../assets/math/math-analytic-geometry-level-curves.webp"))],
+    [#box(image("../../../attach/img/math/gradient-surface.webp"))], [#box(image("../../../attach/img/math/gradient-vector.webp"))], [#box(image("../../../attach/img/math/math-analytic-geometry-level-curves.webp"))],
   )
 
 #emph[图注]: 设 $z = 0$ 平面上点 $A : ( x , y )$, 该点梯度为 $nabla z = ( frac(partial z, partial x) , frac(partial z, partial y) )$. 该梯度向量即是等高线 $x^2 - y^2 = 0$ 的法向量, 也是 $z = x^2 - y^2$ 切向量在 $z = 0$ 的投影.
 
-#box(image("../../../assets/math/math-analytic-geometry-surface-gradient.webp"))
+#box(image("../../../attach/img/math/surface-gradient.webp"))
 
 #emph[图注]: 设曲面 $C = f(x , y , z)$, 其梯度方向代表 C 变化率最大的方向, 即垂直于曲面的方向.
 

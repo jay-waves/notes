@@ -94,4 +94,4 @@ https://en.wikipedia.org/wiki/Space_(mathematics)
 - 度量空间
 - 希尔伯特空间
 
-<img src="../../assets/math/math-algebra-vector-space-overview.avif" alt="" width="500">
+<img src="../../attach/img/math/math-algebra-vector-space-overview.avif" alt="" width="500">

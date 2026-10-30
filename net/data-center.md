@@ -9,7 +9,7 @@ Over-subscription: total allocated or promised resources exceed the actual avail
 
 ## Legacy DCN 
 
-<img src="../assets/net/legacy-data-center-network.avif" alt="" width="500">
+<img src="../attach/img/net/legacy-data-center-network.avif" alt="" width="500">
 
 经典树状 DCN ，分为三层：
 1. Access Layer. A group of hosts(mostly 16/32) is connected to one switch, called ToR switch (Top of Rack)
@@ -36,10 +36,10 @@ Spine-Leaf 的优势是扩展方便。
 
 |     |     |
 | --- | --- |
-| <img src="../assets/net/leaf-spine1.webp" width="200"> | Each Leaf is connected to every Spine |
-| <img src="../assets/net/leaf-spine2.webp" width="200"> |  Spines <br> 4 Line Cards * 36 Ports per Line Card * 100G Port |
-| <img src="../assets/net/leaf-spine3.webp" width="200"> | Leaf's Uplink Ports to Spine Switches <br> 4 * 100G uplink ports  |
-| <img src="../assets/net/leaf-spine4.webp" width="200"> | Leaf's Donwloink Ports to End-Devices <br> 48 * 25G downlink ports (to the Servers)  |
+| <img src="../attach/img/net/leaf-spine1.webp" width="200"> | Each Leaf is connected to every Spine |
+| <img src="../attach/img/net/leaf-spine2.webp" width="200"> |  Spines <br> 4 Line Cards * 36 Ports per Line Card * 100G Port |
+| <img src="../attach/img/net/leaf-spine3.webp" width="200"> | Leaf's Uplink Ports to Spine Switches <br> 4 * 100G uplink ports  |
+| <img src="../attach/img/net/leaf-spine4.webp" width="200"> | Leaf's Donwloink Ports to End-Devices <br> 48 * 25G downlink ports (to the Servers)  |
 
 * 每个 Leaf 交换机需要连接所有 Spine 交换机，但是同类设备彼此间不需要连接。
 * Spine 的端口数量决定了 Leaf 的最大数量
@@ -48,7 +48,7 @@ Spine-Leaf 的优势是扩展方便。
 
 ### Goolge Fat Tree 
 
-<img src="../assets/net/google-fat-tree-topo.avif" alt="" width="500">
+<img src="../attach/img/net/google-fat-tree-topo.avif" alt="" width="500">
 
 Fat Tree 提供更多的并行链路，让上层的总带宽变胖，从而避免 Over-Subscription.
 
@@ -56,7 +56,7 @@ Fat Tree 提供更多的并行链路，让上层的总带宽变胖，从而避�
 
 ## BCube 
 
-<img src="../assets/net/bcube-data-center-topo.avif" alt="" width="400">
+<img src="../attach/img/net/bcube-data-center-topo.avif" alt="" width="400">
 
 BCube 是递归结构，设每个交换机端口数为 $n$ ，每台服务器需要 $k$ 个 NIC 网卡，网卡 $i$ 对应 $BCube_{i}$ 层内的 $i$ 交换机（同层跨集群计数）。$BCube_{0}$ 有一个交换机，星型拓扑连接 $n$ 个服务器，编号分别为 $1\dots n$ 
 

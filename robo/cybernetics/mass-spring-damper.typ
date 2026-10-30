@@ -6,7 +6,7 @@
 = 线性 质量-弹簧-阻尼 模型
 
 #figure(
-  image("../../assets/robo/mass-spring-damper.webp", width: 200pt)
+  image("../../attach/img/robo/mass-spring-damper.webp", width: 200pt)
 )
 
 设参数如下：
@@ -45,7 +45,7 @@ $
 当 $theta$ 稳定时，有一下三种解。总体而言，*特征值在左半复平面离虚轴 $Im$ 越远，衰减越快。在右半复平面，发散。离实轴 $Re$ 越远，震荡越快。* 这和微分方程的解结构是类似的。
 
 #figure(
-  image("../../assets/robo/mass-spring-damper2.webp", width: 70%),
+  image("../../attach/img/robo/mass-spring-damper2.webp", width: 70%),
   caption: [Modern Robotics, Fig 11.5],
   numbering: none
 )

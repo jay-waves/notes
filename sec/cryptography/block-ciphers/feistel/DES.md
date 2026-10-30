@@ -12,7 +12,7 @@ DES, Data Encryption Standard, 是 1977 年颁布的美帝标准加密算法, �
 
 DES 共 16 轮迭代, 每轮有独立派生的子密钥. 输入 64 位明文, 输入 64 位密钥 (有效位数为 56 位), 输出 64 位密文. 
 
-<img src="../../../../assets/sec/crypto-des-diagram.avif" alt="" width="350">
+<img src="../../../../attach/img/sec/crypto-des-diagram.avif" alt="" width="350">
 
 解密可复用整个加密结构, 同时逆序输入轮密钥. 为了对称性, 最后一轮的 Feistel 结构并不完整, $L,R$ 没有交换顺序.
 
@@ -22,7 +22,7 @@ DES密钥长度虽然是56位, 但实现中DES加上了8位校验位, 共64位. 
 
 循环左移 `LCS` 操作的*移动比特数*遵循**轮次左移调度表** $\{1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1\}$, 16轮后正好左移 `28bits` 回到初态.
 
-<img src="../../../../assets/sec/crypto-des-diagram2.avif" alt="" width="500">
+<img src="../../../../attach/img/sec/crypto-des-diagram2.avif" alt="" width="500">
 
 PC-2 盒的置换, 也是分为左右 `28 bits` 进行压缩, 互不相干. 即左 `28 bits` 压缩为 前 `24 bits`, 后 `28bits` 压缩为后 `24 bits`.
 
@@ -38,7 +38,7 @@ DES采用单轮 [Feistel 迭代结构](Feistel.md), 共16轮. 加密流程如下
 	$\quad R_{i}\leftarrow L_{i-1}\oplus P(\ S[\ E(R_{i-1})\oplus rk_{i}\ ]\ )$
 3. $IP^{-1}(R_{16}L_{16})$
 
-<img src="../../../../assets/sec/crypto-des-1round.avif" alt="" width="350">
+<img src="../../../../attach/img/sec/crypto-des-1round.avif" alt="" width="350">
 
 > 这个IP有什么用? 为了加解密结构相同还必须在末尾加上逆IP.
 

@@ -107,7 +107,7 @@ Discrete Logarithm Problem, 离散对数问题, 见 [欧拉定理](../math/numth
 
 ### DH
 
-Diffie-Hellman 密钥交换, 两实体在非安全信道交换秘密的算法, 见 [DiffieHellman](cryptography/public-key-crypto/DiffieHellman.md)
+Diffie-Hellman 密钥交换, 两实体在非安全信道交换秘密的算法, 见 [DiffieHellman](cryptography/public-key-crypto/diffie-hellman.md)
 
 ---
 
@@ -119,7 +119,7 @@ Exploit Database. 公开发布一些漏洞的详细信息和利用代码, 每个
 
 ### ElGamal
 
-一种基于 DLP 困难性的公钥密码算法, 包括加密和签名. 见 [ElGamal](cryptography/public-key-crypto/ElGamal.md)
+一种基于 DLP 困难性的公钥密码算法, 包括加密和签名. 见 [ElGamal](cryptography/public-key-crypto/el-gamal.md)
 
 ---
 
@@ -127,7 +127,7 @@ Exploit Database. 公开发布一些漏洞的详细信息和利用代码, 每个
 
 ### Fuzzing
 
-高效软件模糊测试框架, 见 [模糊测试技术](software-analysis/模糊测试.md)
+高效软件模糊测试框架, 见 [模糊测试技术](software-analysis/fuzzing.md)
 
 ### Finite State Machine
 
@@ -256,7 +256,7 @@ One-Time Password, 用于单次登录的临时密码. TOTP (Time-based OTP) 基�
 
 ### OAuth
 
-[oauth](../db/distributed/auth/oauth.md), 一种开放标准授权协议, 允许用户授权第三方访问其资源而无需暴露凭据. 
+[oauth](../net/web/auth/oauth.md), 一种开放标准授权协议, 允许用户授权第三方访问其资源而无需暴露凭据. 
 
 ---
 
@@ -296,7 +296,7 @@ Platform as a Service. 同见 IaaS, SaaS.
 
 ### PRNG
 
-Pseudo-Random Number Generator, 伪随机数生成器, 见 [流密码](cryptography/stream-ciphers&prng/流密码与伪随机数.md)
+Pseudo-Random Number Generator, 伪随机数生成器, 见 [流密码](cryptography/stream-ciphers&prng/stream-ciphers&prng.md)
 
 ### PKI
 
@@ -330,7 +330,7 @@ Remote Code Execution, 远程代码执行漏洞, 允许攻击者在目标系统�
 
 ### SAML
 
-[saml](../db/distributed/auth/saml.md), Security Assertion Markup Language, 用于单点登录 (SSO) 和身份联合的标准. 
+[saml](../net/web/auth/saml.md), Security Assertion Markup Language, 用于单点登录 (SSO) 和身份联合的标准. 
 
 ### SQL
 

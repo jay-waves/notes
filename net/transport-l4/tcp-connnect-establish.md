@@ -5,10 +5,10 @@ TCP 三次握手建立连接, 四次挥手释放连接
 
 ==(换成时序图)==
 
-<img src="../../assets/net/net-transport-tcp-three-way-handshake.avif" alt="" width="400">
+<img src="../../attach/img/net/net-transport-tcp-three-way-handshake.avif" alt="" width="400">
 
 
-<img src="../../assets/net/net-transport-tcp-four-way-teardown.avif" alt="" width="400">
+<img src="../../attach/img/net/net-transport-tcp-four-way-teardown.avif" alt="" width="400">
 
 启用延迟确认后, 挥手的第二三个可能合并为一个.
 

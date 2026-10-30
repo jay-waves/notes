@@ -68,7 +68,7 @@ struct less {
 
 ## 函数适配器
 
-C++11 之前通常用 `bind()` 和 `mem_fn()` 来完成[函数柯里化 ](../../functional-programming.md). 
+C++11 之前通常用 `bind()` 和 `mem_fn()` 来完成[函数柯里化 ](../functional-programming.md). 
 
 
 ```cpp

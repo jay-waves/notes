@@ -26,7 +26,7 @@ revised: 25-01-24
 	- 逻辑式, Prolog
 - 面向对象, Java 
 
-<img src="../../assets/langs/programming-paradigms.avif" alt="" width="800">
+<img src="../attach/img/langs/programming-paradigms.avif" alt="" width="800">
 
 ### 面向对象
 

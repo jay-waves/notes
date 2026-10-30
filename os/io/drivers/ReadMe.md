@@ -11,7 +11,7 @@
 userspace --> /dev/xxx --> VFS --> driver --> hardware 
 ```
 
-<img src="../../../assets/os/linux-subsystems.avif" alt="" width="700">
+<img src="../../../attach/img/os/linux-subsystems.avif" alt="" width="700">
 
 设备驱动针对的对象是存储器和外设 (包括 CPU 中集成的存储器), 而不是 CPU 内核. Linux 对**用户态**暴露的统一外设驱动主要有三类:
 1. 字符设备驱动: 以串行顺序依次进行访问的设备, 按字节访问和传输. 文件类型为 `c`

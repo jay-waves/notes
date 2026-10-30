@@ -6,7 +6,7 @@
 
 Redis 的很多类型虽然类似 Python, 但是并不支持复杂的多层嵌套, 每种类型存储的都是 String. 可以借助键顺序 `a:b:c` 来实现类似嵌套字典的功能.
 
-<img src="../assets/db/why-redis-so-fast.png" alt="why redis so fast?" width="600">
+<img src="../attach/img/db/why-redis-so-fast.png" alt="why redis so fast?" width="600">
 
 Redis 的 IO 模型是 [Reactor](../os/io/io-multiplexing.md) + EventLoop 
 

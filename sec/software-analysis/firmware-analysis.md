@@ -119,7 +119,7 @@ P2IM 中对外设的分类: 详见
 - 片上外设 (on-chip peripherals): SPI, I2C, USART, PWM, ADC, DAC, GPIO, Timer, DMA 
 - 片外外设 (off-chip peripherals): 
 
-<img src="../../assets/sec/embedded-system-peripherals.png" alt="P2IM Fig.2" width="600">
+<img src="../../attach/img/sec/embedded-system-peripherals.png" alt="P2IM Fig.2" width="600">
 
 固件的输入口:
 - entry point of firmware 

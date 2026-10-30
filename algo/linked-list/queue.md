@@ -77,5 +77,5 @@ bool peek(struct circular_queue *q, int *value)
 }
 ```
 
-代码详见 [queue.c](../../../src/queue.c)
+代码详见 [queue.c](../../attach/src/kernel/queue.c)
 

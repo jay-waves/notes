@@ -5,7 +5,7 @@
 ## 二维离散傅里叶变换
 
 
-详见 [fourier-transform](../../robotics/cybernetics/fourier-transform.md), 将图像变为频域图像, 减小计算量.
+详见 [fourier-transform](../../robo/cybernetics/fourier-transform.md), 将图像变为频域图像, 减小计算量.
 
 二维离散傅里叶变换: $$F(u,v)=\sum\limits^{M-1}_{x=0}\sum\limits^{N-1}_{y=0}f(x,y)\exp\left[ -j2\pi \left( \frac{ux}{M} +\frac{vy}{N}\right) \right]$$ 
 
@@ -39,7 +39,7 @@ f(x,y) &=
 \]
 
 **缺点:**
-- 复数运算费时 (尽管有 [FFT](../../math/numerical/快速傅里叶变换.md))
+- 复数运算费时 (尽管有 [FFT](https://notes.jay-waves.cn/math/numerical/fast-fourier-transform/))
 - 很多图像在高频段衰减很快, 频域集中于原点. 可以取 $D(u,v)=\lg(1+\vert F(u,v)\vert)$ 来解决这一问题.
 
 ### 平移性

@@ -21,7 +21,7 @@ The Inner Loop must be tuned first and be faster. In practice, **current is roug
 
 ## Step Response Position Loop Tunning
 
-![](../../assets/robo/position-pid-loop.avif)
+![](../../attach/img/robo/position-pid-loop.avif)
 
 Position Loop tuning goal is to set the Kp to as high a value as possible while still finding an associated Kd that can create a critically damped response. Higher Kp value will result in more accurate tracking and faster responses to command position changesl.
 

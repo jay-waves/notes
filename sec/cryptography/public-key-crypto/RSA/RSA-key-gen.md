@@ -9,26 +9,26 @@
 3. 在恰当随机填充下 (如OAEP), 公钥较小也可以安全. 当然小如 $1, 2$ 也不行.
 
 什么 $e$ 不行?
-- $e$ 较小, 如 $e=3$, 且[不正确填充](PKCS1.md), 存在 [RSA-低指数广播攻击](RSA%20弱点/RSA-低指数广播攻击.md), 即 [Coppersmith's attack](https://en.wikipedia.org/wiki/Coppersmith%27s_attack)
-- $e$ 使 $e^{i}\equiv 1 \pmod{\phi(n)}, i\geq \frac{\phi(n)}{2}$ 的 $i$ 较小, 存在 [RSA-循环攻击](RSA%20弱点/RSA-循环攻击.md)
+- $e$ 较小, 如 $e=3$, 且[不正确填充](PKCS1.md), 存在 [RSA-低指数广播攻击](RSA-weakness/RSA-低指数广播攻击.md), 即 [Coppersmith's attack](https://en.wikipedia.org/wiki/Coppersmith%27s_attack)
+- $e$ 使 $e^{i}\equiv 1 \pmod{\phi(n)}, i\geq \frac{\phi(n)}{2}$ 的 $i$ 较小, 存在 [RSA-循环攻击](RSA-weakness/RSA-循环攻击.md)
 
 ### 模数 $N$
 
 由[算术基本定理](../../../../math/numth/质数.md), 一个合法 RSA 模数 $N$ 只有唯一一种分解 $p\cdot q$.
 
 什么 $p, q$ 不行?
-- $p,q$ 差值过小不行, 存在 [RSA Fermat Attack](RSA%20弱点/RSA%20Fermat%20Attack.md). 当 N 取 `1024b` 时, pq 可分别取 `516b, 508b`
-- $p-1, q-1$ 素因子皆较小, 此时 $\phi(N)$ 的因子也较小, 分解难度被降低. $p,q$ 最好为安全素数, 见 [RSA-循环攻击](RSA%20弱点/RSA-循环攻击.md). 应先选择素数 $p', q'$, 然后确定 $p=2\times p'+1, q=2\times q'+1$ 也是素数.
+- $p,q$ 差值过小不行, 存在 [RSA Fermat Attack](RSA-weakness/RSA%20Fermat%20Attack.md). 当 N 取 `1024b` 时, pq 可分别取 `516b, 508b`
+- $p-1, q-1$ 素因子皆较小, 此时 $\phi(N)$ 的因子也较小, 分解难度被降低. $p,q$ 最好为安全素数, 见 [RSA-循环攻击](RSA-weakness/RSA-循环攻击.md). 应先选择素数 $p', q'$, 然后确定 $p=2\times p'+1, q=2\times q'+1$ 也是素数.
 - $p-1, q-1$ 有较大公因子, 由于存在[等效模数的问题](RSA.md), 会存在相对很小的等效私钥 $d$, 被较快枚举破解. $p-1, q-1$ 最大公因子最好为 2, 即不存在任何奇数公因子.
 
 什么模数 ${} N$ 不行?
-- 多个用户公用一个模数 $N$, 或一个模数 $N$ 生成多组密钥, 存在 [RSA-共模攻击](RSA%20弱点/RSA-共模攻击与密钥泄露.md). 即, 杜绝使用同一模数 $N$, 加密同一信息 $m$.
-- 同一模数 $N$ 派生多组密钥, 且其中某个私钥 $d$ 泄露. 存在 [RSA-密钥泄露](RSA%20弱点/RSA-密钥泄露.md), 此时必须更换新模数 $N$.
+- 多个用户公用一个模数 $N$, 或一个模数 $N$ 生成多组密钥, 存在 [RSA-共模攻击](RSA-weakness/RSA-共模攻击与密钥泄露.md). 即, 杜绝使用同一模数 $N$, 加密同一信息 $m$.
+- 同一模数 $N$ 派生多组密钥, 且其中某个私钥 $d$ 泄露. 存在 [RSA-密钥泄露](RSA-weakness/RSA-密钥泄露.md), 此时必须更换新模数 $N$.
 
 ### 私钥 $d$
 
 什么 $d$ 不行?
-- $d$ 过小, 存在 [RSA Wiener Attack](RSA%20弱点/RSA%20Wiener%20Attack.md), 在多项式时间破解 $d$. 一般要求 $d\geq \sqrt[4]{n}$
+- $d$ 过小, 存在 [RSA Wiener Attack](RSA-weakness/RSA%20Wiener%20Attack.md), 在多项式时间破解 $d$. 一般要求 $d\geq \sqrt[4]{n}$
 
 ### 避免不动点问题
 

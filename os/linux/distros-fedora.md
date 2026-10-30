@@ -42,7 +42,7 @@ sudo dnf upgrade --refresh -y
 
 ## 访问控制
 
-Fedora 默认开启 [Selinux](../tracing&perf/access-control.md)
+Fedora 默认开启 [Selinux](../perf/access-control.md)
 
 ## 网络服务
 

@@ -8,7 +8,7 @@
 
 ### 2 最佳阈值直方图分割
 
-<img src="../../assets/vision/vision-image-processing-optimal-threshold-histogram.avif" alt="" width="300">
+<img src="../../attach/img/vision/optimal-threshold-histogram.avif" alt="" width="300">
 
 背景像素错认为目标像素的概率为: $$E_{1}(Z_{t})=\int_{-\infty}^{Z_{t}}P_{2}(Z) \, dZ $$ 目标像素错认为背景像素的概率为: $$E_{2}(Z_{t})=\int_{Z_{t}}^{\infty}P_{1}(Z) \, dZ $$
 

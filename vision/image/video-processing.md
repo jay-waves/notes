@@ -10,11 +10,11 @@
 - 分辨率下降, 用更大色块取代小像素.
 - 帧率下降, 即画面中动态变化和运动流畅度会降低.
 
-<img src="../../../assets/vision/vision-image-processing-video-frame-1.avif" alt="" width="500">
+<img src="../../attach/img/vision/vision-image-processing-video-frame-1.avif" alt="" width="500">
 
 视频帧内压缩效果不佳, 所以出现了图像群组 (Group of Pictures, GOP) 的概念. MPEG-1 规定视频包含多个 GOP, 一个 GOP 包含若干帧. GOP 内分为: I/B/P 三种帧, I 帧 (**关键帧**) 包括完整的图像信息并进行帧内压缩, 而 B/P 只包含图像一部分.
 
-![](../../../assets/vision/vision-image-processing-video-frame-2.avif)
+![](../../attach/img/vision/vision-image-processing-video-frame-2.avif)
 
 解码时, 先解码 I 帧, 然后解码 I 帧后第一个 P 帧, 最后解码 I/P 帧之间的 B 帧并播放. 之后根据 P 帧解码下一个 P 帧. 常用视频格式中, GOP 长度(**关键帧间隔**)一般是相同的, 间隔越短视频越清晰, 但是视频体积会大.
 

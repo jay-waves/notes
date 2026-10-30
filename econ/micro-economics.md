@@ -8,7 +8,7 @@
 
 注意， $\varepsilon$ 是无量纲的、规模标准化后的斜率。 $|\varepsilon |>1$ 说明富有弹性，指需求对价格非常敏感； $|\varepsilon |<1$ 表明缺乏弹性，需求对价格并不敏感。通常，有*替代效应*的商品，需求价格弹性较高。
 
-<img src="../assets/econ/20260211101025407.avif" alt="" width="400">
+<img src="../attach/img/econ/20260211101025407.avif" alt="" width="400">
 
 ### 市场失灵
 

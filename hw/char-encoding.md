@@ -58,7 +58,7 @@ UTF-8 以单字节为单位, UTF-16 以双字节为单位, 因此 UTF-16 还需�
 
 ## 大小端序
 
-实际存储中, 还要注意端序, 详见 [endianness](../../hw/endianness.md).
+实际存储中, 还要注意端序, 详见 [endianness](endianness.md).
 
 Unicode 规范定义, 每个文件头应加入一个表示端序的字符, 被称为**零宽度非换行空格** (zero width no-break space), 用 `0xfeff` 表示. 若文件头为 `0xfeff` 则采用大端序, 若文件头为 `0xfffe` 则采用小端序.
 

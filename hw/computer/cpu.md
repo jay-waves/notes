@@ -18,7 +18,7 @@ FLOPS (Floating-point Operations Per Second) 每秒执行浮点操作的次数. 
 
 ## CPU 架构
 
-<img src="../../assets/hw/hw-cpu-internal-architecture.avif" alt="" width="500">
+<img src="../../attach/img/hw/hw-cpu-internal-architecture.avif" alt="" width="500">
 
 CPU (Central Processing Unit): 
 - **ALU, Arithmetic Logic Unit, 算术逻辑单元**

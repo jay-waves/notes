@@ -39,12 +39,12 @@
 
 模糊测试发展路径:[^3]
 
-<img src="../../assets/sec/fuzzing-evolution.avif" alt="" width="1000">
+<img src="../../attach/img/sec/fuzzing-evolution.avif" alt="" width="1000">
 
 ### 动态插桩方式
 
 编译时插桩: 对源代码或代码中间体 (汇编, IR) 修改. 效率高, 更灵活; 但侵入式更强, 需要改动编译流程.
-- [Sanitizers 系列](工具/sanitizers.md)
+- [Sanitizers 系列](tools/sanitizers.md)
 
 运行时插桩技术 (DBI, Dynamic Binary Instruction): 在程序执行期间, 通过动态二进制翻译或动态重写指令, 拦截指令. 无需源码, 但性能损耗大.
 - Valgrind (Memcheck). 动态翻译为 VEX IR.
@@ -66,9 +66,9 @@
 
 ## 内存安全策略
 
-研究表明[^1], 现存漏洞的数量随着代码生命周期指数下降. 假设平均漏洞生命周期为 $\lambda$, 于是漏洞的时间密度满足[指数分布](../../math/prob/随机变量分布/指数分布.md): $$\mathrm{density}(x)=\frac{1}{\lambda}e^{-\frac{1}{\lambda} x}$$
+研究表明[^1], 现存漏洞的数量随着代码生命周期指数下降. 假设平均漏洞生命周期为 $\lambda$, 于是漏洞的时间密度满足[指数分布](https://notes.jay-waves.cn/math/prob/distributions/exponential/): $$\mathrm{density}(x)=\frac{1}{\lambda}e^{-\frac{1}{\lambda} x}$$
 
-<img src="../../assets/sec/sec-software-analysis-vulnerability-lifecycle.avif" alt="" width="400">
+<img src="../../attach/img/sec/vulnerability-lifecycle.avif" alt="" width="400">
 
 谷歌[^2]认为处理内存安全的策略共有四代:
 1. reactive patching. 漏洞和风险曝光后再解决, 软件需要经常打安全补丁.

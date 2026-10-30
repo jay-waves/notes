@@ -21,7 +21,7 @@
 
 ### Subjective Brightness (Weber-Fechner Law)
 
-<img src="../assets/vision/light-perception.webp">
+<img src="../attach/img/vision/light-perception.webp">
 
 $$S=klogB+k_{0}$$
 

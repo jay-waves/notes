@@ -58,7 +58,7 @@ $$s=-\frac{1}{\tau}=-\omega_{c}$$
 
 ## RC Circuit 
 
-![](../../assets/robo/rc-low-pass-filter.webp)
+![](../../attach/img/robo/rc-low-pass-filter.webp)
 
 RC 电路是典型的一阶滤波器的物理实现。包含一个电阻 $R$ 和一个电容 $C$ 。
 

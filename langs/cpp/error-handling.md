@@ -43,7 +43,7 @@ error_code 错误类别包括:
 - `std::generic_category` 通用错误类别, 映射到 POSIX errno 
 - `std::system_category()` 操作系统特定错误
 
-常见错误码 `std::errc`, 对应 [POSIX ERRNO](../../../src/errno.h).
+常见错误码 `std::errc`, 对应 [POSIX ERRNO](../../attach/src/kernel/errno.h).
 ```cpp
 // 没有列出网络相关错误码
 
@@ -107,7 +107,7 @@ no_buffer_space
 
 ### Expected 
 
-将返回值封装为两种可能: `ok(T), err(E)`. c++ 常见的库是 [`tl::expected`]((https://github.com/TartanLlama), 在 c++23 可以用 `std::expected`
+将返回值封装为两种可能: `ok(T), err(E)`. c++ 常见的库是 [`tl::expected`](https://github.com/TartanLlama), 在 c++23 可以用 `std::expected`
 
 ```cpp
 template <typename T, typename E>

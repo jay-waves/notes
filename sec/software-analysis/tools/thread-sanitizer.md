@@ -1,4 +1,4 @@
-基于 [HappensBefore 方法](../并发安全/happens%20before.md)
+基于 [HappensBefore 方法](../thread-safety/happens-before.md)
 
 核心思路还是监控内存访问, 如果有多个线程在同一程序时钟对同一内存地址 (以 8bytes 为单位) 进行访问, 就会警告.  TSan 存在大量误报可能, 所以仅是竞争警告.
 

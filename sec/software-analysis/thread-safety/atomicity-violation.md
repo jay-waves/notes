@@ -11,7 +11,7 @@
 - `W (t1)` --> `R (t2) *` --> `W (t1)`
 
 该方法最早由 Lu'06[^4] 提出, 可能有误报. 其大致思路如下:
-![](/assets/sec/AVIO.avif)
+![](/attach/img/sec/AVIO.avif)
 
 举个漏报的例子:
 - T1: W1, R1, W2

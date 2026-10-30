@@ -92,7 +92,7 @@ f = globalA.f; <-
 
 上述误报, 可以通过维护状态机来排除:
 
-<img src="../../../assets/sec/sec-software-analysis-eraser-state-machine.avif" alt="" width="450">
+<img src="../../../attach/img/sec/eraser-state-machine.avif" alt="" width="450">
 
 误报: 同一线程中, 被不同锁保护的位置.
 ```c

@@ -7,7 +7,7 @@
 
 ## 网络通信安全模型
 
-<img src="../../assets/sec/sec-security-communication-model.avif" alt="" width="500">
+<img src="../attach/img/sec/sec-security-communication-model.avif" alt="" width="500">
 
 四个要素:
 - 加密和认证算法
@@ -146,7 +146,7 @@ Biba 模型 (1977) 是和 BLP 模型对立的概念, 保护 **[完整性](../rea
 
 基于角色的访问控制, Role-Based Access Control, RBAC. 将权限附于角色中, 再将用户与特定角色绑定.
 
-![](../assets/sec/RBAC.avif)
+![](../attach/img/sec/RBAC.avif)
 
 - 最小权限原则: 为用户角色配置其所需最小权限集
 - 责任分离原则: 调用相互独立互斥的角色共同完成敏感任务

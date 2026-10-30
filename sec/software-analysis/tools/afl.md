@@ -1,4 +1,4 @@
-![](../../../assets/sec/afl-diagram.avif)
+![](../../../attach/img/sec/afl-diagram.avif)
 
 ## bitmap
 

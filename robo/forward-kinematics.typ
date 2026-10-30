@@ -29,7 +29,7 @@ $ T_04 = T_01 T_(12) T_23 T_34 $
 
 === Space POE Formula
 
-#image("../assets/robo/robo-PoE.webp", width: 70%)
+#image("../attach/img/robo/robo-PoE.webp", width: 70%)
 
 
 Set all joint variables to zero and record the home configuration $M=T(0)$.
@@ -182,7 +182,7 @@ $
 
 #linebreak()
 
-#image("../assets/robo/robot-2R.webp", width: 30%)
+#image("../attach/img/robo/robot-2R.webp", width: 30%)
 
 $
 x_1 = L_1 cos(theta_1) + L_2 cos(theta_1 + theta_2) \

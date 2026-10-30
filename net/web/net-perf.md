@@ -18,7 +18,7 @@ Metrics:
 
 *HOL, Head-of-Line* (护航效应). small number of slow requests to hold up the processing of subsequent requets. 
 
-<img src="../../assets/db/p99.avif" alt="ddis-f2-1" width="600">
+<img src="../../attach/img/db/p99.avif" alt="ddis-f2-1" width="600">
 
 ### Batching 
 
@@ -26,6 +26,6 @@ ZeroMQ 将多个消息合并为一次请求处理, 避免频繁地系统调用, 
 
 TCP 中的批处理算法被称为 *Nagle's Algorithm*, 通常网络场景总有消息排队 (queueing effect), 推荐开启.
 
-![](../../assets/db/net-0mq-batch-processing.avif)
+![](../../attach/img/db/net-0mq-batch-processing.avif)
 
-![](../../assets/db/net-zmq-batch-processing.avif)
+![](../../attach/img/db/net-zmq-batch-processing.avif)

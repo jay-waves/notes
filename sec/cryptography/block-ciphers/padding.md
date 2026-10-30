@@ -59,6 +59,6 @@
 4. ....
 
 
-<img src="../../../assets/sec/crypto-padding-attack.avif" alt="" width="300">
+<img src="../../../attach/img/sec/crypto-padding-attack.avif" alt="" width="300">
 
 传统上, 加密系统先计算消息 MAC 然后再和明文一起加密, 解密方先解密后再使用 MAC 计算完整性. 随着填充攻击出现, 加密系统转向 "Encrypt-then-MAC" 的模式, 解密时优先验证 MAC, 完整性被破坏时直接丢弃, 而不继续解密.

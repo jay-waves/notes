@@ -6,7 +6,7 @@ tags:
 
 ## 无线通信技术
 
-![800](../../assets/net/net-wireless-spectrum.avif)
+![800](../../attach/img/net/net-wireless-spectrum.avif)
 
 由于电磁波是自然资源, 人类根据频率将电磁波分为不同类型, 称为频谱. 对于每种无线通信方式, 其可利用的电磁波频率不同, 集中分配在不同频段中. 如中国电信 5G 频段为 3400~3500MHz[^1]. 
 
@@ -44,7 +44,7 @@ $c=\lambda\cdot f$, $E=h\cdot f$
 
 ### 移动通信网络架构
 
-<img src="../../assets/net/net-wireless-signal-transmission-architecture.avif" alt="移动通信网路架构" width="400">
+<img src="../../attach/img/net/signal-transmission-architecture.avif" alt="移动通信网路架构" width="400">
 
 手机 (用户设备, UE) 接入移动通信网络时, 会用电磁波向附近的小区基站 (eNodeB/gNodeB) 发出计入申请, 请求信道资源, 传输电磁波的这段信道称为**空口**. 这一过程称为*无线接入过程 (Random Access Procedure)*, 涉及数据链路层的 MAC 协议. 
 
@@ -112,7 +112,7 @@ ITU 提出了 5G 面向的三大目标场景:
 - Massive machine type communication, mMTc. 即支持海量物联网设备.
 
 基于上述三大目标场景, 提出了具体8项性能关键指标: [^3]
-![600](../../assets/net/net-wireless-5g-key-performance-indicators.avif)
+![600](../../attach/img/net/5g-key-performance-indicators.avif)
 
 [^3]: IMT-2020 指 5G, IMT-Advanced 指 4G. 移动性指在高度移动的场景下 5G 信号稳定性, 如动车上信号和车联网信号.
 

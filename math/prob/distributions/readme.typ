@@ -4,7 +4,7 @@
 #show: template
 
 #figure(
-  image("../../../assets/math/distributional-choices.webp"),
+  image("../../../attach/img/math/distributional-choices.webp"),
   caption: [Adapted from [Adamodaron, Figure 6A.15]]
 )
 

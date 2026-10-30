@@ -61,7 +61,7 @@ map
 * y 左
 * z 上
 
-<img src="../assets/robo/adam-lite.webp" alt="pnd-botics" width="400">
+<img src="../attach/img/robo/adam-lite.webp" alt="pnd-botics" width="400">
 
 
 #### odometry 里程计坐标系

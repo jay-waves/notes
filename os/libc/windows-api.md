@@ -23,7 +23,7 @@ Windows 内核*系统调用 (Windows 称之为 系统服务, System Service)* �
 
 Windows 最底层 Windows API 是 `NTDLL.dll`, 它直接和 Windows NT 系统内核调用交互, 其上是 `kernel32.dll, gdi32.dll, user32.dll...`.  
 
-<img src="../../assets/os/win-arch.avif" alt="" width="800">
+<img src="../../attach/img/os/win-arch.avif" alt="" width="800">
 
 类 Unix 系统, 鼓励用户直接和内核交互, [glibc](libc.md) 也仅薄层封装. 而 Windows 为了提供更强的前向兼容性, 多提供了一层稳定的抽象接口 Windows API, 屏蔽了硬件和内核的变化. 在 Windows 2000 之前, Windows 实际在同时维护 Windows 9x 和 Windows NT 两个不同的内核.
 

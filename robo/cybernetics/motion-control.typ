@@ -50,7 +50,7 @@ $ dtheta(t) = dtheta_d (t) + K_p theta_e (t) + K_i integral^t_0 theta_e (t) d t 
 力矩 $tau$ 作为控制系统的直接输出。
 
 #figure(
-  image("../../assets/robo/torque-control.webp", width: 50%),
+  image("../../attach/img/robo/torque-control.webp", width: 50%),
   caption: [Modern Robotis, Fig 11.11]
 )
 
@@ -81,7 +81,7 @@ $
 where $K_d$ is the derivative gain. 
 
 #figure(
-  image("../../assets/robo/pid-controller.webp", width: 70%),
+  image("../../attach/img/robo/pid-controller.webp", width: 70%),
   caption: "Fig 11.5 Modern Robotics, PID Controller Diagram",
   numbering: none
 )

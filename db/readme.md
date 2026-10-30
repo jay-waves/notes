@@ -33,7 +33,7 @@ Data Processing:
 
 常见数据系统架构：
 
-<img src="../assets/db/ddis-f1-1.avif" alt="ddis-f1-1" width="500">
+<img src="../attach/img/db/ddis-f1-1.avif" alt="ddis-f1-1" width="500">
 
 ## Data (Storage) Models 
 

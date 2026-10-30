@@ -14,9 +14,9 @@ PKCS (Public-Key Cryptography Standards, 公钥密码学标准) 由原 RSA Data 
 
 该算法是 PKCS#1 早期版本 (v1.5) 提出的经典填充算法, 可防御一些简单攻击[^1], 目前不再安全[^2].
 
-[^1]: 如 [RSA-循环攻击](RSA%20弱点/RSA-循环攻击.md), [RSA-低指数广播攻击](RSA%20弱点/RSA-低指数广播攻击.md), [RSA-共模攻击与密钥泄露](RSA%20弱点/RSA-共模攻击与密钥泄露.md), [RSA CCA Attack](RSA%20弱点/RSA%20CCA%20Attack.md), 使 RSA 有简单的 CPA 与 CCA 安全性.
+[^1]: 如 [RSA-循环攻击](RSA-weakness/RSA-循环攻击.md), [RSA-低指数广播攻击](RSA-weakness/RSA-低指数广播攻击.md), [RSA-共模攻击与密钥泄露](RSA-weakness/RSA-共模攻击与密钥泄露.md), [RSA CCA Attack](RSA-weakness/RSA%20CCA%20Attack.md), 使 RSA 有简单的 CPA 与 CCA 安全性.
 
-[^2]: 著名的 [Bleichenbacher 攻击 (1998)](https://archiv.infsec.ethz.ch/education/fs08/secsem/Bleichenbacher98.pdf), 证明该填充并不是 CCA 安全的. Bleichenbacher 利用了 PKCS#1 填充程序的不严谨性, 以及 RSA 的[乘法同态性](RSA%20弱点/RSA%20CCA%20Attack.md).
+[^2]: 著名的 [Bleichenbacher 攻击 (1998)](https://archiv.infsec.ethz.ch/education/fs08/secsem/Bleichenbacher98.pdf), 证明该填充并不是 CCA 安全的. Bleichenbacher 利用了 PKCS#1 填充程序的不严谨性, 以及 RSA 的[乘法同态性](RSA-weakness/RSA%20CCA%20Attack.md).
 
 PKCS#1 v1.5 每次. 当用于加密时, 块类型 `BT=0x02`, 同时 `PS` 使用随机非零字节生成; 当用于签名时, `BT=0x01`, 同时 `PS` 完全由重复 `0xff` 组成.
 

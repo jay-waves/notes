@@ -1,4 +1,4 @@
-[不同乔姆斯基层次的形式语言](形式语言.md)恰好被不同自动机所识别:
+[不同乔姆斯基层次的形式语言](formal-languages.md)恰好被不同自动机所识别:
 
 | 文法类型           | 识别器类型     | 
 | ------------------ | -------------- | 
@@ -23,10 +23,10 @@ Definite Automata, DFA, $M=(\Sigma, Q, \delta, q_{0}, F)$:
 - 转移函数 $\delta :=Q\times \Sigma \to Q$
 
 $\sigma_{9}(q, a)=q'$ 描述为: 
-<img src="../../../assets/math/math-automata-transition-function.avif" alt="" width="300">
+<img src="../../attach/img/math/math-automata-transition-function.avif" alt="" width="300">
 
 DFA例子:
-<img src="../../../assets/math/math-automata-dfa-example.avif" alt="" width="300">
+<img src="../../attach/img/math/math-automata-dfa-example.avif" alt="" width="300">
 
 由有限自动机 $M$ 定义的语言 $T(M)=\{ x\vert \sigma(q_{0}, x)\in F \}$
 
@@ -62,7 +62,7 @@ Push-Down Automata, PDA, 是**带有栈存储器的有限自动机**. $M=(\Sigma
 
 $\sigma(q, a, Z)\to\{ (q_{1},\gamma_{1}), \dots \}$ 指在状态 q 面临输入 a 时, 进入 $q_{i}$ 时, 用 $\gamma_{i}$ 代替栈顶端符号 Z, 同时移动输入头. $\gamma_{i}$ 中符号按从左到右顺序依次推入栈中. a 可以为 $\epsilon$, 表示不获取输入, 只改变栈信息; Z 不能为空, 可通过 $Z\to Z\gamma$ 的方式来变相完成不弹出只压栈的操作.
 
-<img src="../../../assets/math/math-automata-pushdown-automaton.avif" alt="" width="300">
+<img src="../../attach/img/math/math-automata-pushdown-automaton.avif" alt="" width="300">
 
 下推自动机接受的语言定义为: $T(M)=\{ x\vert\ x:(q_{0},Z_{0})\ \substack{*\\ \vdash \\ M}\ (q, \gamma),\ \gamma\in \Gamma^{*},\ q\in F \}$. 非确定性下推自动机恰好能识别上下文无关文法生成的语言.
 
@@ -79,4 +79,4 @@ Linear Bounded Automation, LBA. 是一种特殊图灵机, 其磁带空间限制�
 
 ## 图灵机
 
-[图灵机](图灵机.md)
+[图灵机](turing-machine.md)

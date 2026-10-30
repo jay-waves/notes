@@ -44,12 +44,12 @@ $
 - 在 $bb(R)^m$ 中, $upright("Ker") ( A^top ) = ( upright("Im") ( A ) )^tack.t$, 即左零空间为列空间的正交补.
 
 #figure(
-  image("../../../assets/math/math-linalg-four-linear-subspaces.webp", width: 60%),
+  image("../../../attach/img/math/math-linalg-four-linear-subspaces.webp", width: 60%),
   caption: [Art of Linear Algebra]
 )
 
 #figure(
-  image("../../../assets/math/math-linalg-four-linear-subspaces-2.webp", width: 60%),
+  image("../../../attach/img/math/math-linalg-four-linear-subspaces-2.webp", width: 60%),
   caption: [wikipedia]
 )
 

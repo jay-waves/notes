@@ -1,7 +1,7 @@
 
 ### 半加器
 
-<img src="../../assets/hw/logic-half-adder.avif" alt="" width="300">
+<img src="../../attach/img/hw/logic-half-adder.avif" alt="" width="300">
 
 真值表:
 
@@ -17,7 +17,7 @@
 
 全加器有三个输入: A, B, $C_{in}$. A, B 是二进制单比特输入数据, $C_{in}$ 是前一阶段加法的进位. 
 
-<img src="../../assets/hw/logic-full-adder.avif" alt="" width="500">
+<img src="../../attach/img/hw/logic-full-adder.avif" alt="" width="500">
 
 真值表:
 

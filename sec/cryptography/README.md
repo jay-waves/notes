@@ -6,10 +6,10 @@
 
 - 对称密码 (单钥密码)
 	- [分组密码](block-ciphers/block-ciphers.md), block cipher
-	- [流密码](stream-ciphers&prng/流密码与伪随机数.md), stream cipher
+	- [流密码](stream-ciphers&prng/stream-ciphers&prng.md), stream cipher
 - [非对称密码 (公钥密码)](public-key-crypto/pk-crypto.md)
 	- [数字签名](public-key-crypto/digital-signature/digital-signature.md)
-	- [密钥协商](public-key-crypto/DiffieHellman.md)
+	- [密钥协商](public-key-crypto/diffie-hellman.md)
 - [msg-digest](msg-digests/msg-digest.md) (密码学哈希算法)
 - [安全协议](security-protocols/安全协议.md)
 
@@ -47,7 +47,7 @@
 
 对比哈希算法和对称密码 (尤其是 [AES](block-ciphers/sp/AES.md)). 如下图, 单次输入数据块的体积很小时 (<1KB), 由于频繁的初始化 (上下文, IO, 填充等开销), 哈希算法吞吐量 (MB/s) 比不上同规模的块密码; 当数据规模逐渐上升, 初始化开销相对于哈希中压缩函数的开销占比减小时, 哈希算法逐渐接近理论上限, 吞吐性能比块密码 (图中使用的 AES-CBC) 更好. 
 
-<img src="../../assets/sec/crypto-throughput-aes-sha256.avif" alt="" width="700">
+<img src="../../attach/img/sec/crypto-throughput-aes-sha256.avif" alt="" width="700">
 
 注意, AES 在开启支持并行的[流模式](block-ciphers/modes-of-operation.md) (如 CTR, GCM, OFB) 后, 处理大规模数据时吞吐量并不弱于哈希算法. 哈希算法无法并行, 必须遍历整个输入进行迭代; AES-GCM 可通过硬件 (GPU, 或特殊 AES-NI 指令集) 实现并行加速, 实际大规模吞吐量优于哈希算法[^5]. 
 

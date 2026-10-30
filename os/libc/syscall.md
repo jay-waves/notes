@@ -74,7 +74,7 @@ syscall_noerror:
     ret
 ```
 
-<img src="../../assets/os/linux-syscall.avif" alt="" width="500">
+<img src="../../attach/img/os/linux-syscall.avif" alt="" width="500">
 
 对于有参数的系统调用, 生成宏如下. 依次用 `ebx, ecx, edx, esi, edi, ebp` 存储传入系统调用的参数. 
 

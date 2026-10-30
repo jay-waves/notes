@@ -36,7 +36,7 @@ Relative Units:
 * `ic` character width of a full-width glyph (`水`)
 * `lh` line height of the element 
 
-![](../../assets/vision/typography.webp)
+![](../../attach/img/vision/typography.webp)
 
 Viewport-Relative Units:
 * `vw` 1% of viewport's width 

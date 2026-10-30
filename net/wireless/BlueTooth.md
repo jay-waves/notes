@@ -13,7 +13,7 @@
 
 蓝牙是一种多层次协议, 以 Linux 内核的视角来看: 大部分应用层和连接管理放在用户态 BlueZ 中, Socket (L2CAP, RFCOMM, SCO, BNEP) 和 HCI 逻辑放在内核中. 
 
-![](../../assets/net/bluetooth-stack.png)
+![](../../attach/img/net/bluetooth-stack.png)
 
 - 应用层:
 	- A2DP: 音频传输, 用于蓝牙耳机
@@ -28,14 +28,14 @@
 - 逻辑链路控制: L2CAP (Logical Link Control and Adaption Protocol), 
 - 主机控制接口 HCI (Host Controller Interface), 主机和蓝牙控制器间的标准接口.
 
-![](../../assets/net/bluetooth.avif)
+![](../../attach/img/net/bluetooth.avif)
 
 ### 模块架构
 
 * (Baseland) Resource Manager, 控制数据 QoS, 流量与拥塞控制, 硬件资源控制.
 * 控制报文称为 C-plane, 数据报文称为 U-plane.
 
-![](../../assets/net/bluetooth_arch.avif)
+![](../../attach/img/net/bluetooth_arch.avif)
 
 ### 设备通信模式
 

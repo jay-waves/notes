@@ -80,7 +80,7 @@ $$\text{Inflation Rate} = \frac{CPI_t - CPI_{t-1}}{CPI_{t-1}}$$
 - demand pull inflation. 货币过多。
 - supply shock. 成本过高。
 
-<img src="../assets/econ/phillips_curve.jpg" alt="phillips-curve" width="400">
+<img src="../attach/img/econ/phillips_curve.jpg" alt="phillips-curve" width="400">
 
 一般认为，通胀率和失业率是负相关的，抑制通胀的经济政策通常会导致失业率上升。从比较阴暗的角度，社会对“降薪”非常敏感，适度通胀能使实际工资下降，促进劳动力在不同部门间流动，同时减少社会的整体债务负担。
 
@@ -140,7 +140,7 @@ $$\text{Inflation Rate} = \frac{CPI_t - CPI_{t-1}}{CPI_{t-1}}$$
 
 ## 金融 & 货币市场
 
-see：[money-moket](./money-market.md)
+see：[money-moket](money-market/money-market.md)
 
 金融市场将闲置的资金配置给有融资需求的主体，并在未来按约定方式分配收益与风险。主要有三种方式：
 1. 债券（债权关系），有固定的利息和债权。

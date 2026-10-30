@@ -5,10 +5,10 @@
 3. 文件系统
 4. 应用程序
 
-<img src="../../assets/os/linux.avif" alt="" width="400">
+<img src="../../attach/img/os/linux.avif" alt="" width="400">
 | Linux 内核架构 | 安卓内核架构 |
 | -------------- | ------------ |
-|  <img src="../linux-kernel-map.svg" alt="" width="300">       |  <img src="../../assets/os/android.avif" alt="安卓系统五层架构" width="300">            |
+|  <img src="../linux-kernel-map.svg" alt="" width="300">       |  <img src="../../attach/img/os/android.avif" alt="安卓系统五层架构" width="300">            |
 Linux 内核组成: (五个子系统)
 - SCHED 进程调度. 
 - MM 内存管理. 和进程调度系统的耦合度较高.

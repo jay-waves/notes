@@ -387,7 +387,7 @@ K 有序映射表, `BTreeMap<K, V>`
 
 `std::string::String`
 
-<img src="../assets/langs/strings-in-rust.avif" alt="" width="400">
+<img src="../attach/img/langs/strings-in-rust.avif" alt="" width="400">
 
 抽象, 比 C++ 的字符串还复杂. 要不咱们还是用 `GC<str>` 吧.
 

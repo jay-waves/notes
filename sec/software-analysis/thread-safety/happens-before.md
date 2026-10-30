@@ -13,7 +13,7 @@ Time, Clocks, and the Ordering of Events in a Distributed System. Lamport. 1978.
 - 如果所有互斥访问可以被线性排序 -> 无数据竞争执行
 - 如果存在互斥访问不能被排序 -> 可能存在数据竞争
 
-<img src="../../../assets/sec/sec-software-analysis-happens-before-ordering.avif" alt="" width="300">
+<img src="../../../attach/img/sec/happens-before-ordering.avif" alt="" width="300">
 
 ### Algorithm
 
@@ -115,10 +115,10 @@ func on_read_end(x, clock R) {
 [Flanagan, 2009]
 
 - [eraser](eraser.md): low cost, low precision
-- [happens before](happens%20before.md): high cost, high precision
+- [happens before](happens-before.md): high cost, high precision
 - FastTrack: low cost, high precision
 
-FastTrack: Efficient and Precise Dynamic Race Detection. 是对 [Happens Before (HB)](happens%20before.md) 算法的高效实现, 仍是基于逻辑时钟 (Vector Clock 在 FastTrack 中被称为 Epoch). 
+FastTrack: Efficient and Precise Dynamic Race Detection. 是对 [Happens Before (HB)](happens-before.md) 算法的高效实现, 仍是基于逻辑时钟 (Vector Clock 在 FastTrack 中被称为 Epoch). 
 - sound & complete: 尽快地在每个变量上发现至少一个数据竞争.
 - effcient
 - Insight:

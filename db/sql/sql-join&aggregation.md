@@ -1,7 +1,7 @@
 
 ## 1. JOIN
 
-<img src="../../assets/db/db-sql-join-syntax.avif" alt="" width="500">
+<img src="../../attach/img/db/db-sql-join-syntax.avif" alt="" width="500">
 
 套集合关系:
 

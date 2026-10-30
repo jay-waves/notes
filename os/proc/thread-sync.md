@@ -193,5 +193,5 @@ void bar() {
 
 注意, 非安全状态不一定导致死锁, 但安全状态一定不会死锁: 
 
-<img src="../../assets/os/os-process-deadlock.avif" alt="" width="200">
+<img src="../../attach/img/os/os-process-deadlock.avif" alt="" width="200">
 

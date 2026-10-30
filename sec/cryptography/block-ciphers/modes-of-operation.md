@@ -14,7 +14,7 @@ source: https://csrc.nist.gov/pubs/sp/800/38/a/final
 
 电话本模式, ECB, electronic codebook.
 
-<img src="/assets/sec/sec-crypto-ecb-chaining-mode.avif" alt="" width="200">
+<img src="/attach/img/sec/sec-crypto-ecb-chaining-mode.avif" alt="" width="200">
 迭代公式为:[^1] 
 
 $$\begin{align}
@@ -24,7 +24,7 @@ P_{i}\leftarrow \mathrm{dec}(C_{i})
 
 对于给定密钥, 同一明文组总产生相同密文, 因此 ECB 不适合模式类似的大量数据 (如图片).
 
-<img src="../../../assets/sec/sec-crypto-ecb-plaintext-leakage.avif" alt="" width="400">
+<img src="../../../attach/img/sec/sec-crypto-ecb-plaintext-leakage.avif" alt="" width="400">
 ## CBC
 
 密码分组链接模式, CBC, cipher-block chaining. 重复的明文分组不会暴露. 
@@ -35,14 +35,14 @@ C_{i}&\leftarrow \mathrm{enc}[P_{i}\oplus C_{i-1}]\\
 P_{i}&\leftarrow \mathrm{dec}[C_{i}]\oplus C_{i-1}
 \end{align*}$$
 
-<img src="../../../assets/sec/sec-crypto-cbc-chaining-mode.avif" alt="" width="400">
+<img src="../../../attach/img/sec/sec-crypto-cbc-chaining-mode.avif" alt="" width="400">
 **有反馈的链接模式需要用到*初始向量* (IV), 每次加密需使用随机值, 提供新鲜性, 无需加密. (当然加密更好).**
 
 ## CFB
 
-密码反馈模式 (CFB, Cipher Feedback) 模拟了流密码加密模式, 不需要块填充. 是[自同步流密码](../stream-ciphers&prng/流密码与伪随机数.md) (解密过程).
+密码反馈模式 (CFB, Cipher Feedback) 模拟了流密码加密模式, 不需要块填充. 是[自同步流密码](../stream-ciphers&prng/stream-ciphers&prng.md) (解密过程).
 
-<img src="../../../assets/sec/sec-crypto-cfb-chaining-mode.avif" alt="" width="200">
+<img src="../../../attach/img/sec/sec-crypto-cfb-chaining-mode.avif" alt="" width="200">
 ### CFB + LSB 
 
 ...
@@ -61,10 +61,10 @@ P_{i}&\leftarrow C_{i}\oplus msb_{s}(O_{i})
 
 当加解密算法的分组长度 `b` 不等于明密文分组长度 `s` 时, 一般有 `b>s`, 此时截取加解密算法输出的高 `s` 位作为明密文. 由于密文需要反馈到下一组加密模式中, 而 `b>s`, 所以引入 LSB, Leatest Significant Bits, 充当一个左移位寄存器的作用. 初始填入 `IV`, 然后每产生一组密文, 就推入 LSB 右侧.
 
-<img src="../../../assets/sec/sec-crypto-cfb-chaining-mode-lsb.avif" alt="" width="650">
+<img src="../../../attach/img/sec/sec-crypto-cfb-chaining-mode-lsb.avif" alt="" width="650">
 ## OFB
 
-输出反馈模式 (OFB, Output Feedback Mode) 使用[同步流密码](../stream-ciphers&prng/流密码与伪随机数.md)加密模式.
+输出反馈模式 (OFB, Output Feedback Mode) 使用[同步流密码](../stream-ciphers&prng/stream-ciphers&prng.md)加密模式.
 
 OFB 的密钥可以提前生成. 输入全 `0` 的 CBC 模式可以模拟该密钥流生成过程.
 
@@ -74,10 +74,10 @@ K_{i}&=\mathrm{enc}(K_{i-1}) \\
 C_{i}&=P_{i}\oplus K_{i}
 \end{align}$$
 
-<img src="../../../assets/sec/sec-crypto-ofb-chaining-mode.avif" alt="" width="200">
+<img src="../../../attach/img/sec/sec-crypto-ofb-chaining-mode.avif" alt="" width="200">
 ## CTR
 
-计数器模式 (Counter Mode, CTR. Integer Counter Mode, ICM. Segemented Integer Counter, SIC) 使用[同步流密码](../stream-ciphers&prng/流密码与伪随机数.md)加密模式. CTR 模式适合并行加解密, 加解密皆支持随机寻址访问. 计数器可以是简单计数器, 也可以是某种随机数生成函数.
+计数器模式 (Counter Mode, CTR. Integer Counter Mode, ICM. Segemented Integer Counter, SIC) 使用[同步流密码](../stream-ciphers&prng/stream-ciphers&prng.md)加密模式. CTR 模式适合并行加解密, 加解密皆支持随机寻址访问. 计数器可以是简单计数器, 也可以是某种随机数生成函数.
 
 $$\begin{align}
 K_{0} & =IV  \\
@@ -85,7 +85,7 @@ K_{i} & =\mathrm{tick}(K_{i-1})\\
 C_{i} & =P_{i}\oplus K_{i}
 \end{align}$$
 
-<img src="../../../assets/sec/sec-crypto-ctr-chaining-mode.avif" alt="" width="150">
+<img src="../../../attach/img/sec/sec-crypto-ctr-chaining-mode.avif" alt="" width="150">
 ## GCM
 
 GCM, Galois Counter Mode. GCM = CTR + GMac. GMAC 是一种改良的[全域哈希](../msg-digests/MAC/UMAC.md)
@@ -107,7 +107,7 @@ GCM, Galois Counter Mode. GCM = CTR + GMac. GMAC 是一种改良的[全域哈希
 
 加密方发送: $TAG, IV, E$, 并和解密方共享密钥 $K$.
 
-<img src="../../../assets/sec/crypto-aes128-gcm.avif" alt="" width="600">
+<img src="../../../attach/img/sec/crypto-aes128-gcm.avif" alt="" width="600">
 ## 安全特性
 
 |         | 初始向量 | 加密并行性 | 解密并行性 | 需要解密模块 | 含有反馈 | 需要填充 |
@@ -150,7 +150,7 @@ GCM, Galois Counter Mode. GCM = CTR + GMac. GMAC 是一种改良的[全域哈希
 
 ### 自同步能力
 
-[流密码自同步能力](../stream-ciphers&prng/流密码与伪随机数.md): 各项无码扩展...
+[流密码自同步能力](../stream-ciphers&prng/stream-ciphers&prng.md): 各项无码扩展...
 
 CBC 无自同步能力. 流密码都有自同步能力.
 

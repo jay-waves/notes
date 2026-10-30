@@ -6,7 +6,7 @@
 
 S-R Flip-Flop 有两个输入 S (Set) 和 R (Reset). 通电状态下, 一旦输出被建立, S/R 不改变, 输出 Q 也保持不变.
 
-<img src="../../assets/hw/hw-digital-ckt-sr-flip-flop.avif" alt="" width="400">
+<img src="../../attach/img/hw/hw-digital-ckt-sr-flip-flop.avif" alt="" width="400">
 
 | S   | R   | Q   | State     |
 | --- | --- | --- | --------- |
@@ -21,7 +21,7 @@ S-R Flip-Flop 有两个输入 S (Set) 和 R (Reset). 通电状态下, 一旦输�
 
 SR Flip-Flop 在 S=R=1 时存在未定义状态, JK Flip-Flop 就是为了解决该问题. 当 `J=K=1` 时, Q 值翻转.
 
-<img src="../../assets/hw/hw-digital-ckt-jk-flip-flop.avif" alt="" width="400">
+<img src="../../attach/img/hw/hw-digital-ckt-jk-flip-flop.avif" alt="" width="400">
 
 | J   | K   | Q      | State     |
 | --- | --- | ------ | --------- |
@@ -34,7 +34,7 @@ SR Flip-Flop 在 S=R=1 时存在未定义状态, JK Flip-Flop 就是为了解决
 
 D Filp-Flop 只在时钟边沿触发, 输出 Q 存储此时输入 D 的值.
 
-<img src="../../assets/hw/hw-digital-ckt-d-flip-flop.avif" alt="" width="400">
+<img src="../../attach/img/hw/hw-digital-ckt-d-flip-flop.avif" alt="" width="400">
 
 | D   | Q   |
 | --- | --- |

@@ -19,7 +19,7 @@ So, +3dB will twice the sound intensity, +6dB will twice the sound pressure ampl
 ## Speech Production
 
 <figure>
-  <img src="../assets/vision/speech-organs.webp" width=50%>
+  <img src="../attach/img/vision/speech-organs.webp" width=50%>
   <figcaption>Source: <a href="https://speechprocessingbook.aalto.fi/introduction/speech-production-and-acoustic-properties/">@tom2022</a></figcaption>
 </figure>
 
@@ -35,7 +35,7 @@ F0 越高，声音*音高 (pitch)* 越高。以吉他拨弦为例，拨弦更用
 ## SPeech Processing 
 
 <figure>
-  <img src="../assets/vision/waveform-spectrogram.webp">
+  <img src="../attach/img/vision/waveform-spectrogram.webp">
   <figcaption>Source: <a href="https://speechprocessingbook.aalto.fi/representations/spectrogram-and-the-stft/">Tom Bäckström</a>, Waveform & Spectrogram</figcaption>
 </figure>
 
@@ -58,7 +58,7 @@ $$
 * 人声见下图。蓝色曲线的小尖峰就是谐波，橙色曲线的大峰是共振峰 (Formants) 。基频 $F_0$ 则决定了整体的音高。
 
 <figure>
-  <img src="../assets/vision/speech-spectrogram.webp">
+  <img src="../attach/img/vision/speech-spectrogram.webp">
   <figcaption>Source: <a href="https://speechprocessingbook.aalto.fi/introduction/speech-production-and-acoustic-properties/">Tom Bäckström</a></figcaption>
 </figure>
 

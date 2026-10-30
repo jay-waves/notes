@@ -4,7 +4,7 @@ UBI (Unsorted Block Images) 是用于裸 Flash 的文件系统管理层, 比较�
 
 ## 内核模块架构
 
-<img src="../../assets/os/vfs2flash.avif" alt="" width="400">
+<img src="../../attach/img/os/vfs2flash.avif" alt="" width="400">
 
 * MTD (memory technology device) 提供了对 Flash 裸硬件的抽象和基础接口
 * UBI . 专为 NAND Flash 设计, 负责坏块管理和磨损均衡 (wear leveling). 并在 MTD 之上, 提供逻辑卷管理的功能.

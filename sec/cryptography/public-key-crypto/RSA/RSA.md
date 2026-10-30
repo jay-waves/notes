@@ -17,7 +17,7 @@ RSA, Rivest-Shamir-Adleman 公钥体系基于大数分解的 NPC 困难问题 (F
 
 那么 $x^{e}\equiv c \pmod{N}$ 有解 $$x\equiv x\cdot 1^{h}\equiv x\cdot (x^{\phi(N)})^{h}\equiv x^{1+h\cdot \phi(N)}\equiv x^{d\cdot e}\equiv c^{d}\pmod{N}$$
 
-0. [密钥生成](RSA%20密钥生成.md)
+0. [密钥生成](RSA-key-gen.md)
 1. 加密算法: $C=M^{e}\pmod n$, 其中 $(e,n)$ 为公钥
 2. 解密算法: $M=C^{d}\pmod n$, 其中 $d$ 为私钥
 
@@ -51,7 +51,7 @@ X_{q} & =p*(p^{-1}\pmod q)
 
 ### 数字签名
 
-见 [RSA 签名](RSA%20签名.md)
+见 [RSA 签名](RSA-sig.md)
 
 **公钥加密, 私钥解密, 私钥签名, 公钥验签**
 
@@ -65,11 +65,11 @@ RSA 问题基于以下的安全性保证:
 
 #### 参数选择弱点
 
-RSA 的各个参数 $p,q,N,e,d$ 选择皆有安全性要求, 详见 [RSA 密钥生成](RSA%20密钥生成.md).
+RSA 的各个参数 $p,q,N,e,d$ 选择皆有安全性要求, 详见 [RSA 密钥生成](RSA-key-gen.md).
 
 #### 选择密文攻击
 
-教科书式 RSA 不安全, 对 CPA 和 CCA 都不安全, 其数学性质易被利用, 见 [选择密文攻击 (CCA)](RSA%20弱点/RSA%20CCA%20Attack.md).
+教科书式 RSA 不安全, 对 CPA 和 CCA 都不安全, 其数学性质易被利用, 见 [选择密文攻击 (CCA)](RSA-weakness/RSA%20CCA%20Attack.md).
 
 #### 侧信道攻击
 

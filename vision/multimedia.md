@@ -11,7 +11,7 @@
 
 ## Camera 
 
-成像相关知识见 [imaging/photography](./imaging/photography.md)
+成像相关知识见 [imaging/photography](image/photography.md)
 
 CMOS vs. CCD 
 
@@ -19,9 +19,9 @@ Stereo Camera
 
 3D ToF (Time-of-Flight) Sensor
 
-![](../assets/vision/eyeball.webp)
+![](../attach/img/vision/eyeball.webp)
 
-![](../assets/vision/cons-robs.webp)
+![](../attach/img/vision/cons-robs.webp)
 
 Retina (视网膜) is covered by light receptors (i.e., cones & rods, 视锥细胞、视杆细胞),
 * cones: 6~7 millions, located in central (circular) portion of retina, highly sensitive to color
@@ -40,10 +40,10 @@ Retina (视网膜) is covered by light receptors (i.e., cones & rods, 视锥细�
 
 相机的焦距
 
-![](../assets/vision/focal-length.webp)
+![](../attach/img/vision/focal-length.webp)
 
 <figure>
-  <img src="../assets/vision/eyeball-myopia.webp">
+  <img src="../attach/img/vision/eyeball-myopia.webp">
   <figcaption>Source: <a href="https://www.slideserve.com/terris/the-eye-and-cameras">Correcting Short and Long Sight</a></figcaption>
 </figure>
 
@@ -54,7 +54,7 @@ Retina (视网膜) is covered by light receptors (i.e., cones & rods, 视锥细�
 * 光圈大小
 * 实际的焦距
 
-![](../assets/vision/camera-settings.webp)
+![](../attach/img/vision/camera-settings.webp)
 
 ## Earpiece 
 
