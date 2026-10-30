@@ -19,7 +19,7 @@ from pages_index import generate
 ROOT = Path(__file__).resolve().parents[2]
 PAGES = ROOT / ".github" / "pages"
 MARKER = ".notes-site-output"
-CODE_LANGUAGES = {".c": "c", ".h": "c", ".cpp": "cpp", ".cc": "cpp", ".hpp": "cpp", ".py": "python", ".js": "javascript", ".ts": "typescript", ".go": "go", ".rs": "rust", ".java": "java", ".sh": "bash", ".sql": "sql", ".css": "css", ".json": "json", ".yaml": "yaml", ".yml": "yaml"}
+CODE_LANGUAGES = {".c": "c", ".h": "c", ".cpp": "cpp", ".cc": "cpp", ".hpp": "cpp", ".py": "python", ".js": "javascript", ".ts": "typescript", ".go": "go", ".rs": "rust", ".java": "java", ".sh": "bash", ".sql": "sql", ".css": "css", ".json": "json", ".yaml": "yaml", ".yml": "yaml", ".bib": "bibtex"}
 
 
 def code_page(source, target, site_root):
@@ -27,6 +27,10 @@ def code_page(source, target, site_root):
     name = html.escape(source.name)
     language = CODE_LANGUAGES[source.suffix.lower()]
     script = posixpath.relpath("_shared/site/highlight.min.js", target.parent.relative_to(site_root).as_posix())
+    bibtex_script = (
+        f'<script src="{posixpath.relpath("_shared/site/bibtex.js", target.parent.relative_to(site_root).as_posix())}" defer></script>'
+        if language == "bibtex" else ""
+    )
     page = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>{name}</title>
 <style>
@@ -45,7 +49,7 @@ pre {{ margin: 0; font-size: 14px; line-height: 1.6; tab-size: 4; }}
 .hljs-variable, .hljs-symbol, .hljs-meta {{ color: var(--variable); }}
 </style></head>
 <body><pre><code class="language-{language}">{html.escape(text)}</code></pre>
-<script src="{script}" defer onload="hljs.highlightAll()"></script></body></html>
+<script src="{script}" defer></script>{bibtex_script}<script>window.addEventListener("DOMContentLoaded", () => hljs.highlightAll());</script></body></html>
 '''
     target.write_text(page, encoding="utf-8", newline="\n")
 
@@ -228,6 +232,7 @@ def build(args):
         shutil.copy2(PAGES / "theme.css", shared / "theme.css")
         shutil.copy2(PAGES / "vendor" / "highlight.min.js", shared / "highlight.min.js")
         shutil.copy2(PAGES / "vendor" / "highlight-LICENSE.txt", shared / "highlight-LICENSE.txt")
+        shutil.copy2(PAGES / "vendor" / "bibtex.js", shared / "bibtex.js")
         shutil.copy2(PAGES / "404.html", stage / "404.html")
         generate(stage, manifest, PAGES)
         # Typst bundles are versioned directories. Retain whole bundles referenced
