@@ -1,23 +1,4 @@
 .related-notes {
-    max-width: 820px;
-    margin: 4rem auto 2rem;
-    padding: 0 1.5rem;
-    font-size: 0.9rem;
-    color: inherit;
-    opacity: 0.72;
+    margin-top: 4rem;
+    overflow-wrap: anywhere;
 }
-.related-notes summary {
-    border-top: 1px solid currentColor;
-    padding: 1rem 0;
-    cursor: pointer;
-    list-style: none;
-}
-.related-notes summary::-webkit-details-marker { display: none; }
-.related-notes summary::before { content: "+"; margin-right: 0.6em; }
-.related-notes[open] summary::before { content: "−"; }
-.related-notes summary span { float: right; font-size: 0.8em; opacity: 0.7; }
-.related-notes[open] summary span { display: none; }
-.related-notes ul { margin: 0; padding: 0 0 1rem 1.5em; }
-.related-notes li { padding: 0.25rem 0; overflow-wrap: anywhere; }
-.related-notes a { color: inherit; text-underline-offset: 0.2em; }
-.related-notes :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
