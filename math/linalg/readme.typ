@@ -67,7 +67,7 @@
   矩阵合同，详见 #link("https://notes.jay-waves.cn/math/linalg/congruence/")[math/lialg/mat-congruence.md]
 ]
 
-#image("../../assets/math/mat-relation.webp", width: 60%)
+#image("../../attach/img/math/mat-relation.webp", width: 60%)
 
 
 = 参考

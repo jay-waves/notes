@@ -1,4 +1,4 @@
-<img src="../assets/langs/gartner-hype-cycle.avif" alt="" width="500">
+<img src="../attach/img/langs/gartner-hype-cycle.avif" alt="" width="500">
 
 
 ## 标准库

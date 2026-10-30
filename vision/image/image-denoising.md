@@ -1,6 +1,6 @@
 ## 图像去噪
 
-<img src="../../assets/vision/vision-image-processing-denoising.avif" alt="" width="200">
+<img src="../../attach/img/vision/vision-image-processing-denoising.avif" alt="" width="200">
 
 图像频域中, 低频段代表图像的平滑与缓慢变化, 自然图像的能量多集中于此; 高频段则反应图像的突兀变化. **噪声有随机性, 表现在图像上为像素级的随机变化, 所以导致图像高频分量的能量增加.**
 
@@ -29,5 +29,5 @@ $\mathcal{F}$ 变换 $\Rightarrow$ 滤波器 $\Rightarrow$ $\mathcal{F}$ 反变�
 
 | 噪声标准差 | 加噪 (高斯噪声)                                                | 去噪后 (DCT变换+低通滤波)                                               |
 | ---------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| 10         | ![](../../assets/vision/vision-image-processing-image-smoothing-1.avif) | ![](../../assets/vision/vision-image-processing-image-smoothing-2.avif) |
-| 30         | ![](../../assets/vision/vision-image-processing-image-smoothing-3.avif) | ![](../../assets/vision/vision-image-processing-image-smoothing-4.avif)                                                      |
+| 10         | ![](../../attach/img/vision/image-smoothing-1.avif) | ![](../../attach/img/vision/image-smoothing-2.avif) |
+| 30         | ![](../../attach/img/vision/image-smoothing-3.avif) | ![](../../attach/img/vision/image-smoothing-4.avif)                                                      |

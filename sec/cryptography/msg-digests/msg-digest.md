@@ -25,7 +25,7 @@ code:
 | [强碰撞抗性](birthday-attack.md)   | 找出任意 $(X,Y)$, $X\neq Y$, 使得 $\mathrm{hash}(X)=\mathrm{hash}(Y)$ 在计算上不可行       |
 | 伪随机性                    |  任意给定 $X$, 输出 $\mathrm{hash}(X)$ 是值域上任一值的可能性相同.                                                        |
 
-<img src="/assets/sec/sec-crypto-three-hash-attacks.avif" alt="" width="350">
+<img src="/attach/img/sec/sec-crypto-three-hash-attacks.avif" alt="" width="350">
 #### Q: 输出长度为什么固定?
 
 1. 便于存储和管理, 有一致性和兼容性
@@ -71,7 +71,7 @@ SHA-2 系列散列函数是第二代安全散列算法, 它们仍基于 Merkle-D
 
 SHA-3 ([Keccak算法](https://keccak.team/files/CSF-0.1.pdf)) 和 Whirlpool 使用海绵 (Sponge) 构造结构, 是第三代安全散列算法.
 
-<img src="../../../assets/sec/sec-crypto-sha3-hash-function.avif" alt="" width="700">
+<img src="../../../attach/img/sec/sec-crypto-sha3-hash-function.avif" alt="" width="700">
 Sponge 结构虽然支持任意长度输出, 但是标准算法都会固定特定一些输出长度, 以更安全地算法实现.
 
 ### 3 基于树型哈希

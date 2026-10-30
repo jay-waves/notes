@@ -1,10 +1,10 @@
 ## 索引
 
-[信号与系统](./signal&system.typ):
+[信号与系统](https://notes.jay-waves.cn/robo/cybernetics/signal%26system/):
 
 * 信号：连续时间信号 $x(t)$ 与离散时间信号 $x[k]$ 
 * 系统：主要研究*线性时不变系统* (LTI)
-* [采样与离散化](./sampling.typ) 
+* [采样与离散化](https://notes.jay-waves.cn/robo/cybernetics/sampling/) 
 * [低通滤波器](./low-pass-filter.md)
 
 频域分析：
@@ -17,10 +17,10 @@
 
 [控制论](./cybernetics.md)：
 
-* [Mass-Spring-Damper](./mass-spring-damper.typ)
-* [Kalman Filter](./kalman-filter.typ)
+* [Mass-Spring-Damper](https://notes.jay-waves.cn/robo/cybernetics/mass-spring-damper/)
+* [Kalman Filter](https://notes.jay-waves.cn/robo/cybernetics/kalman-filter/)
 * [PID](./servo-motor-pid.md)
-* [Impedance](./impedance-control.typ)
+* [Impedance](https://notes.jay-waves.cn/robo/cybernetics/impedance-control/)
 
 ## 定义
 

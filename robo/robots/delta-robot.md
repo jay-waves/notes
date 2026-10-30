@@ -1,4 +1,4 @@
-<img src="../../assets/robo/delta-robot.webp" alt="" width="800">
+<img src="../../attach/img/robo/delta-robot.webp" alt="" width="800">
 
 designed for lightweight pick-and-place. It used 3 identical parallel kinematic chains connected to a common end-effector playform.
 
@@ -6,7 +6,7 @@ designed for lightweight pick-and-place. It used 3 identical parallel kinematic 
 
 ## DoF
 
-<img src="../../assets/robo/delta-robot-dof.avif" alt="" width="400">
+<img src="../../attach/img/robo/delta-robot-dof.avif" alt="" width="400">
 
 只有 3DoF 
 

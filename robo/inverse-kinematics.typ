@@ -5,7 +5,7 @@
 
 = CCD 
 
-#image("../assets/robo/ccdik.webp")
+#image("../attach/img/robo/ccdik.webp")
 
 = Newton-Euler
 

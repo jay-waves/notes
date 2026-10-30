@@ -98,7 +98,7 @@ else
 int wait( int *status_loc);
 ```
 
-例子见 [appendix/fork.c](../../../src/fork.c), 代码为 K&R 风格.
+例子见 [appendix/fork.c](../../attach/src/kernel/fork.c), 代码为 K&R 风格.
 
 ## String Conversion
 

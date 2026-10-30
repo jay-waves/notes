@@ -248,13 +248,13 @@ Clangd 不内置 clang-format, 但是有格式化功能??. clang-format 使用 `
 "clang-format.fallbackStyle": "Google",
 ```
 
-[^1]: 参见 [C ReadMe](../../os/libc/libc.md), UCRT 为微软 MSVCrt 标准库的升级版. 在 Windows 平台上, 默认的 C 标准为 UCRT, C++ 标准为 MSVC++. 皆在 Visual Studio 套件中.
+[^1]: 参见 [C ReadMe](../os/libc/libc.md), UCRT 为微软 MSVCrt 标准库的升级版. 在 Windows 平台上, 默认的 C 标准为 UCRT, C++ 标准为 MSVC++. 皆在 Visual Studio 套件中.
 
 [^2]: https://code.visualstudio.com/docs/cpp/config-msvc
 
 [^3]: 显然, MSVC 可以安装在其他目录下, 所以 `cl.exe` 和 `MSVC/14/Include` 也可能随之在不同路径下. 这里的路径仅供参考. 
 
-[^4]: [google-cpp-style](../../langs/cpp/google-cpp-style.md)
+[^4]: [google-cpp-style](../langs/cpp/google-cpp-style.md)
 
 [^5]: https://llvm.org/builds/ 页面底部有独立的 clang-format. 当然也可以使用 Visual Studio 内建的 clang-format.
 

@@ -26,11 +26,11 @@
 
 ## 常见协议
 
-- [ElGamal](../ElGamal.md)
+- [ElGamal](../el-gamal.md)
 - [Schnorr](Schnorr.md)
 - [DSA](DSA.md)
 - [ECDSA](../ECC/ECC.md), 基于椭圆曲线域上的离散对数困难问题 ECDLP
-- [RSA 数字签名](../RSA/RSA%20签名.md)
+- [RSA 数字签名](../rsa/RSA-sig.md)
 - [Rabin](../Rabin.md)
 
 

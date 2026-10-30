@@ -2,7 +2,7 @@
 
 DSA 数字签名算法, 是一种基于公钥密码的*带附录数字签名方式*. 用于 NIST 提出的美国国家标准 [DSS (Digital Signature Standard) 数字签名标准](https://csrc.nist.gov/pubs/fips/186-5/final), DSS 还包括 ECDSA 和 RSA.
 
-DSA 算法是 Elgamal 签名的变种, 同样基于有限域上离散对数问题. 但它比 ElGamal 的效率更高, 签名更短. DSA 和 [ElGamal 签名](../ElGamal.md) 有一样的安全问题, 即随机数 k 不能重复使用.
+DSA 算法是 Elgamal 签名的变种, 同样基于有限域上离散对数问题. 但它比 ElGamal 的效率更高, 签名更短. DSA 和 [ElGamal 签名](../el-gamal.md) 有一样的安全问题, 即随机数 k 不能重复使用.
 
 DSA 安全性依赖于 $\mathbb{Z}_{p}$ 的 q 阶子群上的 DLP 问题. 这种*大群的小阶子群*的思想来源于 Schnorr.
 

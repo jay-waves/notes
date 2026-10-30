@@ -14,15 +14,15 @@
 
 曝光不足 (灰度过大):
 
-<img src="../../assets/vision/vision-image-processing-normal-exposure-image.avif" alt="" width="200"><img src="../../assets/vision/vision-image-processing-underexposed-image.avif" alt="" width="200">
+<img src="../../attach/img/vision/normal-exposure-image.avif" alt="" width="200"><img src="../../attach/img/vision/underexposed-image.avif" alt="" width="200">
 
 直方图修正:
 
-<img src="../../assets/vision/vision-image-processing-histogram-equalization.avif" alt="" width="300">
+<img src="../../attach/img/vision/histogram-equalization.avif" alt="" width="300">
 
 同态增晰:（在频域进行滤波）
 
-<img src="../../assets/vision/vision-image-processing-homomorphic-enhancement-1.avif" alt="" width="200"><img src="../../assets/vision/vision-image-processing-homomorphic-enhancement-2.avif" alt="" width="200">
+<img src="../../attach/img/vision/homomorphic-enhancement-1.avif" alt="" width="200"><img src="../../attach/img/vision/homomorphic-enhancement-2.avif" alt="" width="200">
 
 ## 几何校正
 
@@ -108,7 +108,7 @@ $$\hat{F}(u,v)=\left[ \frac{\overline{H}(u,v)}{\vert H(u,v)\vert^{2}+K} \right]\
 
 | 原图像                                                      | 运动降质图像                                                | 维纳滤波                                                    |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| ![](../../assets/vision/vision-image-processing-enhancement-restoration-1.avif) | ![](../../assets/vision/vision-image-processing-enhancement-restoration-2.avif) | ![](../../assets/vision/vision-image-processing-enhancement-restoration-3.avif) |
+| ![](../../attach/img/vision/enhancement-restoration-1.avif) | ![](../../attach/img/vision/enhancement-restoration-2.avif) | ![](../../attach/img/vision/enhancement-restoration-3.avif) |
 | 加噪后逆滤波                                              | 加噪运动降质图像                                            | 加噪后维纳滤波                                                |
-|                ![](../../assets/vision/vision-image-processing-enhancement-restoration-4.avif)         |      ![](../../assets/vision/vision-image-processing-enhancement-restoration-5.avif)          |                    ![](../../assets/vision/vision-image-processing-enhancement-restoration-6.avif)                                         |
+|                ![](../../attach/img/vision/enhancement-restoration-4.avif)         |      ![](../../attach/img/vision/enhancement-restoration-5.avif)          |                    ![](../../attach/img/vision/enhancement-restoration-6.avif)                                         |
 

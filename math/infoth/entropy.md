@@ -60,6 +60,6 @@ I(X;Y)&=H(X)-H(X\vert Y) \\
 \end{align}$$
 
 互信息, 条件熵与联合熵:
-<img src="../../../assets/math/math-information-theory-entropy-relations.avif" alt="" width="300">
+<img src="../../attach/img/math/entropy-relations.avif" alt="" width="300">
 
 由于 $H(X\vert X)=0$, 所以 $H(X)=H(X)-H(X\vert X)=I(X;X)$. 因此熵又被称为**自信息**.

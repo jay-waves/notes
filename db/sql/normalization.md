@@ -4,7 +4,7 @@
 
 范式 (Normal Form, NF) 是符合某一种级别的关系模式的集合. 如关系模式 $R$ 是第二范式, 记为 $R\in 2NF$. 数据库关系 $R$ 的范式分解, **旨在解决数据冗余和操作 (更新, 插入, 删除) 异常**, 实践中 3NF 够用, 更高范式会导致复杂度和维护难度提升.
 
-<img src="../../assets/db/sql-normalization.avif" alt="" width="200">
+<img src="../../attach/img/db/sql-normalization.avif" alt="" width="200">
 
 $5NF\in 4NF\in BCNF\in 3NF\in 2NF\in 1NF$, 处于低级范式的关系模式, 通过模式分解 (schema decomposition) 转化为若干个高一级范式的关系模式集合, 该过程称为**规范化 (normalization)**, 随着范式等级提高, **依次去除所有不依赖候选键的函数依赖**, 数据冗余减少, 但数据库结构复杂性和维护难度也提高.
 

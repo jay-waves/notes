@@ -28,7 +28,7 @@ Given **security parameter n**, one can view n as corresponding to the length of
 - adversary knows the encryption scheme
 - adversary can *eavesdrop* the ciphertext (ciphertext-only attack, known-plaintext attack, KPA)
 
-Perfect Secrecy is that **the [posteriori probability](../../math/prob/贝叶斯定理.md) that some message $m\in M$ was sent, conditioned on the ciphertext that was observed, should be no different from the a [priori probability](../../math/prob/贝叶斯定理.md#贝叶斯定理) that $m$ would be sent.**
+Perfect Secrecy is that **the [posteriori probability](https://notes.jay-waves.cn/math/prob/bayes/) that some message $m\in M$ was sent, conditioned on the ciphertext that was observed, should be no different from the a [priori probability](https://notes.jay-waves.cn/math/prob/bayes/#贝叶斯定理) that $m$ would be sent.**
 
 #### Def. [^1]
 

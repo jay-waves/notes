@@ -89,7 +89,7 @@ Auth | {CertificateVerify*}
 #### 安全性改进
 
 TLS 1.3 移除了一些不安全的加密算法:
-- [RC4](../../sec/cryptography/stream-ciphers&prng/流密码算法/RC4.md)
+- [RC4](../../sec/cryptography/stream-ciphers&prng/stream-ciphers/RC4.md)
 - [DES](../../sec/cryptography/block-ciphers/feistel/DES.md), [3DES](../../sec/cryptography/block-ciphers/feistel/EDE.md) 
 - [MD5](../../sec/cryptography/msg-digests/merkel-damgard/MD5.md)
 - [RSA](../../sec/cryptography/public-key-crypto/RSA/RSA.md)

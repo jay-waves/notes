@@ -1,6 +1,6 @@
 ## 栈
 
-<img src="../../assets/os/os-memory-stack-frame.avif" alt="" width="400">
+<img src="../../attach/img/os/os-memory-stack-frame.avif" alt="" width="400">
 
 栈用于保存函数调用信息, 也被称为**堆栈帧 (Stack Frame)**. 内容包括:
 - 函数的返回地址和参数.

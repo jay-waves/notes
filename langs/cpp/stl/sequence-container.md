@@ -41,7 +41,7 @@ pop_front();
 
 ## list
 
-List 是[循环双向链表](../../../../algo/linked-list/doubly-linked-list.md). 优点是插入删除无须大规模移动元素, 缺点是不能随机访问, 头节点内存开销大.
+List 是[循环双向链表](../../../algo/linked-list/doubly-linked-list.md). 优点是插入删除无须大规模移动元素, 缺点是不能随机访问, 头节点内存开销大.
 
 STL 的链表并不是侵入式链表 (数据本身包含下一个元素的指针), 也就是说节点管理和用户数据是分开的.
 

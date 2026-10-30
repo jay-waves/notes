@@ -2,7 +2,7 @@
 - 共享内存: 仅建立时需系统调用, 但需并发互斥访问. 数据格式和位置自由, 速度最快, 数据量大.
 - 消息传递: 使用"发送/接收消息"原语, 内核持续介入, 耗时多. 但不需避免冲突. 用于较少数据量.
 
-<img src="../../../assets/os/os-ipc-communication-modes.avif" alt="" width="400">
+<img src="../../../attach/img/os/os-ipc-communication-modes.avif" alt="" width="400">
 
 在具体实现上, 考虑到两进程状态, 还有同步和异步两种通信模式:
 - 同步通信: 通过加锁和循环等待, 使进程阻塞, 直到*消息被接收*或*有消息可用*

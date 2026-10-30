@@ -62,7 +62,7 @@ cases(
 $
 
 #figure(
-  image("../../assets/ai/shallow-neural-network.webp", width: 40%),
+  image("../../attach/img/ai/shallow-neural-network.webp", width: 40%),
   caption: [Illu of @eq:shallow]
 )
 
@@ -92,7 +92,7 @@ $
 $ 
 
 #figure(
-  image("../../assets/ai/deep-neural-network.webp", width: 60%),
+  image("../../attach/img/ai/deep-neural-network.webp", width: 60%),
 )
 
 == Loss function

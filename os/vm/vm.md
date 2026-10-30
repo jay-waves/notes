@@ -9,13 +9,13 @@
 | 物理硬件     |        |
 | 网络基础设施             |        |
 
-![On-prem and Cloud -- Network Academic IO, Fig 6](../../assets/os/on-prem-off-prem.webp)
+![On-prem and Cloud -- Network Academic IO, Fig 6](../../attach/img/os/on-prem-off-prem.webp)
 
 vSphere 这类虚拟化平台专用于将所有硬件集群统一为虚拟化平台，允许 CPU 和硬件资源超卖。VMWare vSphere 基于 EXSi 虚拟机内核，类似的还有 OpenStack （基于 Linux KVM 内核）、Windows System Center（基于 Hyper-V 内核）
 
 ## 虚拟机类型
 
-<img src="../../assets/os/vm-type.avif" alt="" width="400">
+<img src="../../attach/img/os/vm-type.avif" alt="" width="400">
 
 type-1 hypervisor (bare-metal hypervisor) 直接管理服务器硬件, 本身是最底层 OS. 如 KVM, Xen, ESXi, Hyper-V.
 

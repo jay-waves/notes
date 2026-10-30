@@ -1,6 +1,6 @@
 ## Feistel 结构
 
-<img src="../../../../assets/sec/sec-crypto-feistel-structure.avif" alt="" width="400">
+<img src="../../../../attach/img/sec/sec-crypto-feistel-structure.avif" alt="" width="400">
 
 对于每次迭代:  
 $L_{i+1}=R_{i}$  

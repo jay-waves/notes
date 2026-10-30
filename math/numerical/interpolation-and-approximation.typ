@@ -46,7 +46,7 @@ $ P(x) = a_0 + a_1(x - x_0) + a_2(x - x_0) ( x - x_1 ) + dots.h + a_n(x - x_0) d
 
 定义 $a_i = f [ x_0 , x_1 , dots.h , x_i ]$
 
-#link("../../assets/math/math-numerical-divided-difference-table.avif")[差商表]
+#link("../../attach/img/math/divided-difference-table.avif")[差商表]
 
 牛顿插值的优点是: 已用 $n$ 个点求出插值公式后, 有新的点加入, 只需计算新项 $a_(n + 1)$ 即可, 不需要重新计算所有系数.
 

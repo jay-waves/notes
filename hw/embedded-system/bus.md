@@ -17,10 +17,10 @@ CMOS (Complementary Metal-Oxide-Semiconductor) 电平: CMOS 是电压控制元�
 - 低电平: 接近 0V
 - 静态时几乎不消耗电流. 是现代数字电路最常见技术.
 
-静电放电 (ESD) 会短暂产生高电压. CMOS 主要由 [MOSFET](../digital-circuits/电子电路.md) 构成, 其栅极的氧化层很薄, 
+静电放电 (ESD) 会短暂产生高电压. CMOS 主要由 [MOSFET](../electronics/electronics.md) 构成, 其栅极的氧化层很薄, 
 容易被高电压击穿, 造成损坏. 
 
-TTL (Transisitor-Transisitor Logic): TTL 是电流控制元件, 由 [BJT](../digital-circuits/电子电路.md) 组成. CMOS 的功耗比 TTL 小, 抗干扰性强, 但是比较贵.
+TTL (Transisitor-Transisitor Logic): TTL 是电流控制元件, 由 [BJT](../electronics/electronics.md) 组成. CMOS 的功耗比 TTL 小, 抗干扰性强, 但是比较贵.
 - 高电平: 2.4V 至 5V
 - 低电平: 0V 至 0.8V
 - 通常使用 5V 电源, 电压范围窄. 消耗更大电流, 但电平切换速度更快.
@@ -45,19 +45,19 @@ RS-232C 是流行的串行数据接口标准 (EIA, 1969), 负责连接 DTE (数�
 - Ringing-RI (振铃指示): 当调制解调器收到交换台送来的振铃呼叫时, 使该信号有效 (ON), 通知终端已被呼叫.
 - SGND (信号接地)
 
-<img src="../../assets/hw/rs232c-io.avif" alt="引用 2, 图 2.9" width="600">
+<img src="../../attach/img/hw/rs232c-io.avif" alt="引用 2, 图 2.9" width="600">
 
 CPU 是并行的, 一次处理 64 位数据. 串口则是串行的, 一次处理一位. CPU 向串口发送数据时, 先通过 *UART (通用异步收发器)* 将并行数据转换为串行数据, 并按 RS-232C 协议的格式进行编码. 接着, 将 CMOS/TTL 电平转化为 RS-232C 电平.
 
 RS-232C 总线的传输距离不超过 15m, 最高传输速率为 20Kbps. 低电平在 `5~15V`, 高电平在 `-5~-15V`. 也因此不能直接连接 TTL 电路. RS232C 规定 25 针接口, 但常用的只有 9 根.
 
-<img src="../../assets/hw/rs-232c.avif" alt="" width="400">
+<img src="../../attach/img/hw/rs-232c.avif" alt="" width="400">
 
 ## UART
 
 通用异步收发器 （UART， Universal Asynchronous Receive/Transmitter). 通用同步和异步收发器 （Universal ASynchronous and Synchronous Receive/Transmitter, USART). CPU 将数据总线并行数据送至 "缓冲区", 然后控制 TxD 线按位送出, 转化为串行数据. 每帧的起始位和停止位由 UART 自动添加. 接受数据时, UART 监听 RxD 线, 当有低电平 (起始位) 时开始接受一帧数据, 直至数据帧完全读取至 "缓冲区", 通过中断促使 CPU 取走数据.
 
-<img src="../../assets/hw/uart.avif" alt="" width="400">
+<img src="../../attach/img/hw/uart.avif" alt="" width="400">
 
 UART 按时钟 (RxC) 上升沿采用 RxD 线, 当连续采集到 RxD 上 K 个低电平 (一般设置为起始位的二分之一时间) 后, UART 确认对方在发送数据 而不是干扰信号. 
 
@@ -116,7 +116,7 @@ SPI (Serial Peripheral Interface, 串行外设接口) 是高速全双工同步�
 - 主机输出/从机输入数据线 (MOSI), 传输数据和操作码.
 - 低电平有效的从机选择线 (SS)
 
-<img src="../../assets/hw/spi-io.avif" alt="引用 2, 图 2.9" width="400">
+<img src="../../attach/img/hw/spi-io.avif" alt="引用 2, 图 2.9" width="400">
 
 通过配置 输出串行同步时钟极性 (CPOL) 和相位 (CPHA), SPI 可以配置适应不同外设的频率, 采样时刻. 
 - CPOL=0, 串行同步时钟的空闲状态为低电平
@@ -153,7 +153,7 @@ IEEE 802.3 定义了以太网接口 (数据链路层). 以太网接口由 MAC (�
 
 数据接口包含接受和发送两个独立信道, 每个信道有独立的数据 / 时钟 / 控制信号; 管理接口包含一个时钟信号和一个数据信号. 因此 MII 接口总共包含 16 个信号. 通常网卡会集成 MAC 和 PHY.
 
-<img src="../../assets/hw/ethernet-io.avif" alt="" width="600">
+<img src="../../attach/img/hw/ethernet-io.avif" alt="" width="600">
 
 ## ISA 
 
@@ -174,7 +174,7 @@ eMMC (Embedded Multi Media Card) 是移动设备本地存储标准, 封装了 NA
 
 CAN （Controller Area Network）总线是一种广泛应用于汽车行业的串行通信网络。采用 [NRZ 编码](../../net/physical-l1.md)，同步依靠本地时钟以及一些微调方法。
 
-<img src="../../assets/hw/can-bus.png" alt="" width="600">
+<img src="../../attach/img/hw/can-bus.png" alt="" width="600">
 
 CAN 总线始终在广播报文，每个 CAN 节点有一个*接收滤波 ID 表*，过滤出包含感兴趣 ID 的报文。
 
@@ -185,7 +185,7 @@ CAN 总线始终在广播报文，每个 CAN 节点有一个*接收滤波 ID 表
 * 遥控帧，接受单元向发送单元请求数据，没有数据段。
 * 错误帧
 
-![](../../assets/hw/20260323123433732.avif)
+![](../../attach/img/hw/20260323123433732.avif)
 
 * SOF, Start of Frame. 1b
 * ID. 11b

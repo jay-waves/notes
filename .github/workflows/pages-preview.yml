@@ -31,6 +31,9 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - name: Warn about missing source paths
+        run: python3 .github/scripts/warn_missing_paths.py
+        continue-on-error: true
       - name: Checkout Typst template
         uses: actions/checkout@v6
         with:

@@ -11,7 +11,7 @@ ld a.o b.o -e main -o ab
 
 在分配地址空间 (链接) 之前, 各个函数的起始虚拟地址都假设为 `0x0000000`, `.text` 段的相关地址引用也用 `0x0` 或其他临时地址代替.
 
-<img src="../../assets/langs/langs-linking-address-space-allocation.avif" alt="地址和空间分配过程" width="600">
+<img src="../../../attach/img/langs/address-space-allocation.avif" alt="地址和空间分配过程" width="600">
 
 ### 重定位
 

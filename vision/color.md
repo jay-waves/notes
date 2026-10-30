@@ -37,8 +37,8 @@ CMYK 是印刷彩色，由四种油墨颜色构成。
 Y (亮度), UV (色度，U 表示蓝色到绿色的色彩、V 表示红色到绿色的色差）。由于人眼对绿色的亮度变化更敏感，YUV 利用这一点来压缩色彩信息。
 
 <figure style="display:flex;flex-wrap:wrap;">
-<img src="../assets/vision/color-space.svg" alt="wiki" width=450>
-<img src="../assets/vision/yuv.webp" alt="wiki" width=150>
+<img src="../attach/img/vision/color-space.svg" alt="wiki" width=450>
+<img src="../attach/img/vision/yuv.webp" alt="wiki" width=150>
 <figcaption style="width:100%;" align="center"> <a href="https://en.wikipedia.org/wiki/Y%E2%80%B2UV">Source: Wikipedia. </a>CIE 1931 xy chromaticity diagram</figcaption>
 </figure>
 

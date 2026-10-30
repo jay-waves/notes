@@ -17,9 +17,9 @@ $C_{3}=hash(\ x\mid\mid M\mid\mid y\ )$, 用于验证
 ## SM2 密钥协商
 
 
-SM2 密钥协商基于 [ECDH](../DiffieHellman.md), 额外引入了随机数 $r$ 进行协商, 假设私钥 $d$, 公钥 $P$.
+SM2 密钥协商基于 [ECDH](../diffie-hellman.md), 额外引入了随机数 $r$ 进行协商, 假设私钥 $d$, 公钥 $P$.
 
-算法主要分为两部分, 第一部分计算共享椭圆曲线点U, 第二部分计算共享密钥$K$以及签名 $S_{1}$ 和 $S_{2}$.  流程图见 [SM2 流程图](../../../../assets/sec/sec-crypto-sm2-key-exchange-protocol.avif).
+算法主要分为两部分, 第一部分计算共享椭圆曲线点U, 第二部分计算共享密钥$K$以及签名 $S_{1}$ 和 $S_{2}$.  流程图见 [SM2 流程图](../../../../attach/img/sec/sec-crypto-sm2-key-exchange-protocol.avif).
 
 - 预计算: 用户标识和时变值等
 

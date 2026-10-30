@@ -77,7 +77,7 @@ Modified Following:
 
 ### Yield Curve
 
-![](../../assets/econ/econ-yield-curve.webp)
+![](../../attach/img/econ/econ-yield-curve.webp)
 
 ## Money Market Instruments
 

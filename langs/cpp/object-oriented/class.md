@@ -233,7 +233,7 @@ public:
  
 ```
 
-<img src="../../../assets/langs/vtable.avif" alt="vtable" width="400">
+<img src="../../../attach/img/langs/vtable.avif" alt="vtable" width="400">
 
 vtable 由编译器生成, 放在 `.rodata` 段供链接器使用. 含有虚函数的类都会有一个静态的*虚函数表 (vtable)*, 而每个对象实例中会有隐藏的*虚表指针 (vptr)*, 指向 vtable.
 

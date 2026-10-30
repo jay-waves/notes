@@ -4,7 +4,7 @@ Schnorr 也是基于离散对数困难问题设计的, 其首先提出了 $g^{k}
 
 Schnorr 签名选择了模 $\varphi(p)=p-1$ 的一个循环子群 $\mathbb{Z}_{q}$ 进行计算, 从而减少计算量和签名长度, 速度比 ElGamal 更快, 但相应安全性更低. 
 
-此外, Schnorr 算法没有 [ElGamal 签名](../ElGamal.md)长度膨胀两倍的缺点.
+此外, Schnorr 算法没有 [ElGamal 签名](../el-gamal.md)长度膨胀两倍的缺点.
 
 ### 密钥生成
 

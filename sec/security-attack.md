@@ -219,8 +219,8 @@ Padding Oracle Attack
 
 MitM, Man in the Middle. 
 
-- 针对 [Diffie Hellman-密钥交换](cryptography/public-key-crypto/DiffieHellman.md) 的中间人攻击
-- 针对 [RSA 签名](cryptography/public-key-crypto/RSA/RSA%20签名.md) 的中间人攻击
+- 针对 [Diffie Hellman-密钥交换](cryptography/public-key-crypto/diffie-hellman.md) 的中间人攻击
+- 针对 [RSA 签名](cryptography/public-key-crypto/rsa/RSA-sig.md) 的中间人攻击
 
 #### 1.8.3.2 随机数重用漏洞
 
@@ -228,7 +228,7 @@ MitM, Man in the Middle.
 
 #### 1.8.3.3 弱参数和低熵漏洞
 
-弱参数导致公钥密码基于的困难问题被削弱, 参考 [RSA 密钥生成](cryptography/public-key-crypto/RSA/RSA%20密钥生成.md).
+弱参数导致公钥密码基于的困难问题被削弱, 参考 [RSA 密钥生成](cryptography/public-key-crypto/rsa/RSA-key-gen.md).
 
 #### 1.8.3.4 密码协议平行会话攻击
 

@@ -11,7 +11,7 @@ BGP 使用路径矢量算法, 每条路由信息包含经过的所有自治系�
 
 *开放最短路径优先协议 (Open Shortest Path First, OSPF)* 是一个**内部网关协议 (IGP)**, 在单一自治系统 (AS) 内实施路由决策, 用于企业或校园大型局域网.
 
-每个 OSPF 路由器都保存有全网链路信息的*链路状态 (Link-State)* 数据库, 通过 [Dijkstra 算法](../../algo/graph/最短路径算法.md)计算网络拓扑中最短路径. 
+每个 OSPF 路由器都保存有全网链路信息的*链路状态 (Link-State)* 数据库, 通过 [Dijkstra 算法](../../algo/graph/shortest-path.md)计算网络拓扑中最短路径. 
 
 OSPF 步骤: (很复杂...不填)
 1. OSPF 区域划分

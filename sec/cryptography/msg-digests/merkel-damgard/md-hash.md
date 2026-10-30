@@ -2,7 +2,7 @@
 
 迭代型散列函数, 也称为 Merkle-Damgard 结构.
 
-<img src="assets/sec/sec-crypto-iterated-hash-function.avif" alt="" width="550">
+<img src="../../../../attach/img/sec/sec-crypto-iterated-hash-function.avif" alt="" width="550">
 
 ### 预处理
 

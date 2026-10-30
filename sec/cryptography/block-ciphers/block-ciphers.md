@@ -37,7 +37,7 @@ revised: 24-11-29
 
 分组密码将长明文划分为等长分组进行加密, 每组独立使用加密算法. 在不同组之间引入迭代关系, 可以增强加密效果, 详见 [链接模式](modes-of-operation.md).
 
-分组密码的性能通常被认为快于[公钥加密](../public-key-crypto/pk-crypto.md), 慢于[流密码](../stream-ciphers&prng/流密码与伪随机数.md).
+分组密码的性能通常被认为快于[公钥加密](../public-key-crypto/pk-crypto.md), 慢于[流密码](../stream-ciphers&prng/stream-ciphers&prng.md).
 
 ## 潜在攻击手段
 

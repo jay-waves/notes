@@ -38,7 +38,7 @@ page_number = addr >> n;
 
 分页的地址转化过程如下图所示. 
 
-<img src="../../assets/os/os-virtual-address-translation.avif" alt="" width="500">
+<img src="../../attach/img/os/os-virtual-address-translation.avif" alt="" width="500">
 
 注意, 若页表在内存中, 则过程需要两次访存. 有两个重要寄存器:
 - 页表基址寄存器 (PTBR) 存储页表的内存位置
@@ -46,7 +46,7 @@ page_number = addr >> n;
 
 引入块表 (转化表缓冲区, Translation Looaside Buffer, TLB), 位置在 CPU [cache](../../hw/computer/cache.md)中, 保存最近使用的地址映射, 从而加速地址转换:
 
-<img src="../../assets/os/os-tlb-virtual-address-translation.avif" alt="" width="400">
+<img src="../../attach/img/os/os-tlb-virtual-address-translation.avif" alt="" width="400">
 
 为评价TLB效率, 引入**有效访问时间 EAT**:
 
@@ -65,7 +65,7 @@ $\text{EAT}=\lambda(a+b)+(1-\lambda)(a+2b)$. 其中查找 TLB 时间为 $a$, 内
 
 32 位系统对于每个进程都要存 4MB 页表, 占用大量**连续**内存, 大部分页表项是无用的. 因此照搬虚拟内存页表的思路, 衍生出多级页表.
 
-<img src="../../assets/os/page-table.avif" alt="" width="550">
+<img src="../../attach/img/os/page-table.avif" alt="" width="550">
 
 硬件架构会强制规定多级页表的结构和查表方式, 以确保 MMU 的正确运行. 内核根据硬件要求, 运行时构造多级页表. 比如 linux x86_64 平台上, 使用四级页表:
  - PGD (Page Global Directory) 页全局目录
@@ -109,7 +109,7 @@ CPU -- vaddr --> MMU -- paddr --> Memory
 
 为页表增加: 有效无效位, 其中无效位有*相关页无效, 页面有效但不在内存中*两种情况. 当试图访问无效页表项时, 会产生**缺页中断, Page Fault Trap**.
 
-<img src="../../assets/os/page-fault-trap.avif" alt="" width="450">
+<img src="../../attach/img/os/page-fault-trap.avif" alt="" width="450">
 
 为了支持按需调页, 通常在外存划分**交换区**, 交换区文件连续分配, 以支持更快读写. 其他区域称为文件区, 离散分配, 利用率高.
 
@@ -117,7 +117,7 @@ CPU -- vaddr --> MMU -- paddr --> Memory
 
 按需调页选中的外存页调入内存时, 若内存无空闲页框, 则按**页面淘汰算法**换出一个页, 然后调入选中页. 为了减少交换负担, 还用*脏位 dirty bit* 记录页面是否被修改, 若未被修改, 则直接丢弃.
 
-<img src="../../assets/os/page-swap.avif" alt="" width="400">
+<img src="../../attach/img/os/page-swap.avif" alt="" width="400">
 
 常见页面交换算法:
 - FIFO

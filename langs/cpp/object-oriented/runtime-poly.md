@@ -33,7 +33,7 @@ PFType pf2 = &floor_divide;
 
 ### 函数体
 
-[functor](../data-types/stl/functor.md)指重载了 `()` 操作符的类. 下面的代码基于 cpp 函数重载, 用虚参数 (但类型确定) 决定触发的具体方法, 这种技术称为标签派发(tag-dispatch), 实际是利用了 C++ 符号重载的特点.
+[functor](../stl/functor.md)指重载了 `()` 操作符的类. 下面的代码基于 cpp 函数重载, 用虚参数 (但类型确定) 决定触发的具体方法, 这种技术称为标签派发(tag-dispatch), 实际是利用了 C++ 符号重载的特点.
 
 ```cpp
 class DivideCeiling {};
@@ -175,11 +175,11 @@ DivisionPolicy["ceiling"](7.0, 3.3);
 
 ### 类型标签
 
-基于 [c++17 variant](../data-types/type-erasing.md) 
+基于 [c++17 variant](../type-erasing.md) 
 
 ### 编译期派发
 
-详见 [c++20 concept](../data-types/concept.md)
+详见 [c++20 concept](../stl/template/concept.md)
 
 [^1]: https://learnmoderncpp.com/2023/11/22/selecting-functions-at-runtime/#more-2406
 

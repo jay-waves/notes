@@ -8,7 +8,7 @@ int main() {
 }
 ```
 
-<img src="../assets/vision/vision-cuda-hardware-architecture.avif" width="500">
+<img src="../attach/img/vision/vision-cuda-hardware-architecture.avif" width="500">
 
 GPU 包含更多的运算单元, CPU 负责处理逻辑. 而 GPU 有更多运算核心, 上下文切换更加轻量, 常用于协同其计算. CPU 及其内存称为 host, GPU 及其内存称为 device. 典型 CUDA 程序流程如:
 1. 分配 host 内存, `malloc(size_t)`, 初始化数据. 
@@ -17,7 +17,7 @@ GPU 包含更多的运算单元, CPU 负责处理逻辑. 而 GPU 有更多运算
 4. 将 device 结果拷贝到 host. `cudaMemcpy(...., kind=cudaMemcpyDeviceToHost)`
 5. 释放 device 和 host 上分配的内存. `free()` + `cudaFree()`
 
-<img src="../assets/vision/vision-cuda-programming-abstraction.avif" width="500">
+<img src="../attach/img/vision/vision-cuda-programming-abstraction.avif" width="500">
 
 CUDA 编程的核心是核函数 (`kernel_func<<<grid, block>>>`), 该函数会被放入 device 中并行化执行. 一个核在 device 中的映射称为**网格 (grid)**, 同一网格上的线程共享相同的全局内存空间; 每个网格又可分为多个**区块 (block)**, 每个区块中包含多个**线程 (thread)**. 
 
@@ -50,7 +50,7 @@ col = blockIdx.x * blockDim.x + threadIdx.x;
 
 https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#simt-architecture
 
-<img src="../assets/vision/vision-cuda-hardware-resources.avif" alt="" width="500">
+<img src="../attach/img/vision/vision-cuda-hardware-resources.avif" alt="" width="500">
 
 查询本机实际 GPU 硬件配置:
 

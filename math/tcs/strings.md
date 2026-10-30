@@ -28,5 +28,5 @@ $V=\{a, b\}$, $V^{*}=\{\epsilon, a, b, aa, ab, bb, ba, aaa, \dots\}$
 2. 任意 $x\in \Sigma$, x为正则式, 正则集为 $\{ x \}$
 3. 如果 $X, Y$ 是 $\Sigma$ 上正则式, 并且对应正则集为 $U, V$, 那么: $X\vert Y, X\cdot Y, X^{*}$ 也是正则式, 对应正则集为 $U\cup V, U\cdot V, U^{*}$
 
-**正则表达式等价于[有限自动机](自动机.md)**
+**正则表达式等价于[有限自动机](automata.md)**
 

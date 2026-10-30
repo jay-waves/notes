@@ -1,5 +1,5 @@
 
-<img src="../../assets/math/P_NP_NPC_NPH.avif" alt="" width="400">
+<img src="../../attach/img/math/P_NP_NPC_NPH.avif" alt="" width="400">
 
 ## P 与 NP
 

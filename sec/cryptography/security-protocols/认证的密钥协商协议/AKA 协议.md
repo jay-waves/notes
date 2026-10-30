@@ -4,7 +4,7 @@
 
 ### 2G-GSM AKA
 
-<img src="../../../../assets/sec/net-wireless-2g-gsm-aka-protocol.avif" alt="" width="700">
+<img src="../../../../attach/img/sec/net-wireless-2g-gsm-aka-protocol.avif" alt="" width="700">
 
 GSM 安全性缺陷:
 - 主密钥 `K` 固定存储在 SIM 卡中, 有复制 SIM 卡风险. 截获 `RAND` 和 `SRES` 后, 由于 A3 算法的输出长度较短以及设计缺陷, 攻击者容易破译出 `K`
@@ -18,7 +18,7 @@ CDMA 使用防篡改的 UMI (UserIdentity Module) 卡替代了 GSM 的 SIM 卡. 
 
 ### 3G-WCDMA AKA
 
-<img src="../../../../assets/sec/net-wireless-3g-aka-protocol.avif" alt="" width="1000">
+<img src="../../../../attach/img/sec/net-wireless-3g-aka-protocol.avif" alt="" width="1000">
 
 > f6~f10 在哪? SQN 是每次会话递增的, 
 

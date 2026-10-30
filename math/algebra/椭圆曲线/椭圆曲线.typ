@@ -25,12 +25,12 @@ $
   columns: 2,
   [$y^2 = x^3 - 3x + 3$],
   [$y^2 = x^3 - 6x + 5$],
-  image("../../../assets/math/curve_-3_3.webp", width: 80%),
-  image("../../../assets/math/curve_-6_5.webp", width: 80%),
+  image("../../../attach/img/math/curve_-3_3.webp", width: 80%),
+  image("../../../attach/img/math/curve_-6_5.webp", width: 80%),
   [$y^2 = x^3$ 含不可导点],
   [$y^2 = x^3 - 3x + 2$ 含自相交点],
-  image("../../../assets/math/curve_0_0.webp", width: 80%),
-  image("../../../assets/math/curve_-3_2.webp", width: 80%),
+  image("../../../attach/img/math/curve_0_0.webp", width: 80%),
+  image("../../../attach/img/math/curve_-3_2.webp", width: 80%),
 )
 
 == 负元
@@ -59,7 +59,7 @@ $
 
 === $P != Q$ 推导
 
-#image("../../../assets/math/sec-crypto-ecc-point-addition.webp", width: 45%)
+#image("../../../attach/img/math/sec-crypto-ecc-point-addition.webp", width: 45%)
 
 设 $P(x_1, y_1)$, $Q(x_2, y_2)$.
 斜率 $k = (y_2 - y_1) \/ (x_2 - x_1)$, 所以直线表示为 $y = k x + t$.
@@ -84,7 +84,7 @@ $
 
 === $P = Q$ 推导
 
-#image("../../../assets/math/sec-crypto-ecc-point-doubling.webp", width: 45%)
+#image("../../../attach/img/math/sec-crypto-ecc-point-doubling.webp", width: 45%)
 
 此时直线为 $P$ 点切线. 同时对 $x$ 求导:
 $

@@ -2,4 +2,4 @@
 
 ## Lunar Lake
 
-<img src="../../assets/hw/lunar-lake.webp" alt="lunar-lake" width="400">
+<img src="../../attach/img/hw/lunar-lake.webp" alt="lunar-lake" width="400">

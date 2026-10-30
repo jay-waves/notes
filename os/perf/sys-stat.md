@@ -116,7 +116,7 @@ ulimit -a
 
 Shows disk usage. (disk free)
 
-### [`du`]((http://www.linfo.org/du.html)
+### [`du`](http://www.linfo.org/du.html)
 
 Shows the disk usage of files or directories. 
 

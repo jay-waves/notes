@@ -14,7 +14,7 @@ Write-ahead logging appends changes to a durable log before applying them to the
 
 LSM Tre is tiered, write-optimized data structure that organizes *key-value* pairs in multiple components, residing partly in memory and partly on disk.
 * Each Level of LSM-Tree is tuned to the characteristics of its underlying storage medium
-* Data is efficiently migrate across media in *rolling write batches*, using an algorithm reminiscent of [merge sort](sort/merge-sort.md)
+* Data is efficiently migrate across media in *rolling write batches*, using an algorithm reminiscent of [merge sort](../../algo/sort/merge-sort.md)
 * Component is maintained as an *append-only sequence*, so new records and updates are written sequentially rather than issuing costly random writes to persistent media. 
 
 
@@ -34,7 +34,7 @@ SSTable Compaction (in background):
 
 ### Trade-Off
 
-*Read Amplification* : A point lookup in LSM Tree may need to check multiple SSTables across multiple levels with many unnecessary disk reads. Hence, [Bloom Filter](hash-based/bloom-filter.md) is introduced to check whether the key is present in this SSTable. Although Bloom Filter accelerate the point lookup, ranges lookup still suffers.
+*Read Amplification* : A point lookup in LSM Tree may need to check multiple SSTables across multiple levels with many unnecessary disk reads. Hence, [Bloom Filter](../../algo/hash-based/bloom-filter.md) is introduced to check whether the key is present in this SSTable. Although Bloom Filter accelerate the point lookup, ranges lookup still suffers.
 
 Best suited for: 
 * **Write-Heavy** systems, and **Random Writes are expensive**.

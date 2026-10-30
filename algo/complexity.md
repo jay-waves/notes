@@ -12,7 +12,7 @@ $f(n)=O(g(n))$, 当且仅当 $\exists c,n_0$, 使得 $\forall n \ge n_0,0\le f(n
 
 $f(n)=\Omega(g(n))$, 当且仅当 $\exists c,n_0$, 使得 $\forall n \ge n_0,0\le c\cdot g(n)\le f(n)$.
 
-![图源 OI Wiki](../assets/algo/complexity-theory.avif)
+![图源 OI Wiki](../attach/img/algo/complexity-theory.avif)
 
 此外, 极限无穷小分析中还用到 $o$ 符号, 但不常用于复杂度分析. 
 

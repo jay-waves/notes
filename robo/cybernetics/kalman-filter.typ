@@ -18,7 +18,7 @@ $ x_k^+ = x_k^- + K_k (z_k - H x_k^-) $
 其中 $K_i$ 是每次迭代的最优权重，被称为_卡尔曼增益（Kalman Gain）_。
 
 #figure(
-  image("../../assets/robo/kalman-filter-wiki.png", width: 50%),
+  image("../../attach/img/robo/kalman-filter-wiki.png", width: 50%),
   caption: link("https://en.wikipedia.org/wiki/Kalman_filter")[Kalman Filter -- Wikipedia],
 )
 

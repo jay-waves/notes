@@ -1,15 +1,15 @@
 
 开环控制系统（Open Loop）：
 
-<img src="/assets/robo/open-loop-system.png" alt="" width="200">
+<img src="/attach/img/robo/open-loop-system.png" alt="" width="200">
 
 **闭环控制系统**：
 
-<img src="../../assets/robo/closed-loop-system.png" alt="" width="400">
+<img src="../../attach/img/robo/closed-loop-system.png" alt="" width="400">
 
 控制理论目的是借由控制器的工作让系统稳定在设定值，而不会有误差或震荡。设定值不变的控制称为*调节*，设定值快速变化的控制称为*伺服*。
 
-<img src="../../assets/robo/pid-curve.webp" alt="Modern Robotics, 2019, Fig11.2" width="500">
+<img src="../../attach/img/robo/pid-curve.webp" alt="Modern Robotics, 2019, Fig11.2" width="500">
 
 当 $t\to \infty$ 时，系统响应达到稳态后的误差被称为*稳态误差*（steady-state error） $e_{ss}$
 
@@ -94,7 +94,7 @@ $$u(t)=K_{p}\theta_{e}(t)+K_{i}\int^{t}_{0}\theta_{e}(\tau)d\tau +K_{d} \frac{d\
 * $K_{i}$ 积分增益，消除 *稳态误差（steady-state error）*
 * $K_{d}$ 微分增益，提高相位裕度（阻尼、damping）。
 
-<img src="../../assets/robo/pid-curve.avif" alt="no-copyright" width="400">
+<img src="../../attach/img/robo/pid-curve.avif" alt="no-copyright" width="400">
 
 $K_{d}$ 微分项对噪声（高频信号）很敏感，因此会搭配[低通滤波器](low-pass-filter.md)使用，或干脆不用。*带低通滤波的微分项（Dirty Derivative）* 定义为： 
 

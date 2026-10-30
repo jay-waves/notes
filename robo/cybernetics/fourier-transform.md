@@ -6,7 +6,7 @@ math-engine: mathjax
 
 由于基频 $\omega_{0}\to 0$ ，每个离散频率点 $k\omega_{0}$ 间隔变小，**频谱变得连续**。数学上，级数变为积分： $$f(t)=\int^{\infty}_{-\infty}F(\omega)e^{j\omega t}  \, d\omega $$
 
-<img src="../../assets/robo/spectrum.avif" alt="no-copyright" width="400">
+<img src="../../attach/img/robo/spectrum.avif" alt="no-copyright" width="400">
 
 ## 傅里叶变换
 
@@ -60,7 +60,7 @@ $$\mathcal{F}\{f(at)\}=\frac{1}{|a|}F\left( \frac{\omega}{a} \right)$$
 
 ## 参考资料
 
-![](../../assets/robo/math-fourier-four-forms-of-fourier-transform.avif)
+![](../../attach/img/robo/four-forms-of-fourier-transform.avif)
 
 > [3blue1Brown – 形象傅里叶变换](https://www.bilibili.com/video/BV1pW411J7s8/?spm_id_from=333.337.search-card.all.click&vd_source=389ad1f24e143504d05c538916c8c532)
 

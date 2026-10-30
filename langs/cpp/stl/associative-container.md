@@ -1,4 +1,4 @@
-关联容器 (associative contianers) 存储**键值对 (key-value)**, 底层基于[红黑树](../../../../algo/tree/red-black-tree.md), 元素插入时自动排序. 查找和插入效率都为 $O(\log n)$.
+关联容器 (associative contianers) 存储**键值对 (key-value)**, 底层基于[红黑树](../../../algo/tree/red-black-tree.md), 元素插入时自动排序. 查找和插入效率都为 $O(\log n)$.
 
 ## set
 

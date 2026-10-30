@@ -38,7 +38,7 @@ $ bmat(1; 0) dot x_1 + bmat(0; 1) dot x_2 = bmat(x_1; x_2) $
   线性变换的另一个形象体现是#link("https://notes.jay-waves.cn/math/linalg/congruence/")[二次型形状变换], 本质也是基底变换.
 ]
 
-#image("../../assets/math/math-linalg-linear-transformation.webp", width: 60%)
+#image("../../attach/img/math/math-linalg-linear-transformation.webp", width: 60%)
 
 $A_(n times n)$不一定是满秩的, 即其描述的新基底无法张成n维空间. 这种降维有一个生动的例子: 沿着平面内一条直线旋转平面, 垂直纸面时, 平面降维为了一条直线.
 

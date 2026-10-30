@@ -164,7 +164,7 @@ While (changes to any in[] occur) {
 
 表达了一种信息精确性的约束关系, 见 https://en.wikipedia.org/wiki/Lattice_(order).
 
-![](../../../assets/sec/Snipaste_2025-09-18_14-18-49.png)
+![](../../attach/img/sec/Snipaste_2025-09-18_14-18-49.png)
 
 $x\leq y$ iff $x\wedge y =x$. 
 
@@ -217,7 +217,7 @@ CBMC [Clarke, 2004] 是第一个可分析 ANSI-C 全集的 BMC 框架.
 3. (recursive) function calls are expanded: 将函数内联, 将递归限制在 $n$ 步.
 4. Transform into SSA form (requiring a [pointer analysis](pointer%20analysis.md))
 
-![](/assets/sec/cbmc.avif)
+![](/attach/img/sec/cbmc.avif)
 
 此时程序被形式化为 $C,P$, 接着用 SAT 求解器, 求解合取范式 (CNF): $C\wedge \lnot P$.
 - $C$: constraints. 约束, 指程序本身的逻辑约束

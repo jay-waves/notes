@@ -7,7 +7,7 @@
 5. 数据库实施: 创建数据库实例, 并载入真实数据.
 6. 数据库运行和维护
 
-<img src="../../assets/db/db-relational-database-design-1.avif" alt="" width="400">
+<img src="../../attach/img/db/db-relational-database-design-1.avif" alt="" width="400">
 
 ### 评判质量指标
 
@@ -31,9 +31,9 @@ DFD (数据流图) 描述系统业务流程的以下方面:
 - 处理过程 (Process)
 - 数据存储 (参与业务流程的数据实体)
 
-<img src="../../assets/db/db-relational-database-design-2.avif" alt="" width="400">
+<img src="../../attach/img/db/db-relational-database-design-2.avif" alt="" width="400">
 
-![](../../assets/db/db-relational-database-design-3.avif)
+![](../../attach/img/db/db-relational-database-design-3.avif)
 
 > 详细可参考 [visaul-paradigm-data-flow-diagram](https://www.visual-paradigm.com/cn/guide/data-flow-diagram/what-is-data-flow-diagram/)
 
@@ -55,19 +55,19 @@ Entity Relationship Model, 1976, 陈品山.
 - 复合关键字: 标有相同数字
 - 多组关键字: 标有不同数字
 
-<img src="../../assets/db/db-relational-database-design-4.avif" alt="" width="300">
+<img src="../../attach/img/db/db-relational-database-design-4.avif" alt="" width="300">
 
 ##### Crow Foot's Notation
 
-<img src="../../assets/db/db-relational-database-design-5.avif" alt="" width="450">
+<img src="../../attach/img/db/db-relational-database-design-5.avif" alt="" width="450">
 
-<img src="../../assets/db/db-relational-database-design-6.avif" alt="" width="400">
+<img src="../../attach/img/db/db-relational-database-design-6.avif" alt="" width="400">
 
 举例:
 
-<img src="../../assets/db/db-relational-database-design-7.avif" alt="" width="400">
+<img src="../../attach/img/db/db-relational-database-design-7.avif" alt="" width="400">
 
-<img src="../../assets/db/db-relational-database-design-8.avif" alt="" width="400">
+<img src="../../attach/img/db/db-relational-database-design-8.avif" alt="" width="400">
 
 #### 实体和属性设计
 

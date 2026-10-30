@@ -21,7 +21,7 @@
 	- 责任链模式 (Chain of Responsibility Pattern, Request Relay). 不断向下传递请求, 直到负责者.
 	- 命令模式 (Command Pattern, TaskWrapper), 将请求变为一个就绪对象
 	- 解释器模式 (interpreter Pattern)
-	- [迭代器模式 (Iterator, Collection Explorer)](../data-types/stl/iterator.md)
+	- [迭代器模式 (Iterator, Collection Explorer)](../stl/iterator.md)
 	- 中介者模式 (Mediator, Communication Hub). 用中介来简化对象间的通信.
 	- 备忘录模式 (Memento, Time Capsule). 捕获并保存对象状态.
 	- [观察者模式 (Observer, Broadcaster)](observer-pattern.md)

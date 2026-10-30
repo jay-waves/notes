@@ -7,9 +7,9 @@ Avoid excessive caveats, defensive language, and unnecessary assumptions.
 # Repository guidelines
 
 - This repository contains Markdown and Typst notes organized by subject. Follow the writing, 
-    naming, citation, and license guidelines in README.md; see appx/personal-coding-styles.md 
+    naming, citation, and license guidelines in README.md; see attach/personal-coding-styles.md 
     for code style.
-- Store images under `assets/<subject>/` and references in the subject's `references.bib`. Preserve 
+- Store images under `attach/img/<subject>/` and references in the subject's `references.bib`. Preserve 
     third-party attribution and license information.
 - Use spaces for indentation, with an indent size of 4.
 - Aim for 100 display columns in prose, counting full-width characters as two; 

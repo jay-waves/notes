@@ -4,8 +4,7 @@
 | ----------- | ----------------------- | ------------ |
 | algo        | algorithm               | 算法         |
 | ai          | intelligence            | 人工智能     |
-| *appx*      | appendices              | 附录         |
-| *assets*    | attachments             | 附件         |
+| *attach*    | attachments             | 附件         |
 | db          | databases               | 数据库       |
 | econ        | economics               | 经济学       |
 | hw          | hardware                | 体系架构     |
@@ -59,7 +58,7 @@
 
 ### Coding
 
-详见 [个人代码风格描述](appx/personal-coding-styles.md)
+详见 [个人代码风格描述](attach/personal-coding-styles.md)
 
 ### Reference
 
@@ -68,7 +67,7 @@
 
 ### Attachments 
 
-* 图片附件按 `assets/<主题>/` 一级目录归档，并与引用它们的笔记一起提交。
+* 图片附件按 `attach/img/<主题>/` 一级目录归档，并与引用它们的笔记一起提交。
 * 图片如有版权信息，同样需要著名来源, 形式如：
 
 ```html

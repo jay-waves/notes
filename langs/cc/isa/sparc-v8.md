@@ -31,7 +31,7 @@ FPU 的控制寄存器:
 
 当前窗口的寄存器地址由 CWP (Current Windows Pointer) 给出, CWP 是 PSR 状态寄存器中的五位, 其值由 `RESTORE, SAVE` 两个指令控制. 某个窗口的有效性由 WIM 记录.
 
-<img src="../../assets/langs/sparc-reg-windows.png" alt="" width="500">
+<img src="../../../attach/img/langs/sparc-reg-windows.png" alt="" width="500">
 
 FPU 包含 32 个浮点数寄存器 (f), 但没有窗口机制, 即某时刻可以访问所有 32 个浮点数寄存器. 双精度浮点数需要近邻并地址对齐的一对浮点数寄存器....
 
@@ -123,7 +123,7 @@ PC / next PC
 
 > The tagged arithmetic instructions assume that the least-significant 2 bits of the operands are data-type “tags”. These instructions set the overflow condition code bit upon arithmetic overflow, or if any of the operands’ tag bits are nonzero. There are also versions that trap when either of these conditions occurs.
 
-[sparc architecture manualv8, page 14](appx/sparc%20architecture%20manualv8.pdf#page=14&selection=61,0,70,73)
+[sparc architecture manualv8, page 14](attach/sparc%20architecture%20manualv8.pdf#page=14&selection=61,0,70,73)
 
 ### Control transfer
 

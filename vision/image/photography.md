@@ -10,11 +10,11 @@ Common assumptions:
 
 Vanishing point:
 
-<img src="../../assets/vision/vanishing-points.webp" width=40%>
+<img src="../../attach/img/vision/vanishing-points.webp" width=40%>
 
 ## Focal Length
 
-<img src="../../assets/vision/pinhole.webp" width=60%>
+<img src="../../attach/img/vision/pinhole.webp" width=60%>
 
 In a *pinhole model*, each 3D points is presented by essentially one ray passing through the camera center;
 In a *lens/glass model*, Many rays from the same 3D point enter the lens, are refracted, and ideally converge onto
@@ -23,7 +23,7 @@ point on the sensor.
 Pinhole selects rays, with very low light intake and no fucusing system.
 But pinhole model can have very large _depth of field (景深, DOF)_, and ideally no optical distortion.
 
-<img src="../../assets/vision/focus-distance.webp" width=30%>
+<img src="../../attach/img/vision/focus-distance.webp" width=30%>
 
 To focus on objects at different distances, move sensor relative to lens. 像手机镜头，_焦距 (focal length)_ 很短，
 景深天然很大，即有很长距离看起来清晰，没有那么强的失焦虚化感，但不等于清晰或锐度高了。
@@ -38,11 +38,11 @@ $$
 \text{FOV} = 2 \arctan(\frac{d}{2f})
 $$
 
-<img src="../../assets/vision/focal-length.webp" width=40%>
+<img src="../../attach/img/vision/focal-length.webp" width=40%>
 
 传感器尺寸参数通常有几种选择：
 
-<img src="../../assets/vision/sensor-sizes.webp" width=70%>
+<img src="../../attach/img/vision/sensor-sizes.webp" width=70%>
 
 其中，_全画幅 (Full Frame)_ 是指接近传统 35mm 胶片尺寸的传感器，并不是最大的画幅。其他画幅：
 - _APS-C_ 约 `24x16mm` ，裁切系数大概 1.6x ，一般用于入门相机
@@ -68,16 +68,16 @@ $$
 \text{Exposure} \approx \text{Exposure time} \times \text{Aperture size}
 $$
 
-<img src="../../assets/vision/shutter-speed.webp">
+<img src="../../attach/img/vision/shutter-speed.webp">
 
-<img src="../../assets/vision/shutter-aperture.webp" width=30%>
+<img src="../../attach/img/vision/shutter-aperture.webp" width=30%>
 
 ### Aperture
 
 在衡量 _光圈 (Aperture)_ 大小参数时，不直接用光圈的物理直径，而用 _入瞳 (entrance pupil)_ 直径。
 入瞳是指从物体一侧看去，光圈被镜片映射到多大，这实际反映了镜头允许多大的光束进入。
 
-<img src="../../assets/vision/entrance-pupil.webp">
+<img src="../../attach/img/vision/entrance-pupil.webp">
 
 在光圈参数 `D = f/N` 中，$D$ 是入瞳直径。最终进光量正比于 $D^2$ ，这意味，每一档光圈让
 进光量增加 2 倍，直径应该增加 $\sqrt{2}$ 倍。因此常见的光圈挡位为：
@@ -89,9 +89,9 @@ f/1  f/1.4  f/2  f/2.8  f/4  f/5.6  f/8  f/11
 物体不在镜头焦点上，就会在传感器形成一个小圆斑，只要其不过大，画面中物体就仍看起来清晰。
 也就是说焦点前后会有一个 *近景景深界限* 和一个 *远景景深界限*。
 
-<img src="../../assets/vision/aperture-dof.webp" width=40%>
+<img src="../../attach/img/vision/aperture-dof.webp" width=40%>
 
-<img src="../../assets/vision/aperture.webp">
+<img src="../../attach/img/vision/aperture.webp">
 
 
 
@@ -100,7 +100,7 @@ f/1  f/1.4  f/2  f/2.8  f/4  f/5.6  f/8  f/11
 ISO 则是传感器对光信号的增益（敏感）程度，增益小时，画面干净但是需要更多光线；
 增益大时，画面更亮，但噪点多，动态范围差。
 
-<img src="../../assets/vision/iso.webp" width=70%>
+<img src="../../attach/img/vision/iso.webp" width=70%>
 
 ### 典型场景
 
@@ -120,7 +120,7 @@ SLR (Single lens reflex camera, 单反相机)
 
 
 <figure>
-    <img src="../../assets/vision/spherical-aberrations.webp">
+    <img src="../../attach/img/vision/spherical-aberrations.webp">
   <figcaption>
     Source: <a href="https://www.dpreview.com/articles/1449146848/closer-look-canon-rf-100mm-f2-8l-macro-is-usm">OpenStax</a>
   </figcaption>
@@ -130,7 +130,7 @@ SLR (Single lens reflex camera, 单反相机)
 理想条件下凸镜才有焦点，一般光学中还分为近轴焦点 (paraxial focus)、边缘光焦点、最佳焦点和各种像差。
 
 <figure>
-  <img src="../../assets/vision/thin-lens-eq.webp">
+  <img src="../../attach/img/vision/thin-lens-eq.webp">
   <figcaption>Source: <a href="https://wanda.fiu.edu/boeglinw/courses/Modern_lab_manual3/optical_instruments.html">Modern Lab Experiments 17.</a></figcaption>
 </figure>
 

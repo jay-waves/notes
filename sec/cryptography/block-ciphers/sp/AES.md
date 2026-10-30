@@ -9,7 +9,7 @@ AES (Advanced Encryption Standard) 是 NIST 于2001年选定的, 用于替代 DE
 
 AES 以 **Rijndael 迭代型密码算法**为基础, 但**分组长度固定为 `128bits`**, 仅允许密钥长度可变 (`128bits`, `192bits`, `256bits`). 和 DES 以比特为处理单位不同, AES 处理单位是字节, 用 $GF(2^{8})$ 上元素表示.
 
-<img src="../../../../assets/sec/crypto-aes.avif" alt="" width="250">
+<img src="../../../../attach/img/sec/crypto-aes.avif" alt="" width="250">
 
 ## AES 构造
 
@@ -206,7 +206,7 @@ Rijndal( State, Key ){
 
 `Nk=4` 时密钥扩展步骤如下, `Nk` 增长时, 会有些许变化, 详见 AES 标准. 每轮密钥长度皆为 $N_{b}$, 那么共需要 $N_{b}(N_{r}+1)$ 长度的密钥.
 
-<img src="../../../../assets/sec/crypto-aes-key-extend.avif" alt="" width="550">
+<img src="../../../../attach/img/sec/crypto-aes-key-extend.avif" alt="" width="550">
 
 变换 $g$ 详情如:
 1. 循环左移一字节
@@ -219,7 +219,7 @@ Rijndal( State, Key ){
 Rijndael算法高性能, 高效率, 高伸缩性, 存储要求低. 缺点是加解密区别较大, 硬件重用较困难.  AES 雪崩效应比 DES 佳, 因此轮数也少, 10 轮AES安全性已非常高, 最有效破解方案是密钥穷举.
 
 字节扩散效果:
-<img src="../../../../assets/sec/crypto-aes-avalanche.avif" alt="" width="450">
+<img src="../../../../attach/img/sec/crypto-aes-avalanche.avif" alt="" width="450">
 
 比特扩散效果:  
 ...

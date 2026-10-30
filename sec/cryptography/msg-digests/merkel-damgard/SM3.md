@@ -8,5 +8,5 @@ code: src/cryptography/sm3.py
 
 SM3 采用 [Merkle-Damgard 结构](md-hash.md), **基于 SHA-256**, 安全性和SHA-256相当. 
 
-<img src="assets/sec/sec-crypto-sm3-hash-function.avif" alt="" width="300">
+<img src="../../../../attach/img/sec/sec-crypto-sm3-hash-function.avif" alt="" width="300">
 

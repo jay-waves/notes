@@ -1,5 +1,5 @@
 
-<img src="../../assets/math/reduction.avif" alt="" width="400">
+<img src="../../attach/img/math/reduction.avif" alt="" width="400">
 
 A proof that some cryptographic construction $\Pi$ is secure as long as some underlying problem $X$ is hard generally proceeds by presenting an explicit reduction showing how to transform any efficient adversary $\mathcal{A}$ that succeeds in "breaking" $\Pi$ into an efficient algorithm $\mathcal{A}'$ that solves $X$. 
 

@@ -53,7 +53,7 @@
 
 ### 错误码
 
-使用 C POSIC LIB `errno.h` 中定义的部分错误状态码. 详见 [src/errno.h](../../src/errno.h)
+使用 C POSIC LIB `errno.h` 中定义的部分错误状态码. 详见 [src/errno.h](../attach/src/kernel/errno.h)
 - `-ENOMEM` 内存不足, 无法分配内存. 即 `malloc` 失败时返回.
 - `-EINVAL` 无效参数.
 - `-ENOENT` 资源不存在, 如查找操作未找到指定键, 或数据结构已空.

@@ -1,6 +1,6 @@
 ##  ECC-Elgamal
 
-基于 Elgamal 公钥体制建立,  Elgamal 体制基于[离散对数困难问题](../../../../math/numth/欧拉定理.md), ECC-Elgammal 基于[椭圆曲线群中的离散对数困难问题](../../../../math/algebra/椭圆曲线/椭圆曲线.typ).
+基于 Elgamal 公钥体制建立,  Elgamal 体制基于[离散对数困难问题](../../../../math/numth/欧拉定理.md), ECC-Elgammal 基于[椭圆曲线群中的离散对数困难问题](https://notes.jay-waves.cn/math/algebra/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF/).
 
 ### 密钥生成
 

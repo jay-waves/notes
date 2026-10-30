@@ -56,7 +56,7 @@
 
 其中, 防火墙一般通过扫描报文的端口和地址来访问控制, IPS 则可以深入检测攻击内容, 如异常的请求头和请求体. 通常出于成本原因防火墙在IPS流量前, 但实际场景中, 某些组织需要对特定流量进行深入检查, 可能将IPS放在防火墙后; 还有将防火墙和IPS结合一起的设备, 称为下一代防护墙(NGFW).
 
-<img src="../../assets/net/net-network-topology-v3.avif" alt="" width="700">
+<img src="../attach/img/net/net-network-topology-v3.avif" alt="" width="700">
 
 ...家庭网络层次...
 
@@ -114,4 +114,4 @@ Content Delivery Network, 内容分发网络, 通过分布式缓存加速内容�
 
 *光猫 (光纤调制解调器,GPON, EPON Modem)* 负责将运营商 (ISP) 的光纤信号转换成数字电信号, 为内部网络提供网络接入. 一般有一个光纤接口连接 ISP 的光纤网络, 还有以太网接口用于将数字信号传递给路由器或网络设备.
 
-![nat](../../attach/ascii/nat.md)
+![nat](../attach/ascii/nat.md)

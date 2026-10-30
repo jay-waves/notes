@@ -89,4 +89,4 @@ Redis 中部分命令时 `O(n)` 复杂度：
 
 #BP 
 
-解决办法：加无效 Key 过滤，考虑使用 [布隆过滤器](../algo/hash-based/bloom-filter.md) 以及用于验证格式的正则表达式。
+解决办法：加无效 Key 过滤，考虑使用 [布隆过滤器](../../algo/hash-based/bloom-filter.md) 以及用于验证格式的正则表达式。

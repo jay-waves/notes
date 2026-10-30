@@ -22,11 +22,11 @@ of the robot can reach.
 
 空间中的刚体有六个自由度： $(x,y,z, "roll","yaw","pitch")$ #footnote[roll,yaw,pitch 翻译为： 滚转、俯仰、偏航]
 
-#image("../assets/robo/adam-lite.webp", width: 50%)
+#image("../attach/img/robo/adam-lite.webp", width: 50%)
 
 == 刚体关节
 
-#image("../assets/robo/robot-joints.webp", width: 70%)
+#image("../attach/img/robo/robot-joints.webp", width: 70%)
 
 - F: fixed joint. 完全刚性连接。0DoF
 - R: revolute joint, hinge joint. 铰链关节。1DoF
@@ -78,7 +78,7 @@ $
 
 $ dot(vec(x)) & = w times vec(x) \ dot(vec(y)) & = w times vec(y) \ dot(vec(z)) & = w times vec(z) $
 
-#image("../assets/robo/angular-velocity.webp", width: 50%)
+#image("../attach/img/robo/angular-velocity.webp", width: 50%)
 
 #sidenote[
   用固定坐标系 $s$ 表示*旋转变化量* $w$, 即 $w_s$ ，设从固定坐标系 $s$ 到刚体坐标系 $b$ 的旋转矩阵 $R$ ，此时角速度可表示为： $ dot(R)=w_s times R=[w_s]R $
@@ -219,7 +219,7 @@ Screw axis $cal(S)={q,hat(s),h}$ represents the motion of a screw: rotating abou
 
 
 #figure(
-  image("../assets/robo/screw-axis.webp", width: 50%),
+  image("../attach/img/robo/screw-axis.webp", width: 50%),
   caption: [Modern Robotics F3.19],
 )
 
@@ -249,9 +249,9 @@ $ [cal(S) ]= bmat([omega], v ; 0, 0) $
 
 == Exponential Repr. of Rotation
 
-#image("../assets/robo/rigid-body-motion.webp", width: 40%)
+#image("../attach/img/robo/rigid-body-motion.webp", width: 40%)
 
-考察线速度，参考[四元数推导过程](quaternion.md)，对于固定坐标系中的向量 $p in RR^3$ ，设其旋转角速度向量为 $w=vec(w)dot(theta)$ ，其端点线速度为： 
+考察线速度，参考 #link("https://notes.jay-waves.cn/robo/quaternion/")[四元数推导过程]，对于固定坐标系中的向量 $p in RR^3$ ，设其旋转角速度向量为 $w=vec(w)dot(theta)$ ，其端点线速度为： 
 
 $ dot(p)=w times p=[w]p $ 
 

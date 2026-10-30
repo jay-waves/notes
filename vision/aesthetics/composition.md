@@ -1,7 +1,7 @@
 
 ## Box Model
 
-![](../../assets/vision/box-model.webp)
+![](../../attach/img/vision/box-model.webp)
 
 * box: 
     * context box: (标准盒模型)，border 和 padding 会增加元素总尺寸

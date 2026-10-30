@@ -55,7 +55,7 @@ $$HMAC=Hash[\quad(K^{+}\oplus opad)\ \Vert\ Hash[\quad(K^{+}\oplus ipad)\ \Vert\
 *加速方式*: 预先计算 $f(IV, (K^{+}\oplus ipad))$ 和 $f(IV, (K^{+}\oplus opad))$ 两个值. 其中 $f(cv, block)$ 是散列函数的迭代压缩函数, 此二值视为新 $IV'$, 替代原哈希函数 $IV$. 该法缺点是增加了 HMAC 算法和哈希算法的耦合度. 该法也揭示出迭代型压缩函数的一些弱点, 见 [length-extension-attack](../merkel-damgard/length-extension-attack.md).
 
 > opad 和 ipad 选择的原因见 [HMAC ipad and opad choice - Stack Exchange](https://crypto.stackexchange.com/questions/20695/hmac-ipad-and-opad-choice), 和 [What do the magic numbers 0x5c and 0x36 in HMAC do - Stack Exchange](https://crypto.stackexchange.com/questions/3005/what-do-the-magic-numbers-0x5c-and-0x36-in-the-opad-ipad-calc-in-hmac-do?rq=1).   
-> 简单来讲, 需要从 $K^{+}$ 派生两个密钥, 且内层密钥 $K^{+}\oplus ipad$ 和外层密钥 $K^{+}\oplus opad$ 需相对独立. 雪崩效应要求对 n 长字符串, 雪崩后 [汉明距离](../../../../math/infoth/汉明编码.md) 为 $\frac{n}{2}$, opad 和 ipad 汉明距离为 4 保证了内外层 hash 使用的密钥有所区别. 如果汉明距离为 8, 那么 $opad\approx \neg ipad$, 两者联系相反更强.
+> 简单来讲, 需要从 $K^{+}$ 派生两个密钥, 且内层密钥 $K^{+}\oplus ipad$ 和外层密钥 $K^{+}\oplus opad$ 需相对独立. 雪崩效应要求对 n 长字符串, 雪崩后 [汉明距离](../../../../math/infoth/hamming-code.md) 为 $\frac{n}{2}$, opad 和 ipad 汉明距离为 4 保证了内外层 hash 使用的密钥有所区别. 如果汉明距离为 8, 那么 $opad\approx \neg ipad$, 两者联系相反更强.
 
 ### HMAC 安全性
 
