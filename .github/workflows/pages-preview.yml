@@ -42,15 +42,8 @@ jobs:
           template_sha=$(git -C .github/.ypst-template rev-parse HEAD)
           echo "TEMPLATE_COMMIT=$template_sha" >> "$GITHUB_ENV"
           echo "Typst template commit: $template_sha"
-      - name: Install Typst
-        run: |
-          curl -fsSL -o "$RUNNER_TEMP/typst.tar.xz" https://github.com/typst/typst/releases/download/v0.15.1/typst-x86_64-unknown-linux-musl.tar.xz
-          tar -xJf "$RUNNER_TEMP/typst.tar.xz" -C "$RUNNER_TEMP"
-          echo "$RUNNER_TEMP/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
-      - name: Install template and Python dependencies
-        run: |
-          python3 -m pip install -r .github/.ypst-template/requirements.txt
-          python3 .github/.ypst-template/install.py
+      - name: Set up Typst template
+        uses: ./.github/.ypst-template
       - name: Download lib.comrak
         env:
           GH_TOKEN: ${{ github.token }}
