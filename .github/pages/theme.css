@@ -1,6 +1,6 @@
 :root { color-scheme: light dark; --ink: light-dark(#292929,#dedede); --paper: light-dark(#fafafa,#202020); --muted: light-dark(#6b6b6b,#a8a8a8); --line: light-dark(#dedede,#454545); --link: light-dark(#444444,#bdbdbd); }
 * { box-sizing: border-box } body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.75 Georgia,"Source Han Serif CN","Noto Serif CJK SC",serif; }
-main { max-width: 820px; margin: auto; padding: 4rem 1.5rem 6rem } h1 { font-size: 2.2rem; margin: 0 } header { border-bottom: 1px solid var(--line); padding-bottom: 1.5rem } .muted, header p { color: var(--muted) }
+main { width: min(95%, 920px); margin: auto; padding: 4rem 0 6rem } h1 { font-size: 2.2rem; margin: 0 } header { border-bottom: 1px solid var(--line); padding-bottom: 1.5rem } .muted, header p { color: var(--muted) }
 a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px }
 .breadcrumbs { margin-top: .6rem; color: var(--muted); overflow-wrap: anywhere } .directory-tree { padding-top: 1.5rem } .directory-tree ul { list-style: none; margin: 0; padding: 0 } .directory-tree li { padding: .35rem 0; overflow-wrap: anywhere } .directory-tree .directory a { font-weight: bold } a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .2em } a:hover { text-decoration-thickness: 2px }
 
