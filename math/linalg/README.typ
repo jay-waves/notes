@@ -1,10 +1,7 @@
-#import "@local/ypst-template:0.1.0": template, meta, sidenote
+#import "@local/ypst-template:0.1.0": template, sidenote
 
+#set document(title: [矩阵关系])
 #show: template
-
-#meta(
-  subtitle: [矩阵关系],
-)
 
 = 目录
 

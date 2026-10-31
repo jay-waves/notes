@@ -1,5 +1,5 @@
 
-#import "@local/ypst-template:0.1.0": template, meta, sidenote
+#import "@local/ypst-template:0.1.0": template, sidenote
 #show: template
 
 = 正交矩阵

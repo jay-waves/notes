@@ -79,10 +79,10 @@ see [Latex 空格与换行](Latex%20空格与换行.md) for details.
     *    &emsp;&emsp;&emsp;into$\left\{\frac{(x+y)}{[\alpha+\beta]}\right\}$,you can make it on the left. \left&\right can change the format only on the left of sth.
 * express ! `\not` $\not=$ 
 * sqrt $\sqrt[3]{x}$
-* overbrackets and underbrackets:
+* overbraces and underbraces:
 
-$$\newcommand{\bm}{}\begin{equation}
-    \min_{\bm{w} \in \mathbb{R}^d} \mathcal{L}(w) \triangleq \min_{\bm{w} \in \mathbb{R}^d} \underbracket[.25pt][12pt]{\sum_{k=1}^K \frac{n_k}{n} \overbracket[.25pt][12pt]{\frac{1}{n_k} \sum_{i \in \mathcal{P}_k}  \underbracket[.25pt][10pt]{\ell(\bm{x}_i, y_i, \bm{w})}_{\text{sample}\,i\,\text{loss}}}^{\text{client average loss}}}_{\text{population average loss}}
+$$\begin{equation}
+    \min_{\bm{w} \in \mathbb{R}^d} \mathcal{L}(w) \triangleq \min_{\bm{w} \in \mathbb{R}^d} \underbrace{\sum_{k=1}^K \frac{n_k}{n} \overbrace{\frac{1}{n_k} \sum_{i \in \mathcal{P}_k}  \underbrace{\ell(\bm{x}_i, y_i, \bm{w})}_{\text{sample}\,i\,\text{loss}}}^{\text{client average loss}}}_{\text{population average loss}}
 \end{equation}$$
 
 ### 8. operator

@@ -1,9 +1,8 @@
-#import "@local/ypst-template:0.1.0": template, meta, sidenote, theorem, proof
+#import "@local/ypst-template:0.1.0": template, sidenote, theorem, proof
+#set document(title: [矩阵分解])
 #show: template
 
 #let bmat(..args) = math.mat(delim: "[", ..args)
-
-#meta(subtitle: [矩阵分解])
 
 #sidenote[
   #image("../../attach/img/math/matrix-world.webp")

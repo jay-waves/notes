@@ -1,14 +1,12 @@
 
-#import "@local/ypst-template:0.1.0": template, meta, sidenote, theorem
+#import "@local/ypst-template:0.1.0": template, sidenote, theorem
 
+#set document(title: [机器人动力学], keywords: ("robotics", "dynamics"))
 #show: template
 
-#meta(
-  subtitle: [机器人动力学],
-  source: [Modern Robotics, Chapter 8],
-  revised: [2026-08-02],
-  tags: ("robotics", "dynamics"),
-)
+来源：Modern Robotics, Chapter 8
+
+修订日期：2026-08-02
 
 "./imu.typ"
 

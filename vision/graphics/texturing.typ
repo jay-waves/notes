@@ -1,4 +1,4 @@
-#import "@local/ypst-template:0.1.0": template, sidenote, diagram, node, edge
+#import "@local/ypst-template:0.1.0": template, sidenote
 #show: template
 
 #let bmat(..args) = math.mat(delim: "[", ..args)
@@ -11,18 +11,14 @@
 图像纹理中的像素通常称为 Texels（纹素）。将纹理空间中的数据，通过纹理坐标映射到几何表面，并
 在几何着色过程中进行采样的技术，称为_纹理贴图 (Texture Mapping)_ 。
 
-#diagram(
-  node-fill: none,
-  node-stroke: none,
-
-  node((0, 0), $P$),
-  edge($f$, "->"),
-  node((2, 0), $(u, v)$),
-  edge($T$, "->"),
-  node((4, 0), $t$),
-  edge([Shading], "->"),
-  node((6, 0), $C$),
-)
+#mermaid[
+```mermaid
+flowchart LR
+    P["P"] -->|f| UV["(u, v)"]
+    UV -->|T| t["t"]
+    t -->|Shading| C["C"]
+```
+]
 
 - $P (x,y,z)$ 是空间坐标
 - $U V  (u,v)$ 是纹理坐标，对应纹理图片上的某个位置

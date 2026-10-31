@@ -34,40 +34,10 @@ jobs:
       - name: Warn about missing source paths
         run: python3 .github/scripts/warn_missing_paths.py
         continue-on-error: true
-      - name: Checkout Typst template
-        uses: actions/checkout@v6
-        with:
-          repository: jay-waves/ypst-template
-          path: .github/.ypst-template
-          persist-credentials: false
-      - name: Record Typst template commit
-        run: |
-          template_sha=$(git -C .github/.ypst-template rev-parse HEAD)
-          echo "TEMPLATE_COMMIT=$template_sha" >> "$GITHUB_ENV"
-          echo "Typst template commit: $template_sha"
-      - name: Set up Typst template
-        uses: ./.github/.ypst-template
-      - name: Download lib.comrak
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api repos/jay-waves/lib.ts/releases/latest > "$RUNNER_TEMP/comrak-release.json"
-          tag=$(jq -er '.tag_name' "$RUNNER_TEMP/comrak-release.json")
-          asset=$(jq -er '[.assets[] | select(.name | test("^lib\\.comrak.*linux-x86_64\\.tar\\.xz$"))] | if length == 1 then .[0].name else error("expected exactly one Linux lib.comrak asset") end' "$RUNNER_TEMP/comrak-release.json")
-          digest=$(jq -er --arg name "$asset" '.assets[] | select(.name == $name) | .digest | select(startswith("sha256:")) | ltrimstr("sha256:")' "$RUNNER_TEMP/comrak-release.json")
-          [[ "$digest" =~ ^[0-9a-f]{64}$ ]]
-          gh release download "$tag" --repo jay-waves/lib.ts --pattern "$asset" --dir "$RUNNER_TEMP"
-          archive="$RUNNER_TEMP/$asset"
-          printf '%s  %s\n' "$digest" "$archive" | sha256sum --check
-          echo "lib.comrak release: $tag, asset SHA-256: $digest"
-          mkdir "$RUNNER_TEMP/comrak"
-          tar -xJf "$archive" -C "$RUNNER_TEMP/comrak"
-          executable=$(find "$RUNNER_TEMP/comrak" -type f -name lib.comrak -print)
-          test -n "$executable"
-          test "$(printf '%s\n' "$executable" | wc -l)" -eq 1
-          chmod +x "$executable"
-          echo "COMRAK_PATH=$executable" >> "$GITHUB_ENV"
-          "$executable" --help
+      - name: Set up ypst
+        uses: jay-waves/ypst@main
+      - name: Set up comrakk
+        uses: jay-waves/comrakk@main
       - name: Install related notes dependency
         run: python3 -m pip install -r .github/scripts/requirements-related.txt
       - name: Test build scripts
@@ -86,9 +56,6 @@ jobs:
           full=()
           if [[ "$FULL_BUILD" == "true" ]]; then full+=(--full); fi
           python3 .github/scripts/build_site.py \
-            --comrak "$COMRAK_PATH" \
-            --typst-wrapper .github/.ypst-template/typst.py \
-            --typst-font-path .github/.ypst-template/fonts \
             --report "$RUNNER_TEMP/site-build-report.json" \
             --cache-dir .site-cache "${full[@]}"
       - name: Summarize skipped documents

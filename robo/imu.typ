@@ -1,5 +1,5 @@
 #import "@local/ypst-template:0.1.0" as theme
-#import theme: theorem, definition, diagram, node, edge
+#import theme: theorem, definition
 
 #set document(
   title: [IMU Driven Systems],
@@ -530,60 +530,89 @@ $
 
 至此，ESKF 的总体流程如下：
 
-#align(center, diagram(
-  node((0, 0), align(center)[
-    Previous State \
-    $x^+, P^+$
-  ]),
-  node((0, 1), [
-    IMU (KF) Predict \
-    $x^-, delta x^-, P^-$
-  ]),
-  node((0, 2), align(center)[
-    Residual and Jacobian \
-    $r = z - h(x^-), quad H$
-  ]),
-  node((0, 3), align(center)[
-    Kalman Update \
-    $delta x^+ = K r$ \
-    $P^+ = (I - K H) P^-$
-  ]),
-  node((0, 4), align(center)[
-    Error Injection \
-    $x^+ = x^- plus.o delta x^+$
-  ]),
-  node((0, 5), align(center)[
-    Reset Error Estimate \
-    $P <- J_"reset" P^+ J_"reset"^top$ \
-    $delta x <- 0$
-  ]),
 
-  node((-1, 1), [
-    IMU Measurements\
-    $a_m, w_m$
-  ]),
-  node((-1, 2), align(center)[
-    Sensor Observation \
-    $z$
-  ]),
-  node((1, 5), align(center)[
-    Output \
-    $x^+$
-  ]),
+#mermaid[
+```mermaid
+flowchart TB
+    S["Previous State<br/>$$x^+,\ P^+$$"]
+    P["IMU / KF Prediction<br/>$$x^-,\ \delta x^-,\ P^-$$"]
+    R["Residual & Jacobian<br/>$$r=z-h(x^-),\quad H$$"]
+    K["Kalman Update<br/>$$\delta x^+=Kr$$<br/>$$P^+=(I-KH)P^-$$"]
+    I["Error Injection<br/>$$x^+=x^-\oplus\delta x^+$$"]
+    Z["Error-State Reset<br/>$$P\leftarrow J_{\mathrm{reset}}P^+J_{\mathrm{reset}}^\top$$<br/>$$\delta x\leftarrow 0$$"]
 
-  edge((0, 0), (0, 1), "-|>"),
-  edge((0, 1), (0, 2), "-|>"),
-  edge((0, 2), (0, 3), "-|>"),
-  edge((0, 3), (0, 4), "-|>"),
-  edge((0, 4), (0, 5), "-|>"),
+    U["IMU Measurements<br/>$$a_m,\ \omega_m$$"]
+    O["Sensor Observation<br/>$$z$$"]
+    OUT(["Output<br/>$$x^+$$"])
 
-  edge((-1, 1), (0, 1), "-|>"),
-  edge((-1, 2), (0, 2), "-|>"),
-  edge((0, 5), (1, 5), "-|>"),
+    S --> P --> R --> K --> I --> Z
+    U --> P
+    O --> R
+    Z --> OUT
+    Z -.->|Next cycle| S
 
-  // Return to the next prediction cycle.
-  edge((0, 5), "l,l,u,u,u,u,u,r,r", "-|>"),
-))
+    classDef input fill:#eef4fb,stroke:#8da9c4
+    classDef output fill:#eaf6ee,stroke:#77aa8a
+
+    class U,O input
+    class OUT output
+```
+]
+
+// #align(center, diagram(
+//   node((0, 0), align(center)[
+//     Previous State \
+//     $x^+, P^+$
+//   ]),
+//   node((0, 1), [
+//     IMU (KF) Predict \
+//     $x^-, delta x^-, P^-$
+//   ]),
+//   node((0, 2), align(center)[
+//     Residual and Jacobian \
+//     $r = z - h(x^-), quad H$
+//   ]),
+//   node((0, 3), align(center)[
+//     Kalman Update \
+//     $delta x^+ = K r$ \
+//     $P^+ = (I - K H) P^-$
+//   ]),
+//   node((0, 4), align(center)[
+//     Error Injection \
+//     $x^+ = x^- plus.o delta x^+$
+//   ]),
+//   node((0, 5), align(center)[
+//     Reset Error Estimate \
+//     $P <- J_"reset" P^+ J_"reset"^top$ \
+//     $delta x <- 0$
+//   ]),
+//
+//   node((-1, 1), [
+//     IMU Measurements\
+//     $a_m, w_m$
+//   ]),
+//   node((-1, 2), align(center)[
+//     Sensor Observation \
+//     $z$
+//   ]),
+//   node((1, 5), align(center)[
+//     Output \
+//     $x^+$
+//   ]),
+//
+//   edge((0, 0), (0, 1), "-|>"),
+//   edge((0, 1), (0, 2), "-|>"),
+//   edge((0, 2), (0, 3), "-|>"),
+//   edge((0, 3), (0, 4), "-|>"),
+//   edge((0, 4), (0, 5), "-|>"),
+//
+//   edge((-1, 1), (0, 1), "-|>"),
+//   edge((-1, 2), (0, 2), "-|>"),
+//   edge((0, 5), (1, 5), "-|>"),
+//
+//   // Return to the next prediction cycle.
+//   edge((0, 5), "l,l,u,u,u,u,u,r,r", "-|>"),
+// ))
 
 // ---------------------------------------
 

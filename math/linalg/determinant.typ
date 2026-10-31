@@ -1,8 +1,7 @@
-#import "@local/ypst-template:0.1.0": template, meta, sidenote, theorem, corollary, proof
+#import "@local/ypst-template:0.1.0": template, sidenote, theorem, corollary, proof
 
+#set document(title: [行列式])
 #show: template
-
-#meta(subtitle: [行列式])
 
 == 行列式等值变换
 

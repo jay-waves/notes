@@ -9,8 +9,8 @@ revised: 24-09-19
 一台图灵机是一个七元有序组 $(Q,  \Sigma,  \Gamma,  \delta,  q_0,  q_{accept},  q_{reject})$,  其中 $Q,  \Sigma,  \Gamma$ 都是**有限集合**,  且满足:  
 
 1. $Q$ 是非空有穷状态集合
-2. $\Sigma$ 是非空有穷输入字母表, 其中不包含特殊的空白符 $\textvisiblespace$ 
-3. $\Gamma$ 是非空有穷带字母表且 $\Sigma \subseteq \Gamma; \textvisiblespace \in \Gamma$. 其中 $\textvisiblespace$ 为空白符, 也是唯一允许出现无限次的字符; 
+2. $\Sigma$ 是非空有穷输入字母表, 其中不包含特殊的空白符 $\sqcup$ 
+3. $\Gamma$ 是非空有穷带字母表且 $\Sigma \subseteq \Gamma; \sqcup \in \Gamma$. 其中 $\sqcup$ 为空白符, 也是唯一允许出现无限次的字符; 
 4. $\delta :  Q \times \Gamma \rightarrow Q \times \Gamma \times \{L,  R,  \_ \}$ 是转移函数,  其中 $L,  R$ 表示读写头是向左移还是向右移,  $\_$ 表示不移动
 5. $q_0 \in Q$ 是起始状态
 6. $q_{accept} \in Q$ 是接受状态
@@ -18,7 +18,7 @@ revised: 24-09-19
 
 图灵机 $M = (Q,  \Sigma,  \Gamma,  \delta,  q_0,  q_{accept},  q_{reject})$ 将以如下方式运行: 
 
-1. 开始的时候将输入串 $\omega = \omega_0 \omega_1 ... \omega_{n-1} \in \Sigma^*$ 从左到右依次填在纸带的第 0,1,...,n-1 号格子上, 其他格子保持空白 (即填以空白符 $\textvisiblespace$). $M$ 的读写头指向第 0 号格子, $M$ 处于状态 $q_0$. 
+1. 开始的时候将输入串 $\omega = \omega_0 \omega_1 ... \omega_{n-1} \in \Sigma^*$ 从左到右依次填在纸带的第 0,1,...,n-1 号格子上, 其他格子保持空白 (即填以空白符 $\sqcup$). $M$ 的读写头指向第 0 号格子, $M$ 处于状态 $q_0$. 
 2. 机器开始运行, 按照转移函数 $\delta$ 所描述的规则进行计算. 例如, 若当前机器的状态为 $q$, 读写头所在格子的符号为 $x$,  设 $\delta(q,  x) = (q',  x',  L)$, 则机器进入新状态 $q'$, 将读写头所指的格子中的符号改为 $x'$, 然后将读写头向左移动一个格子. 
 3. 若在某一时刻, 读写头所指的是第0号格子, 但根据转移函数数它下一步将继续向左移, 这时它将停止在原地不动. 换句话说, 读写头终将停在纸带的左边界. 
 4. 若在某个时刻 $M$ 根据转移函数数进入了状态 $q_{accept}$, 则它到此刻停止并接受输入的字符串; 
@@ -58,7 +58,7 @@ revised: 24-09-19
 
     $$ F_1(i) = \begin{cases}
     \omega_i & 0 \leq i \leq n-1 \\
-    \textvisiblespace & otherwise
+    \sqcup & otherwise
     \end{cases}$$
 
 2. $C_i \rightarrow_M C_{i+1}$, 其中 $i = 1,  2,  ...,  k - 1$; 
