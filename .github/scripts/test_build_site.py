@@ -152,7 +152,7 @@ class BuildTest(unittest.TestCase):
             source.parent.mkdir()
             source.write_text('int x = 1 < 2;\n', encoding="utf-8")
             output = root / "_site"
-            args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None, report=None)
+            args = argparse.Namespace(output=str(output), comrak="comrak", ypst="ypst", typst_font_path=None, report=None)
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=[Path("nested/a.c")]):
                 build_site.build(args)
             self.assertEqual((output / "nested/a.c").read_text(encoding="utf-8"), source.read_text(encoding="utf-8"))
@@ -171,12 +171,12 @@ class BuildTest(unittest.TestCase):
             (root / "b.typ").write_text("hello", encoding="utf-8")
             (root / "raw.txt").write_text("raw", encoding="utf-8")
             output = root / "_site"
-            args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None, report=None)
+            args = argparse.Namespace(output=str(output), comrak="comrak", ypst="ypst", typst_font_path=None, report=None)
             files = [Path("a.md"), Path("b.typ"), Path("raw.txt")]
 
             def compile_stub(command, **kwargs):
                 stage = Path(command[command.index("--site-root") + 1])
-                source = Path(command[2] if command[0] == "comrak" else command[3])
+                source = Path(command[2])
                 page = stage / source.stem / "index.html"
                 page.parent.mkdir(parents=True, exist_ok=True)
                 page.write_text("compiled", encoding="utf-8")
@@ -195,7 +195,7 @@ class BuildTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             output = root / "_site"
-            args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None, report=None)
+            args = argparse.Namespace(output=str(output), comrak="comrak", ypst="ypst", typst_font_path=None, report=None)
             files = [Path("broken.typ"), Path("raw.txt")]
             (root / "broken.typ").write_text("broken", encoding="utf-8")
             (root / "raw.txt").write_text("raw", encoding="utf-8")
@@ -220,7 +220,7 @@ class BuildTest(unittest.TestCase):
             (cache / "site" / "unchanged" / "index.html").write_text('<link href="../_shared/typst/used/theme.css">', encoding="utf-8")
             for name in ("unchanged.md", "changed.md", "raw.txt"):
                 (root / name).write_text(name, encoding="utf-8")
-            args = argparse.Namespace(output=str(output), comrak="comrak", typst_wrapper="typst.py", typst_font_path=None, report=None, cache_dir=str(cache), full=False)
+            args = argparse.Namespace(output=str(output), comrak="comrak", ypst="ypst", typst_font_path=None, report=None, cache_dir=str(cache), full=False)
             files = [Path("unchanged.md"), Path("changed.md"), Path("raw.txt")]
             compiled = []
 

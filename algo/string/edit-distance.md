@@ -12,10 +12,12 @@ revised: 24-08-07
 
 在 `a, b` 字符串间的 Levenshtein Distance 表示为:
 
-$$lev(a,b)=\cases{\vert a\vert & if \vert b\vert = 0,\\
-\vert b\vert & if \vert a\vert =0,\\
-\text{lev( tail(a), tail(b) )} & if\  head(a)=head(b),\\
-1+min\cases{\text{lev( tail(a), b )}\\\text{lev( a, tail(b) )}\\\text{lev( tail(a), tail(b) )}&}}$$
+$$lev(a,b)=\begin{cases}
+\vert a\vert & \text{if } \vert b\vert = 0,\\
+\vert b\vert & \text{if } \vert a\vert = 0,\\
+lev(tail(a), tail(b)) & \text{if } head(a)=head(b),\\
+1+\min\begin{cases}lev(tail(a), b),\\lev(a, tail(b)),\\lev(tail(a), tail(b))\end{cases} & \text{otherwise}.
+\end{cases}$$
 
 其中, $\vert a\vert$ 为字符串长度, $tail(a)=tail(a_{1}a_{2}\cdots a_{n})=a_{2}a_{3}\cdots a_{n}$ , $head(a)=a_1$. 
 

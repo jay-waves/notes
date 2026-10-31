@@ -1,8 +1,7 @@
-#import "@local/ypst-template:0.1.0": template, meta, sidenote, theorem, proof
+#import "@local/ypst-template:0.1.0": template, sidenote, theorem, proof
 
+#set document(title: [矩阵运算])
 #show: template
-
-#meta(subtitle: [矩阵运算])
 
 #let bmat(..arg) = $mat(delim: "[", ..arg)$
 #let vec(x) = $upright(bold(#x))$

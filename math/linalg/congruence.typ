@@ -1,4 +1,4 @@
-#import "@local/ypst-template:0.1.0": template, meta, sidenote, theorem, proof
+#import "@local/ypst-template:0.1.0": template, sidenote, theorem, proof
 #show: template
   
 #let bmat(..args) = math.mat(delim: "[", ..args)

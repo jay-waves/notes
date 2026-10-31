@@ -9,10 +9,10 @@ math-engine: mathjax
 
 $$f(t)\sim \frac{a_{0}}{2}+\sum\limits^{\infty}_{n=1}\left[ a_{n}\cos\left( \frac{n\pi{t}}{l} \right)+b_{n}\sin\left( \frac{n\pi{t}}{l} \right) \right]$$
 
-其中, $$\large\begin{array}\\
+其中, $$\large\begin{aligned}
 a_{n}=\frac{1}{l}\int^{l}_{-l}\cos\left( \frac{n\pi t}{l}\right)\cdot f(t)\ dt \\
 b_{n}=\frac{1}{l}\int^{l}_{-l}\sin\left( \frac{n\pi t}{l}\right)\cdot f(t)\ dt
-\end{array}$$
+\end{aligned}$$
 
 
 ### 推导过程

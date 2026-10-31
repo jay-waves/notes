@@ -133,6 +133,15 @@ $
     &approx n E_x[log p(x | theta)]
 $
 
+复杂公式随行注释：
+
+$
+  (a + b)^2
+    &= (a+b)(a+b) && "展开平方" \
+    &= a^2 + a b + b a + b^2 && "分配律" \
+    & = a^2 + 2a b + b^2 && "交换律"
+$
+
 明确使用编号，便于自动编码引用:
 
 #set math.equation(numbering: "(1)")

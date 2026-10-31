@@ -1,15 +1,15 @@
 #import "@local/ypst-template:0.1.0": template, definition, theorem, proof
 
+#set document(title: [实数域椭圆曲线运算])
 #show: template
 
 #let GF(x) = $upright("GF")(#x)$
 #let EC(a, b) = $upright("EC")(#a, #b)$
 #let O = $cal(O)$
 
-#meta(
-  revised: [24-11-29],
-  code: [src/cryptography/ec_plot.py],
-)
+修订日期：24-11-29
+
+代码：`src/cryptography/ec_plot.py`
 
 = 实数域椭圆曲线运算
 

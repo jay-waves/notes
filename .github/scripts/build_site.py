@@ -86,23 +86,19 @@ pre {{ margin: 0; font-size: 14px; line-height: 1.6; tab-size: 4; }}
 
 def cache_fingerprint(args):
     """Fingerprint the compilers and template files that affect output."""
-    digest = hashlib.sha256(b"notes-site-cache-v1\0")
-    digest.update(os.environ.get("TEMPLATE_COMMIT", "").encode("ascii"))
-    paths = [Path(args.comrak).resolve(), Path(args.typst_wrapper).resolve(), Path(__file__).resolve()]
-    typst = shutil.which("typst")
-    if not typst:
-        raise ValueError("Typst executable not found")
-    paths.append(Path(typst).resolve())
-    template = Path(args.typst_wrapper).resolve().parent
-    for name in ("lib.typ", "typst.toml", "html", "fonts", "tools"):
-        path = template / name
-        paths.extend(sorted(path.rglob("*")) if path.is_dir() else [path])
+    digest = hashlib.sha256(b"notes-site-cache-v2\0")
+    paths = [Path(__file__).resolve()]
+    for executable in (args.comrak, args.ypst, "typst"):
+        resolved = shutil.which(executable)
+        if not resolved:
+            raise ValueError(f"Executable not found: {executable}")
+        paths.append(Path(resolved).resolve())
     if args.typst_font_path:
         path = Path(args.typst_font_path).resolve()
         paths.extend(sorted(path.rglob("*")) if path.is_dir() else [path])
     for path in paths:
         if path.is_file():
-            digest.update(str(path.relative_to(template) if path.is_relative_to(template) else path.name).encode("utf-8"))
+            digest.update(str(path.name).encode("utf-8"))
             with path.open("rb") as file:
                 while chunk := file.read(1024 * 1024):
                     digest.update(chunk)
@@ -236,9 +232,9 @@ def build(args):
                 if kind == "Markdown":
                     command = [args.comrak, "compile", str(ROOT / source), "--root", str(ROOT), "--site-root", str(stage)]
                 else:
-                    command = [sys.executable, str(Path(args.typst_wrapper).resolve()), "compile", str(ROOT / source), "--site-root", str(stage), "--", "--root", str(ROOT)]
+                    command = [args.ypst, "compile", str(ROOT / source), "--root", str(ROOT), "--site-root", str(stage)]
                     if args.typst_font_path:
-                        command.extend(["--font-path", str(Path(args.typst_font_path).resolve())])
+                        command.extend(["--", "--font-path", str(Path(args.typst_font_path).resolve())])
                 print(f"Compiling {source}", flush=True)
                 started = time.monotonic()
                 result = subprocess.run(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace")
@@ -315,8 +311,8 @@ def build(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", default=str(ROOT / "_site"))
-    parser.add_argument("--comrak", default="lib.comrak", help="path to the site-mode lib.comrak executable")
-    parser.add_argument("--typst-wrapper", default=os.environ.get("TYPST_WRAPPER", "E:/typst-template/typst.py"), help="path to typst.py")
+    parser.add_argument("--comrak", default="comrakk", help="path to the comrakk executable")
+    parser.add_argument("--ypst", default="ypst", help="path to the ypst executable")
     parser.add_argument("--typst-font-path", help="path to additional Typst fonts")
     parser.add_argument("--report", help="path to JSON build report")
     parser.add_argument("--cache-dir", help="directory for incremental build state")
