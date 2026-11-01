@@ -361,4 +361,4 @@ see #link("https://notes.jay-waves.cn/robo/inverse-kinematics.typ/")[inverse-kin
 
 详见 @lynch2019 ，此处略
 
-#bibliography("biblio.bib")
+#bibliography("BIBLIO.bib")
