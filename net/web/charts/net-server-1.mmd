@@ -1,0 +1,12 @@
+flowchart TD
+    A[Main Process] --> B[Listen Socket]
+    B --> C{New Connection?}
+    C -->|Yes| D[fork]
+    D --> E[Child Process 1]
+    D --> F[Child Process 2]
+    E --> H[Handle Client 1]
+    F --> I[Handle Client 2]
+    C -->|No| C
+    
+    style E fill:#e1f5fe
+    style F fill:#e1f5fe

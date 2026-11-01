@@ -44,47 +44,9 @@ https://en.wikipedia.org/wiki/Algebraic_structure
 
 域一定是整环, 整环不一定是域 (即, 无零因子, 不意味着一定有逆元)
 
-```mermaid
-flowchart TB
-    Set["集合<br/>(Set)"]
-    Magma["原群<br/>(Magma)"]
-    SemiGroup["半群<br/>(SemiGroup)"]
-    Monoid["幺半群<br/>(Monoid)"]
-    Group["群<br/>(Group)"]
+<mermaid src="charts/readme-1.mmd"></mermaid>
 
-    AbelianSemiGroup["阿贝尔半群<br/>(Abelian SemiGroup)"]
-    AbelianMonoid["阿贝尔幺半群<br/>(Abelian Monoid)"]
-    AbelianGroup["阿贝尔群<br/>(Abelian Group)"]
-
-    Set -->|"运算二元运算 ⊕<br/>其应有封闭性 closure<br/>∀x,y∈S, x⊕y∈S"| Magma
-    Magma -->|"结合律 associative<br/>(x⊕y)⊕z = x⊕(y⊕z)"| SemiGroup
-    SemiGroup -->|"含单位元 identity<br/>∃e, ∀x∈S, x⊕e = e⊕x = x"| Monoid
-    Monoid -->|"逆元 inverse<br/>∀x∈S, ∃y∈S, y⊕x = x⊕y = e"| Group
-
-    SemiGroup -->|"交换律 commutative<br/>∀x,y∈S, x⊕y = y⊕x"| AbelianSemiGroup
-    Monoid -->|"交换律 commutative<br/>∀x,y∈S, x⊕y = y⊕x"| AbelianMonoid
-    Group -->|"交换律 commutative<br/>∀x,y∈S, x⊕y = y⊕x"| AbelianGroup
-```
-
-```mermaid
-flowchart TB
-    SG["阿贝尔群<br/>(SemiGroup) (R, +)"]
-    M["幺半群<br/>(Monoid) (R, ·)<br/><br/>常见环的乘法大多也满足交换律<br/>矩阵环、四元数环不满足"]
-    D["乘法对加法运算有分配律：<br/>∀x,y,z∈S<br/>x·(y+z)=x·y+x·z<br/>(y+z)·x=y·x+z·x"]
-
-    R["环<br/>(Ring) (R, +, ·)<br/>ℤ, ℤ/nℤ"]
-    F["域<br/>(Field)<br/>ℝ, ℝ(x), ℂ, ℚ"]
-    PF["素域<br/>(Prime Field)<br/>ℚ, 𝔽ₚ"]
-    GF["有限域<br/>(Galois Field)<br/>𝔽ₚ, 𝔽ₚⁿ"]
-
-    SG --> R
-    M --> R
-    D --> R
-
-    R -->|"非零元素乘法逆元<br/>乘法逆元意味着没有零因子<br/>∀x∈R×, ∃y∈R×, x·y=y·x=e"| F
-    F -->|"最小子域<br/>注意 ℚ 是特征为 0 的唯一素域"| PF
-    PF -->|"素域有限扩展"| GF
-```
+<mermaid src="charts/readme-2.mmd"></mermaid>
 
 #### 抽象空间
 

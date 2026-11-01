@@ -61,12 +61,7 @@ int main(void)
 
 进程唤醒指将进程**从阻塞态变为就绪态**, 切换则指**就绪态和运行态的转换.** [操作系统并发](irq.md)需要**进程上下文切换 (Context Switch):**
 
-```mermaid 
-flowchart LR
-    main((main)) --> fork((fork))
-    fork -->|Child| childExit((exit))
-    fork -->|Parent| parentExit((exit))
-```
+<mermaid src="charts/thread-1.mmd"></mermaid>
 
 ## 线程
 

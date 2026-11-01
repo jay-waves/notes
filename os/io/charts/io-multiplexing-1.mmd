@@ -1,0 +1,13 @@
+flowchart TD
+    A[Event Loop] --> B[Event Queue]
+    B --> C[Event Handler]
+    C --> D[Callback]
+    D --> A
+    
+    E[I/O Events] --> B
+    F[Timer Events] --> B
+    G[Network Events] --> B
+    
+    style A fill:#ffecb3
+    style B fill:#e3f2fd
+    style C fill:#fff3e0

@@ -20,8 +20,8 @@ class BuildTest(unittest.TestCase):
             root = Path(tmp)
             stage = root / "site"
             entries = [
-                {"source": "os/a.md", "url": "os/a/", "kind": "Markdown"},
-                {"source": "other/b.typ", "url": "other/b/", "kind": "Typst"},
+                {"source": "os/a.md", "url": "os/a.md/", "kind": "Markdown"},
+                {"source": "other/b.typ", "url": "other/b.typ/", "kind": "Typst"},
             ]
             for entry in entries:
                 source = root / entry["source"]
@@ -33,15 +33,15 @@ class BuildTest(unittest.TestCase):
             with patch.object(build_site, "ROOT", root):
                 (stage / "_shared/site").mkdir(parents=True)
                 build_site.add_related(stage, entries)
-                before = (stage / "os/a/index.html").read_text(encoding="utf-8")
+                before = (stage / "os/a.md/index.html").read_text(encoding="utf-8")
                 build_site.add_related(stage, entries)
-                page = (stage / "os/a/index.html").read_text(encoding="utf-8")
+                page = (stage / "os/a.md/index.html").read_text(encoding="utf-8")
                 self.assertEqual(page, before)
                 self.assertIn('src="../../_shared/site/related-notes.js"', page)
                 data = json.loads((stage / "_shared/site/related-notes.json").read_text(encoding="utf-8"))
-                self.assertEqual(data["os/a/"], [{"url": "other/b/", "source": "other/b.typ"}])
+                self.assertEqual(data["os/a.md/"], [{"url": "other/b.typ/", "source": "other/b.typ"}])
                 build_site.add_related(stage, entries[:1])
-                self.assertEqual(before, (stage / "os/a/index.html").read_text(encoding="utf-8"))
+                self.assertEqual(before, (stage / "os/a.md/index.html").read_text(encoding="utf-8"))
 
     def test_cleanup_reports_cloudflare_http_error_details(self):
         error = HTTPError("https://example.org", 400, "Bad Request", {},
@@ -136,16 +136,15 @@ class BuildTest(unittest.TestCase):
             self.assertTrue(any("missing shared resource" in error for error in errors))
 
     def test_collisions(self):
+        entries = build_site.plan([Path("a.md"), Path("a.typ"), Path("a.c")])
+        self.assertEqual([dest.as_posix() for _, dest, _ in entries],
+                         ["a.md/index.html", "a.typ/index.html", "a.c/index.html"])
         with self.assertRaisesRegex(ValueError, "collision"):
-            build_site.plan([Path("a.md"), Path("a.typ")])
+            build_site.plan([Path("a.md"), Path("a.md/index.html")])
         with self.assertRaisesRegex(ValueError, "collision"):
-            build_site.plan([Path("a.typ"), Path("a")])
-        with self.assertRaisesRegex(ValueError, "collision"):
-            build_site.plan([Path("a.typ"), Path("a/note.md")])
-        with self.assertRaisesRegex(ValueError, "collision"):
-            build_site.plan([Path("a.c"), Path("a.c.html")])
+            build_site.plan([Path("a.c"), Path("a.c/index.html")])
 
-    def test_code_viewer_preserves_raw_and_escapes_content(self):
+    def test_code_viewer_uses_compiler_and_does_not_copy_source(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             source = root / "nested" / "a.c"
@@ -153,15 +152,20 @@ class BuildTest(unittest.TestCase):
             source.write_text('int x = 1 < 2;\n', encoding="utf-8")
             output = root / "_site"
             args = argparse.Namespace(output=str(output), comrak="comrak", ypst="ypst", typst_font_path=None, report=None)
-            with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=[Path("nested/a.c")]):
+
+            def compile_stub(command, **kwargs):
+                self.assertEqual(command[:3], ["comrak", "compile", str(source)])
+                stage = Path(command[command.index("--site-root") + 1])
+                page = stage / "nested/a.c/index.html"
+                page.parent.mkdir(parents=True)
+                page.write_text("compiled code", encoding="utf-8")
+                return subprocess.CompletedProcess(command, 0, "", "")
+
+            with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=[Path("nested/a.c")]), patch.object(build_site.subprocess, "run", side_effect=compile_stub):
                 build_site.build(args)
-            self.assertEqual((output / "nested/a.c").read_text(encoding="utf-8"), source.read_text(encoding="utf-8"))
-            self.assertIn('href="a.c.html"', (output / "nested/index.html").read_text(encoding="utf-8"))
-            viewer = (output / "nested/a.c.html").read_text(encoding="utf-8")
-            self.assertIn('int x = 1 &lt; 2;', viewer)
-            self.assertIn('class="language-c"', viewer)
-            self.assertIn('src="../_shared/site/highlight.min.js"', viewer)
-            self.assertTrue((output / "_shared/site/highlight.min.js").is_file())
+            self.assertTrue((output / "nested/a.c").is_dir())
+            self.assertIn('href="a.c/"', (output / "nested/index.html").read_text(encoding="utf-8"))
+            self.assertEqual((output / "nested/a.c/index.html").read_text(encoding="utf-8"), "compiled code")
             self.assertEqual(check_site.check(output), [])
 
     def test_build_and_keep_previous_on_failure(self):
@@ -177,7 +181,7 @@ class BuildTest(unittest.TestCase):
             def compile_stub(command, **kwargs):
                 stage = Path(command[command.index("--site-root") + 1])
                 source = Path(command[2])
-                page = stage / source.stem / "index.html"
+                page = stage / source.name / "index.html"
                 page.parent.mkdir(parents=True, exist_ok=True)
                 page.write_text("compiled", encoding="utf-8")
                 return subprocess.CompletedProcess(command, 0, "", "")
@@ -185,11 +189,11 @@ class BuildTest(unittest.TestCase):
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=files), patch.object(build_site.subprocess, "run", side_effect=compile_stub):
                 build_site.build(args)
                 self.assertEqual((output / "raw.txt").read_text(), "raw")
-                self.assertIn('href="a/"', (output / "index.html").read_text(encoding="utf-8"))
+                self.assertIn('href="a.md/"', (output / "index.html").read_text(encoding="utf-8"))
                 with patch.object(build_site.subprocess, "run", side_effect=OSError("compiler failed")):
                     with self.assertRaises(OSError):
                         build_site.build(args)
-                self.assertTrue((output / "a" / "index.html").is_file())
+                self.assertTrue((output / "a.md" / "index.html").is_file())
 
     def test_failed_article_is_reported_and_omitted(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -216,12 +220,12 @@ class BuildTest(unittest.TestCase):
             (cache / "site" / "_shared" / "typst" / "stale").mkdir()
             (cache / "site" / "_shared" / "site").mkdir()
             (cache / "site" / "_shared" / "site" / "stale.js").write_text("old", encoding="utf-8")
-            (cache / "site" / "unchanged").mkdir()
-            (cache / "site" / "unchanged" / "index.html").write_text('<link href="../_shared/typst/used/theme.css">', encoding="utf-8")
-            for name in ("unchanged.md", "changed.md", "raw.txt"):
+            (cache / "site" / "unchanged.c").mkdir()
+            (cache / "site" / "unchanged.c" / "index.html").write_text('<link href="../_shared/typst/used/theme.css">', encoding="utf-8")
+            for name in ("unchanged.c", "changed.md", "raw.txt"):
                 (root / name).write_text(name, encoding="utf-8")
             args = argparse.Namespace(output=str(output), comrak="comrak", ypst="ypst", typst_font_path=None, report=None, cache_dir=str(cache), full=False)
-            files = [Path("unchanged.md"), Path("changed.md"), Path("raw.txt")]
+            files = [Path("unchanged.c"), Path("changed.md"), Path("raw.txt")]
             compiled = []
 
             def run_stub(command, **kwargs):
@@ -229,19 +233,19 @@ class BuildTest(unittest.TestCase):
                     return subprocess.CompletedProcess(command, 0, "abc\n")
                 compiled.append(Path(command[2]).name)
                 stage = Path(command[command.index("--site-root") + 1])
-                (stage / "changed").mkdir()
-                (stage / "changed" / "index.html").write_text("new", encoding="utf-8")
+                (stage / "changed.md").mkdir()
+                (stage / "changed.md" / "index.html").write_text("new", encoding="utf-8")
                 return subprocess.CompletedProcess(command, 0, "", "")
 
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "inputs", return_value=files), patch.object(build_site, "cache_fingerprint", return_value="v1"), patch.object(build_site, "cached_changes", return_value={"changed.md", "raw.txt"}), patch.object(build_site.subprocess, "run", side_effect=run_stub):
                 build_site.build(args)
             self.assertEqual(compiled, ["changed.md"])
-            self.assertIn("_shared/typst/used/theme.css", (output / "unchanged" / "index.html").read_text())
+            self.assertIn("_shared/typst/used/theme.css", (output / "unchanged.c" / "index.html").read_text())
             self.assertTrue((output / "_shared/typst/used").is_dir())
             self.assertFalse((output / "_shared/typst/stale").exists())
             self.assertFalse((output / "_shared/site/stale.js").exists())
             self.assertEqual((output / "raw.txt").read_text(), "raw.txt")
-            self.assertTrue((cache / "site" / "changed" / "index.html").exists())
+            self.assertTrue((cache / "site" / "changed.md" / "index.html").exists())
 
 
 if __name__ == "__main__":

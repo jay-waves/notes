@@ -1,0 +1,25 @@
+flowchart TD
+    A[Main Loop] --> B["pollfds[]"]
+    B --> C["pollfd[0]: listen_fd"]
+    B --> D["pollfd[1]: client_fd1"]
+    B --> E["pollfd[2]: client_fd2"]
+    
+    G[poll] --> H{Check revents}
+    C --> G
+    D --> G
+    E --> G
+    
+    H -->|POLLIN on listen_fd| I[Accept new connection]
+    H -->|POLLIN on client_fd| J[Read data]
+    H -->|POLLOUT on client_fd| K[Write data]
+    H -->|POLLHUP/POLLERR| L[Close connection]
+    
+    I --> M["Add to pollfd[]"]
+    J --> A
+    K --> A
+    L --> N["Remove from pollfds[]"]
+    M --> A
+    N --> A
+    
+    style B fill:#e8f5e8
+    style G fill:#fff3e0

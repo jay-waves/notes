@@ -18,23 +18,7 @@ Linux 的进程状态划分：
 
 
 
-```mermaid
-stateDiagram-v2
-
-    NEW --> RUNNING : fork/clone
-
-    RUNNING --> SLEEP_INT : wait/sleep
-    RUNNING --> SLEEP_UNINT : blocking I/O
-
-    SLEEP_INT --> RUNNING : wakeup/signal
-    SLEEP_UNINT --> RUNNING : I/O complete
-
-    RUNNING --> STOPPED : SIGSTOP
-    STOPPED --> RUNNING : SIGCONT
-
-    RUNNING --> ZOMBIE : exit
-    ZOMBIE --> DEAD : wait
-```
+<mermaid src="charts/thread-sched-1.mmd"></mermaid>
 
 在 Unix 系统下，有一个特殊状态被称为 Zombie（Z），指进程已经完成 `exit`，但是仍在等待父进程通过 `wait()` 系统调用读取其退出状态，因此一些进程资源未被释放。
 

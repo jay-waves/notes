@@ -1,0 +1,20 @@
+flowchart TD
+    A[Main Thread] --> B[Create Thread Pool]
+    B --> C[Worker Thread 1]
+    B --> D[Worker Thread 2]
+    
+    A --> F[Accept Connections]
+    F --> G[Task Queue]
+    
+    C --> H{Get Task}
+    D --> I{Get Task}
+    
+    G --> H
+    G --> I
+    
+    H --> K[Process Client]
+    I --> L[Process Client]
+    
+    style C fill:#fff3e0
+    style D fill:#fff3e0
+    style G fill:#e3f2fd

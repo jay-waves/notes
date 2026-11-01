@@ -1,0 +1,19 @@
+flowchart TB
+    subgraph Frame_N["Frame N"]
+        F1[Front Buffer<br/>display/read old data]
+        B1[Back Buffer<br/>write new data]
+    end
+
+    subgraph Swap["Swap"]
+        S[atomic pointer swap<br/>or lock-protected swap]
+    end
+
+    subgraph Frame_N1["Frame N + 1"]
+        F2[Front Buffer<br/>display/read new data]
+        B2[Back Buffer<br/>reuse old front]
+    end
+
+    F1 --> S
+    B1 --> S
+    S --> F2
+    S --> B2

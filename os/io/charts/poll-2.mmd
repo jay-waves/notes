@@ -1,0 +1,21 @@
+flowchart TD
+    D[Main Loop] --> E[epoll_wait]
+    E --> F{Ready Events?}
+    
+    F -->|listen_fd EPOLLIN| G[Accept connection]
+    F -->|client_fd EPOLLIN| H[Read data]
+    F -->|client_fd EPOLLOUT| I[Write data]
+    F -->|client_fd EPOLLHUP| J[Close connection]
+    
+    G --> K[epoll_ctl ADD client_fd]
+    H --> L[Process request]
+    I --> M[Send response]
+    J --> N[epoll_ctl DEL client_fd]
+    
+    K --> D
+    L --> D
+    M --> D
+    N --> D
+    
+    style E fill:#e8f5e8
+    style F fill:#f3e5f5

@@ -5,20 +5,7 @@ fork-per-connection 模式：
 * 子进程关闭关闭监听 socket ，处理完客户端连接的 IO 操作后退出
 * 主进程关闭客户端 socket ，继续监听新连接，通过 signal 或 `waitpid()` 回收僵尸进程
 
-```mermaid 
-flowchart TD
-    A[Main Process] --> B[Listen Socket]
-    B --> C{New Connection?}
-    C -->|Yes| D[fork]
-    D --> E[Child Process 1]
-    D --> F[Child Process 2]
-    E --> H[Handle Client 1]
-    F --> I[Handle Client 2]
-    C -->|No| C
-    
-    style E fill:#e1f5fe
-    style F fill:#e1f5fe
-```
+<mermaid src="charts/net-server-1.mmd"></mermaid>
 
 ### 多线程模型
 
@@ -28,28 +15,7 @@ thread-per-connection，类似 fork-per-connection，但可以共享一些内存
 
 预先创建一定数量工作线程，有 socket 连接时进行负载分配。参考 [algorithm/conc/thread-pool](../../algo/concurrency/thread-pool-work-stealing.md) 中实现。
 
-```mermaid 
-flowchart TD
-    A[Main Thread] --> B[Create Thread Pool]
-    B --> C[Worker Thread 1]
-    B --> D[Worker Thread 2]
-    
-    A --> F[Accept Connections]
-    F --> G[Task Queue]
-    
-    C --> H{Get Task}
-    D --> I{Get Task}
-    
-    G --> H
-    G --> I
-    
-    H --> K[Process Client]
-    I --> L[Process Client]
-    
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-    style G fill:#e3f2fd
-```
+<mermaid src="charts/net-server-2.mmd"></mermaid>
 
 ### Leader&Follower Model 
 

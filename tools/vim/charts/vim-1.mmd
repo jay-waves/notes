@@ -1,0 +1,10 @@
+flowchart TB
+    N[Normal]
+    V[Visual]
+    I[Insert]
+
+    N -- "v, V" --> V
+    V -- "ESC" --> N
+
+    N -- "i, a, o" --> I
+    I -- "ESC" --> N

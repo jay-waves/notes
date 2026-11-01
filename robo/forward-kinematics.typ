@@ -355,7 +355,7 @@ $tau=J^T cal(F)$ alone describes only the wrench-to-joint mapping.
 
 = Inverse Kinematics
 
-see #link("https://notes.jay-waves.cn/robo/inverse-kinematics")[inverse-kinematics.typ]
+see #link("https://notes.jay-waves.cn/robo/inverse-kinematics.typ/")[inverse-kinematics.typ]
 
 = closed-chain kinematics
 

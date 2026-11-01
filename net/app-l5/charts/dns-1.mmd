@@ -1,0 +1,38 @@
+sequenceDiagram
+    participant H as Local Host
+    participant L as Local DNS Server
+    participant Root as Root DNS Server
+    participant Com as .com Auth<br/>DNS Server
+    participant GitHub as Github Public<br/>Auth DNS Server
+
+    H->>H: 浏览器访问 gist.github.com
+    H->>H: 查询浏览器缓存
+    H->>H: 查询系统缓存（Hosts）
+
+    H->>L: 递归查询本地域名服务器
+    activate L
+    L->>L: 查询本地缓存
+
+    L->>Root: 【缓存未命中】<br/>迭代查询根域名服务器
+    activate Root
+    Root->>Root: 查询
+    Root-->>L: .com's IP
+    deactivate Root
+
+    L->>Com: 迭代查询 .com 权威域名服务器
+    activate Com
+    Com->>Com: 查询
+    Com-->>L: .github.com's IP
+    deactivate Com
+
+    L->>GitHub: 迭代查询 .github.com 权威域名服务器
+    activate GitHub
+    GitHub->>GitHub: 查询
+    GitHub-->>L: gist.github.com's IP
+    deactivate GitHub
+
+    L->>L: 更新本地缓存
+    L-->>H: gist.github.com's IP
+    deactivate L
+
+    H->>H: 访问 gist.github.com

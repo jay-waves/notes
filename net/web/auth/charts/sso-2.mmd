@@ -1,0 +1,55 @@
+sequenceDiagram
+    participant B as 浏览器
+    participant S1 as 系统1
+    participant S2 as 系统2
+    participant C as 认证中心
+
+    B->>S1: 访问（URL1）
+    activate S1
+    S1->>S1: 验证未登录
+
+    S1->>C: 跳转（URL1）
+    activate C
+    C->>C: 验证未登录
+    C-->>B: 登录页面（URL1）
+    deactivate C
+
+    B->>C: 跳转（URL1）
+    activate C
+    C->>C: 验证成功（）
+    C->>C: 创建全局 Session（）
+    C->>C: 创建 Token（）
+    C-->>S1: 跳转（Token）
+    deactivate C
+
+    S1->>C: 校验（Token, URL1）
+    activate C
+    C->>C: 令牌有效（）
+    C->>C: 注册系统（URL1）
+    C-->>S1: 令牌有效（）
+    deactivate C
+
+    S1->>S1: 创建局部 Session（Token）
+    S1-->>B: 受保护资源（）
+    deactivate S1
+
+    B->>S2: 访问（URL2）
+    activate S2
+    S2->>S2: 验证未登录
+
+    S2->>C: 跳转（URL2）
+    activate C
+    C->>C: 验证已登录（）
+    C-->>S2: 跳转（Token）
+    deactivate C
+
+    S2->>C: 验证（Token, URL2）
+    activate C
+    C->>C: 令牌有效（）
+    C->>C: 注册系统（URL2）
+    C-->>S2: 令牌有效（）
+    deactivate C
+
+    S2->>S2: 创建局部 Session（Token）
+    S2-->>B: 受保护资源（）
+    deactivate S2

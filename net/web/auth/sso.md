@@ -4,34 +4,7 @@
 
 Session 是服务器端的数据, 也用于存储用户数据. 当用户通过 Cookie 上传 Session ID, 服务器用此 ID 在数据库寻找对应 Session, 从而获取到该用户的数据. 
 
-```mermaid 
-sequenceDiagram
-    participant B as 浏览器
-    participant S as 服务器
-
-    B->>S: 第一次请求（用户名，密码）
-
-    activate S
-    S->>S: 创建会话 Session
-    S->>S: 验证（用户名，密码）
-    S->>S: 设置登录状态 IsLogin
-    S-->>B: 第一次响应（SessionID）
-    deactivate S
-
-    B->>B: 设置 Cookie（SessionID）
-
-    B->>S: 第二次请求（Cookie）
-    activate S
-    S->>S: 查看登录状态 IsLogin
-    S-->>B: 第二次响应
-    deactivate S
-
-    B->>S: 第三次请求（Cookie）
-    activate S
-    S->>S: 查看登录状态 IsLogin
-    S-->>B: 第三次响应
-    deactivate S
-```
+<mermaid src="charts/sso-1.mmd"></mermaid>
 
 以下情况被称为*跨域 (Cross-Region)*:
 - 不同域名, 如 `http://blog.example.com` 与 `http://store.example.com` 
@@ -52,93 +25,9 @@ sequenceDiagram
 2. 全局会话存在, 局部会话不一定存在.
 3. 全局会话销毁, 局部会话必须销毁.
 
-```mermaid
-sequenceDiagram
-    participant B as 浏览器
-    participant S1 as 系统1
-    participant S2 as 系统2
-    participant C as 认证中心
+<mermaid src="charts/sso-2.mmd"></mermaid>
 
-    B->>S1: 访问（URL1）
-    activate S1
-    S1->>S1: 验证未登录
-
-    S1->>C: 跳转（URL1）
-    activate C
-    C->>C: 验证未登录
-    C-->>B: 登录页面（URL1）
-    deactivate C
-
-    B->>C: 跳转（URL1）
-    activate C
-    C->>C: 验证成功（）
-    C->>C: 创建全局 Session（）
-    C->>C: 创建 Token（）
-    C-->>S1: 跳转（Token）
-    deactivate C
-
-    S1->>C: 校验（Token, URL1）
-    activate C
-    C->>C: 令牌有效（）
-    C->>C: 注册系统（URL1）
-    C-->>S1: 令牌有效（）
-    deactivate C
-
-    S1->>S1: 创建局部 Session（Token）
-    S1-->>B: 受保护资源（）
-    deactivate S1
-
-    B->>S2: 访问（URL2）
-    activate S2
-    S2->>S2: 验证未登录
-
-    S2->>C: 跳转（URL2）
-    activate C
-    C->>C: 验证已登录（）
-    C-->>S2: 跳转（Token）
-    deactivate C
-
-    S2->>C: 验证（Token, URL2）
-    activate C
-    C->>C: 令牌有效（）
-    C->>C: 注册系统（URL2）
-    C-->>S2: 令牌有效（）
-    deactivate C
-
-    S2->>S2: 创建局部 Session（Token）
-    S2-->>B: 受保护资源（）
-    deactivate S2
-```
-
-```mermaid 
-sequenceDiagram
-    participant B as 浏览器
-    participant S1 as 系统1
-    participant S2 as 系统2
-    participant C as 认证中心
-
-    B->>S1: 注销请求（SessionID）
-    activate S1
-
-    S1->>S1: 取出 Token（SessionID）
-    S1->>C: 注销请求（Token）
-
-    activate C
-    C->>C: 校验令牌有效性（Token）
-    C->>C: 销毁全局会话（Token）
-    C->>C: 取出注册系统（Token）
-
-    C-->>S2: 销毁局部会话（Token）
-    activate S2
-    S2-->>C: 销毁局部会话（Token）
-    deactivate S2
-
-    C-->>S1: 销毁局部会话（Token）
-    deactivate C
-
-    S1-->>B: 跳转登录页面（）
-    deactivate S1
-```
+<mermaid src="charts/sso-3.mmd"></mermaid>
 
 ![](attach/sso.avif)
 

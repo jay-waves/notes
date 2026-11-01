@@ -8,21 +8,7 @@
 EventLoop 模型适合 IO 密集型应用，用单线程达到并发处理多个 IO 事件的目的，避免阻塞等待。
 
 
-```mermaid
-flowchart TD
-    A[Event Loop] --> B[Event Queue]
-    B --> C[Event Handler]
-    C --> D[Callback]
-    D --> A
-    
-    E[I/O Events] --> B
-    F[Timer Events] --> B
-    G[Network Events] --> B
-    
-    style A fill:#ffecb3
-    style B fill:#e3f2fd
-    style C fill:#fff3e0
-```
+<mermaid src="charts/io-multiplexing-1.mmd"></mermaid>
 
 ### Reactor 
 

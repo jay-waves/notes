@@ -1,24 +1,4 @@
-```mermaid
-flowchart TB
-    subgraph Frame_N["Frame N"]
-        F1[Front Buffer<br/>display/read old data]
-        B1[Back Buffer<br/>write new data]
-    end
-
-    subgraph Swap["Swap"]
-        S[atomic pointer swap<br/>or lock-protected swap]
-    end
-
-    subgraph Frame_N1["Frame N + 1"]
-        F2[Front Buffer<br/>display/read new data]
-        B2[Back Buffer<br/>reuse old front]
-    end
-
-    F1 --> S
-    B1 --> S
-    S --> F2
-    S --> B2
-```
+<mermaid src="charts/double-buffer-1.mmd"></mermaid>
 
 读者需要稳定快照，而写者又需要持续更新。由于数据块比较大，不能让读者看到半成品（撕裂），至少需要加锁。双缓冲区的思想是，让写者在后台完全准备好数据后，再通过交换一个原子索引（指针），原子地更新读视图。
 

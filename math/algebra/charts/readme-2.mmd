@@ -1,0 +1,17 @@
+flowchart TB
+    SG["阿贝尔群<br/>(SemiGroup) (R, +)"]
+    M["幺半群<br/>(Monoid) (R, ·)<br/><br/>常见环的乘法大多也满足交换律<br/>矩阵环、四元数环不满足"]
+    D["乘法对加法运算有分配律：<br/>∀x,y,z∈S<br/>x·(y+z)=x·y+x·z<br/>(y+z)·x=y·x+z·x"]
+
+    R["环<br/>(Ring) (R, +, ·)<br/>ℤ, ℤ/nℤ"]
+    F["域<br/>(Field)<br/>ℝ, ℝ(x), ℂ, ℚ"]
+    PF["素域<br/>(Prime Field)<br/>ℚ, 𝔽ₚ"]
+    GF["有限域<br/>(Galois Field)<br/>𝔽ₚ, 𝔽ₚⁿ"]
+
+    SG --> R
+    M --> R
+    D --> R
+
+    R -->|"非零元素乘法逆元<br/>乘法逆元意味着没有零因子<br/>∀x∈R×, ∃y∈R×, x·y=y·x=e"| F
+    F -->|"最小子域<br/>注意 ℚ 是特征为 0 的唯一素域"| PF
+    PF -->|"素域有限扩展"| GF

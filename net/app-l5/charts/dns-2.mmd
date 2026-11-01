@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant H as Local Host
+    participant R as Router
+    participant D as Local DNS Server
+
+    H->>H: 查询浏览器缓存
+    H->>H: 查询系统缓存（Hosts）
+
+    H->>R: 【缓存未命中】<br/>递归查询路由器
+    activate R
+    R->>R: 查询本地缓存
+
+    R->>D: 【缓存未命中】<br/>递归查询本地域名服务器
+    activate D
+    D->>D: 查询本地缓存
+    D->>D: 【缓存未命中】<br/>开始迭代查询
+    deactivate D
+    deactivate R
+
+    Note right of D: ISP DNS Server<br/>Public DNS Server:<br/>- Ali: 223.5.5.5<br/>- Google: 8.8.8.8<br/>- Baidu: 180.76.76.76<br/>- 114DNS: 114.114.114.114<br/>- Cloudflare: 1.1.1.1<br/>- Microsoft DNS: 4.2.2.1

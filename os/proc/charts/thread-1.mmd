@@ -1,0 +1,4 @@
+flowchart LR
+    main((main)) --> fork((fork))
+    fork -->|Child| childExit((exit))
+    fork -->|Parent| parentExit((exit))

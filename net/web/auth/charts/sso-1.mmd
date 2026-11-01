@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant B as 浏览器
+    participant S as 服务器
+
+    B->>S: 第一次请求（用户名，密码）
+
+    activate S
+    S->>S: 创建会话 Session
+    S->>S: 验证（用户名，密码）
+    S->>S: 设置登录状态 IsLogin
+    S-->>B: 第一次响应（SessionID）
+    deactivate S
+
+    B->>B: 设置 Cookie（SessionID）
+
+    B->>S: 第二次请求（Cookie）
+    activate S
+    S->>S: 查看登录状态 IsLogin
+    S-->>B: 第二次响应
+    deactivate S
+
+    B->>S: 第三次请求（Cookie）
+    activate S
+    S->>S: 查看登录状态 IsLogin
+    S-->>B: 第三次响应
+    deactivate S

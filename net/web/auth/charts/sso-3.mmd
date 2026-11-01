@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant B as 浏览器
+    participant S1 as 系统1
+    participant S2 as 系统2
+    participant C as 认证中心
+
+    B->>S1: 注销请求（SessionID）
+    activate S1
+
+    S1->>S1: 取出 Token（SessionID）
+    S1->>C: 注销请求（Token）
+
+    activate C
+    C->>C: 校验令牌有效性（Token）
+    C->>C: 销毁全局会话（Token）
+    C->>C: 取出注册系统（Token）
+
+    C-->>S2: 销毁局部会话（Token）
+    activate S2
+    S2-->>C: 销毁局部会话（Token）
+    deactivate S2
+
+    C-->>S1: 销毁局部会话（Token）
+    deactivate C
+
+    S1-->>B: 跳转登录页面（）
+    deactivate S1

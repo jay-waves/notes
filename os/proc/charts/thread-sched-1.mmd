@@ -1,0 +1,15 @@
+stateDiagram-v2
+
+    NEW --> RUNNING : fork/clone
+
+    RUNNING --> SLEEP_INT : wait/sleep
+    RUNNING --> SLEEP_UNINT : blocking I/O
+
+    SLEEP_INT --> RUNNING : wakeup/signal
+    SLEEP_UNINT --> RUNNING : I/O complete
+
+    RUNNING --> STOPPED : SIGSTOP
+    STOPPED --> RUNNING : SIGCONT
+
+    RUNNING --> ZOMBIE : exit
+    ZOMBIE --> DEAD : wait

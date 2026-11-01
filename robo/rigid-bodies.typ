@@ -251,7 +251,7 @@ $ [cal(S) ]= bmat([omega], v ; 0, 0) $
 
 #image("../attach/img/robo/rigid-body-motion.webp", width: 40%)
 
-考察线速度，参考 #link("https://notes.jay-waves.cn/robo/quaternion/")[四元数推导过程]，对于固定坐标系中的向量 $p in RR^3$ ，设其旋转角速度向量为 $w=vec(w)dot(theta)$ ，其端点线速度为： 
+考察线速度，参考 #link("https://notes.jay-waves.cn/robo/quaternion.typ/")[四元数推导过程]，对于固定坐标系中的向量 $p in RR^3$ ，设其旋转角速度向量为 $w=vec(w)dot(theta)$ ，其端点线速度为： 
 
 $ dot(p)=w times p=[w]p $ 
 

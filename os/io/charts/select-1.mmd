@@ -1,0 +1,17 @@
+flowchart TD
+    A[Main Loop] --> B[fd_set readmask]
+    B --> C[Add socket_fd]
+    B --> D[Add STDIN_FILENO]
+    
+    G[select] --> H{Any FD Set?}
+    C --> G
+    D --> G
+    
+    H -->|socket_fd ready| I[Accept new connection]
+    H -->|timeout| K[Continue loop]
+    
+    I --> A
+    K --> A
+    
+    style B fill:#e1f5fe
+    style G fill:#fff3e0

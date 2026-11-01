@@ -48,31 +48,7 @@ $$
 
 ## Control System 
 
-```mermaid
-flowchart TB
-
-    DB[desired behavior]
-
-    subgraph LOOP[ ]
-        C[controller]
-        S[sensors]
-    end
-
-    A[amplifiers]
-
-    AT[actuators<br/>and<br/>transmissions]
-
-    D[dynamics of<br/>arm and<br/>environment]
-
-
-    DB --> C
-    C -->|low power controls| A
-    A -->|high power controls| AT
-    AT -->|forces and torques| D
-    D -->|motions and forces| S
-    S --> C
-    AT -->|local feedback| A
-```
+<mermaid src="charts/cybernetics-1.mmd"></mermaid>
 
 
 ## LQR

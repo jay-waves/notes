@@ -2,7 +2,6 @@
 """Build a static notes site from Git-tracked and non-ignored files."""
 import argparse
 import hashlib
-import html
 import json
 import os
 from pathlib import Path
@@ -21,13 +20,16 @@ from related_notes import is_recommendable, related
 ROOT = Path(__file__).resolve().parents[2]
 PAGES = ROOT / ".github" / "pages"
 MARKER = ".notes-site-output"
-CODE_LANGUAGES = {".c": "c", ".h": "c", ".cpp": "cpp", ".cc": "cpp", ".hpp": "cpp", ".py": "python", ".js": "javascript", ".ts": "typescript", ".go": "go", ".rs": "rust", ".java": "java", ".sh": "bash", ".sql": "sql", ".css": "css", ".json": "json", ".yaml": "yaml", ".yml": "yaml", ".bib": "bibtex"}
+CODE_EXTENSIONS = {
+    ".c", ".h", ".cpp", ".cc", ".hpp", ".py", ".js", ".ts", ".go", ".rs", ".java",
+    ".sh", ".sql", ".css", ".json", ".yaml", ".yml", ".bib",
+}
 
 
 def add_related(stage, manifest):
     """Write recommendation data and add a stable loader to article pages."""
     articles = {entry["url"]: entry for entry in manifest
-                if entry["kind"] != "Raw" and is_recommendable(entry["source"])}
+                if entry["kind"] in ("Markdown", "Typst") and is_recommendable(entry["source"])}
     documents = {url: (ROOT / entry["source"]).read_text(encoding="utf-8")
                  for url, entry in articles.items()}
     recommendations = related(documents)
@@ -37,7 +39,7 @@ def add_related(stage, manifest):
         json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n",
         encoding="utf-8", newline="\n")
     for entry in manifest:
-        if entry["kind"] == "Raw":
+        if entry["kind"] not in ("Markdown", "Typst"):
             continue
         url = entry["url"]
         page = stage / url / "index.html"
@@ -50,38 +52,6 @@ def add_related(stage, manifest):
             if re.search(r"</body\s*>", content, flags=re.I):
                 content = re.sub(r"</body\s*>", lambda match: block + match.group(), content, count=1, flags=re.I)
         page.write_text(content, encoding="utf-8", newline="\n")
-
-
-def code_page(source, target, site_root):
-    text = source.read_text(encoding="utf-8")
-    name = html.escape(source.name)
-    language = CODE_LANGUAGES[source.suffix.lower()]
-    script = posixpath.relpath("_shared/site/highlight.min.js", target.parent.relative_to(site_root).as_posix())
-    bibtex_script = (
-        f'<script src="{posixpath.relpath("_shared/site/bibtex.js", target.parent.relative_to(site_root).as_posix())}" defer></script>'
-        if language == "bibtex" else ""
-    )
-    page = f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>{name}</title>
-<style>
-:root {{ color-scheme: light dark; --ink: #24292f; --paper: #fff; --comment: #57606a; --keyword: #cf222e; --string: #0a3069; --number: #0550ae; --title: #8250df; --variable: #953800; }}
-@media (prefers-color-scheme: dark) {{
-  :root {{ --ink: #e6edf3; --paper: #0d1117; --comment: #8b949e; --keyword: #ff7b72; --string: #a5d6ff; --number: #79c0ff; --title: #d2a8ff; --variable: #ffa657; }}
-}}
-body {{ width: min(95%, 920px); margin: 32px auto; color: var(--ink); background: var(--paper); }}
-pre, code {{ font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }}
-pre {{ margin: 0; font-size: 14px; line-height: 1.6; tab-size: 4; }}
-.hljs-comment, .hljs-quote {{ color: var(--comment); }}
-.hljs-keyword, .hljs-selector-tag, .hljs-literal {{ color: var(--keyword); }}
-.hljs-string, .hljs-regexp, .hljs-doctag {{ color: var(--string); }}
-.hljs-number, .hljs-built_in, .hljs-type, .hljs-attr {{ color: var(--number); }}
-.hljs-title, .hljs-section {{ color: var(--title); }}
-.hljs-variable, .hljs-symbol, .hljs-meta {{ color: var(--variable); }}
-</style></head>
-<body><pre><code class="language-{language}">{html.escape(text)}</code></pre>
-<script src="{script}" defer></script>{bibtex_script}<script>window.addEventListener("DOMContentLoaded", () => hljs.highlightAll());</script></body></html>
-'''
-    target.write_text(page, encoding="utf-8", newline="\n")
 
 
 def cache_fingerprint(args):
@@ -142,27 +112,16 @@ def inputs(output):
 def plan(files):
     result = []
     claimed = {"index.html": "site index", "404.html": "site 404", MARKER: "site marker"}
-    article_paths = {}
     for path in files:
         ext = path.suffix.lower()
-        kind = "Markdown" if ext in (".md", ".markdown") else "Typst" if ext == ".typ" else "Raw"
-        if kind != "Raw":
-            article = path.with_suffix("").as_posix().casefold()
-            if article in article_paths:
-                raise ValueError(f"Article URL collision: {path} and {article_paths[article]}")
-            article_paths[article] = path
-        dest = path.with_suffix("") / "index.html" if kind != "Raw" else path
+        kind = ("Markdown" if ext in (".md", ".markdown") else
+                "Typst" if ext == ".typ" else "Code" if ext in CODE_EXTENSIONS else "Raw")
+        dest = path / "index.html" if kind != "Raw" else path
         key = dest.as_posix().casefold()
         if key in claimed:
             raise ValueError(f"Output collision: {path} and {claimed[key]} -> {dest}")
         claimed[key] = path
         result.append((path, dest, kind))
-    for path, dest, kind in result:
-        if kind == "Raw" and path.suffix.lower() in CODE_LANGUAGES:
-            viewer = Path(str(dest) + ".html").as_posix().casefold()
-            if viewer in claimed:
-                raise ValueError(f"Output collision: code viewer for {path} and {claimed[viewer]}")
-            claimed[viewer] = path
     directories = set()
     for path in files:
         parent = path.parent
@@ -215,11 +174,6 @@ def build(args):
             if kind == "Raw":
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(ROOT / source, target)
-                if source.suffix.lower() in CODE_LANGUAGES:
-                    try:
-                        code_page(ROOT / source, Path(str(target) + ".html"), stage)
-                    except UnicodeDecodeError:
-                        pass
             else:
                 cached_page = cache / "site" / dest if changed is not None else None
                 if cached_page is not None and source.as_posix() not in changed and cached_page.is_file():
@@ -229,12 +183,11 @@ def build(args):
                     url = dest.parent.as_posix() + "/"
                     manifest.append({"source": source.as_posix(), "url": url, "kind": kind})
                     continue
-                if kind == "Markdown":
-                    command = [args.comrak, "compile", str(ROOT / source), "--root", str(ROOT), "--site-root", str(stage)]
-                else:
-                    command = [args.ypst, "compile", str(ROOT / source), "--root", str(ROOT), "--site-root", str(stage)]
-                    if args.typst_font_path:
-                        command.extend(["--", "--font-path", str(Path(args.typst_font_path).resolve())])
+                compiler = args.ypst if kind == "Typst" else args.comrak
+                command = [compiler, "compile", str(ROOT / source), "--root", str(ROOT),
+                           "--site-root", str(stage)]
+                if kind == "Typst" and args.typst_font_path:
+                    command.extend(["--", "--font-path", str(Path(args.typst_font_path).resolve())])
                 print(f"Compiling {source}", flush=True)
                 started = time.monotonic()
                 result = subprocess.run(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace")
@@ -250,17 +203,11 @@ def build(args):
                     target.unlink(missing_ok=True)
                     continue
             url = dest.parent.as_posix() + "/" if kind != "Raw" else dest.as_posix()
-            if kind == "Raw" and source.suffix.lower() in CODE_LANGUAGES and Path(str(target) + ".html").is_file():
-                url += ".html"
             manifest.append({"source": source.as_posix(), "url": url, "kind": kind})
         shared = stage / "_shared" / "site"
         shared.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(PAGES / "theme.css", shared / "theme.css")
-        shutil.copy2(PAGES / "vendor" / "highlight.min.js", shared / "highlight.min.js")
-        shutil.copy2(PAGES / "vendor" / "highlight-LICENSE.txt", shared / "highlight-LICENSE.txt")
-        shutil.copy2(PAGES / "vendor" / "bibtex.js", shared / "bibtex.js")
-        shutil.copy2(PAGES / "related-notes.css", shared / "related-notes.css")
-        shutil.copy2(PAGES / "related-notes.js", shared / "related-notes.js")
+        for name in ("theme.css", "related-notes.css", "related-notes.js"):
+            shutil.copy2(PAGES / name, shared / name)
         shutil.copy2(PAGES / "404.html", stage / "404.html")
         generate(stage, manifest, PAGES)
         add_related(stage, manifest)
@@ -311,7 +258,7 @@ def build(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", default=str(ROOT / "_site"))
-    parser.add_argument("--comrak", default="comrakk", help="path to the comrakk executable")
+    parser.add_argument("--comrakk", "--comrak", dest="comrak", default="comrakk", help="path to the comrakk executable")
     parser.add_argument("--ypst", default="ypst", help="path to the ypst executable")
     parser.add_argument("--typst-font-path", help="path to additional Typst fonts")
     parser.add_argument("--report", help="path to JSON build report")

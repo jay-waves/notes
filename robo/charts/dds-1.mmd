@@ -1,0 +1,28 @@
+flowchart TD
+    Factory["DomainParticipantFactory (singleton)"]
+    Participant["DomainParticipant"]
+    Publisher["Publisher"]
+    Subscriber["Subscriber"]
+    Topic["Topic"]
+    DataWriter["DataWriter"]
+    DataReader["DataReader"]
+    TypeSupport["TypeSupport"]
+    WriterHist["WriterHistory"]
+    ReaderHist["ReaderHistory"]
+
+    Factory --> Participant
+
+    Participant --> Publisher
+    Participant --> Subscriber
+    Participant --> Topic
+    Participant --> TypeSupport
+
+    Publisher --> DataWriter
+
+    Subscriber --> DataReader
+
+    DataWriter --> WriterHist
+    DataWriter --> Topic
+
+    DataReader --> ReaderHist
+    DataReader --> Topic

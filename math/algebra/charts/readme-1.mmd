@@ -1,0 +1,19 @@
+flowchart TB
+    Set["集合<br/>(Set)"]
+    Magma["原群<br/>(Magma)"]
+    SemiGroup["半群<br/>(SemiGroup)"]
+    Monoid["幺半群<br/>(Monoid)"]
+    Group["群<br/>(Group)"]
+
+    AbelianSemiGroup["阿贝尔半群<br/>(Abelian SemiGroup)"]
+    AbelianMonoid["阿贝尔幺半群<br/>(Abelian Monoid)"]
+    AbelianGroup["阿贝尔群<br/>(Abelian Group)"]
+
+    Set -->|"运算二元运算 ⊕<br/>其应有封闭性 closure<br/>∀x,y∈S, x⊕y∈S"| Magma
+    Magma -->|"结合律 associative<br/>(x⊕y)⊕z = x⊕(y⊕z)"| SemiGroup
+    SemiGroup -->|"含单位元 identity<br/>∃e, ∀x∈S, x⊕e = e⊕x = x"| Monoid
+    Monoid -->|"逆元 inverse<br/>∀x∈S, ∃y∈S, y⊕x = x⊕y = e"| Group
+
+    SemiGroup -->|"交换律 commutative<br/>∀x,y∈S, x⊕y = y⊕x"| AbelianSemiGroup
+    Monoid -->|"交换律 commutative<br/>∀x,y∈S, x⊕y = y⊕x"| AbelianMonoid
+    Group -->|"交换律 commutative<br/>∀x,y∈S, x⊕y = y⊕x"| AbelianGroup

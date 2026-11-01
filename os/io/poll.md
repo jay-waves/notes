@@ -93,33 +93,7 @@ for(;;) {
 }
 ```
 
-```mermaid 
-flowchart TD
-    A[Main Loop] --> B["pollfds[]"]
-    B --> C["pollfd[0]: listen_fd"]
-    B --> D["pollfd[1]: client_fd1"]
-    B --> E["pollfd[2]: client_fd2"]
-    
-    G[poll] --> H{Check revents}
-    C --> G
-    D --> G
-    E --> G
-    
-    H -->|POLLIN on listen_fd| I[Accept new connection]
-    H -->|POLLIN on client_fd| J[Read data]
-    H -->|POLLOUT on client_fd| K[Write data]
-    H -->|POLLHUP/POLLERR| L[Close connection]
-    
-    I --> M["Add to pollfd[]"]
-    J --> A
-    K --> A
-    L --> N["Remove from pollfds[]"]
-    M --> A
-    N --> A
-    
-    style B fill:#e8f5e8
-    style G fill:#fff3e0
-```
+<mermaid src="charts/poll-1.mmd"></mermaid>
 
 ## epoll 
 
@@ -166,26 +140,4 @@ epoll 支持两种触发模式
 * 水平触发 (LT), 每次条件满足时, `epoll_wait` 都会返回
 * 边缘触发 (ET), 只在状态变化时, 触发一次. 要求一次性将 IO 操作完成. 
 
-```mermaid 
-flowchart TD
-    D[Main Loop] --> E[epoll_wait]
-    E --> F{Ready Events?}
-    
-    F -->|listen_fd EPOLLIN| G[Accept connection]
-    F -->|client_fd EPOLLIN| H[Read data]
-    F -->|client_fd EPOLLOUT| I[Write data]
-    F -->|client_fd EPOLLHUP| J[Close connection]
-    
-    G --> K[epoll_ctl ADD client_fd]
-    H --> L[Process request]
-    I --> M[Send response]
-    J --> N[epoll_ctl DEL client_fd]
-    
-    K --> D
-    L --> D
-    M --> D
-    N --> D
-    
-    style E fill:#e8f5e8
-    style F fill:#f3e5f5
-```
+<mermaid src="charts/poll-2.mmd"></mermaid>
