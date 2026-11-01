@@ -36,8 +36,8 @@ jobs:
         continue-on-error: true
       - name: Set up ypst
         uses: jay-waves/ypst@main
-      - name: Set up comrakk
-        uses: jay-waves/comrakk@main
+      - name: Set up cmrak
+        uses: jay-waves/cmrak@main
       - name: Install related notes dependency
         run: python3 -m pip install -r .github/scripts/requirements-related.txt
       - name: Test build scripts

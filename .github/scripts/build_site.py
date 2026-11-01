@@ -258,7 +258,7 @@ def build(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", default=str(ROOT / "_site"))
-    parser.add_argument("--comrakk", "--comrak", dest="comrak", default="comrakk", help="path to the comrakk executable")
+    parser.add_argument("--cmrak", "--comrakk", "--comrak", dest="comrak", default="cmrak", help="path to the cmrak executable")
     parser.add_argument("--ypst", default="ypst", help="path to the ypst executable")
     parser.add_argument("--typst-font-path", help="path to additional Typst fonts")
     parser.add_argument("--report", help="path to JSON build report")
