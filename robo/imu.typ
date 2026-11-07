@@ -531,33 +531,7 @@ $
 至此，ESKF 的总体流程如下：
 
 
-#mermaid[
-```mermaid
-flowchart TB
-    S["Previous State<br/>$$x^+,\ P^+$$"]
-    P["IMU / KF Prediction<br/>$$x^-,\ \delta x^-,\ P^-$$"]
-    R["Residual & Jacobian<br/>$$r=z-h(x^-),\quad H$$"]
-    K["Kalman Update<br/>$$\delta x^+=Kr$$<br/>$$P^+=(I-KH)P^-$$"]
-    I["Error Injection<br/>$$x^+=x^-\oplus\delta x^+$$"]
-    Z["Error-State Reset<br/>$$P\leftarrow J_{\mathrm{reset}}P^+J_{\mathrm{reset}}^\top$$<br/>$$\delta x\leftarrow 0$$"]
-
-    U["IMU Measurements<br/>$$a_m,\ \omega_m$$"]
-    O["Sensor Observation<br/>$$z$$"]
-    OUT(["Output<br/>$$x^+$$"])
-
-    S --> P --> R --> K --> I --> Z
-    U --> P
-    O --> R
-    Z --> OUT
-    Z -.->|Next cycle| S
-
-    classDef input fill:#eef4fb,stroke:#8da9c4
-    classDef output fill:#eaf6ee,stroke:#77aa8a
-
-    class U,O input
-    class OUT output
-```
-]
+#image("../attach/tmp/imu-eskf.svg", width: 100%)
 
 // #align(center, diagram(
 //   node((0, 0), align(center)[

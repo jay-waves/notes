@@ -11,14 +11,7 @@
 图像纹理中的像素通常称为 Texels（纹素）。将纹理空间中的数据，通过纹理坐标映射到几何表面，并
 在几何着色过程中进行采样的技术，称为_纹理贴图 (Texture Mapping)_ 。
 
-#mermaid[
-```mermaid
-flowchart LR
-    P["P"] -->|f| UV["(u, v)"]
-    UV -->|T| t["t"]
-    t -->|Shading| C["C"]
-```
-]
+#image("../../attach/tmp/texturing-pipeline.svg", width: 100%)
 
 - $P (x,y,z)$ 是空间坐标
 - $U V  (u,v)$ 是纹理坐标，对应纹理图片上的某个位置

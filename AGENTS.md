@@ -28,6 +28,16 @@ Avoid excessive caveats, defensive language, and unnecessary assumptions.
     automatically recompile notes; use the workflow's `full_build` when rendered output must be
     refreshed.
 
+## Chart Style
+
+- Use Paul Tol's Muted qualitative palette for categorical series, with its original color values.
+  Choose colors that remain distinct against the background and in grayscale.
+- For line charts, emphasize data points with clearly visible, hollow markers with solid outlines.
+  Use distinct marker shapes for different series and connect points with lines. Use line styles as
+  an additional distinction when helpful, and provide a matching legend.
+- Keep axes, units, and any illustrative data clear. Use a sequential or diverging color scale when
+  color represents ordered values or deviations from a meaningful midpoint.
+
 ## Markdown
 
 - Compile with `comrakk`. It renders math with KaTeX, code with highlight.js,
@@ -48,4 +58,24 @@ Avoid excessive caveats, defensive language, and unnecessary assumptions.
 - Import `template` and any needed helpers from `@local/ypst-template:0.1.0`, then use
     `#show: template`. Place `#set document(...)` before the show rule.
 - `ypst` supports `#mermaid` and `#chartist` diagrams.
+- Pass Mermaid source directly to `#mermaid`, as a literal string or a fenced
+    `mermaid` code block in its content argument. A filename string is interpreted
+    as diagram text, not loaded as a file. For separate sources, put the whole
+    `#mermaid` call in a `.typ` file and `#include` it.
+- Import `mermaid` from the template. For example:
+
+  ````typst
+  #mermaid(width: 80%, caption: [Workflow])[
+  ```mermaid
+  flowchart LR
+      A[Input] --> B[Output]
+  ```
+  ]
+  ````
+
+- Use `ypst compile main.typ main.html` or
+    `ypst compile main.typ main.pdf --pdf` from the document's project directory.
+    ypst pre-renders `#mermaid` to SVG for both outputs; plain Typst uses the
+    template's placeholder. Bare Mermaid code blocks are a separate HTML-only
+    rendering path and remain code in PDF.
 - Use absolute #link(https://notes.jay-waves.cn/..) URLs for links between Typst notes.

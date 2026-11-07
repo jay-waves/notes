@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Build a static notes site from Git-tracked and non-ignored files."""
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -54,35 +53,15 @@ def add_related(stage, manifest):
         page.write_text(content, encoding="utf-8", newline="\n")
 
 
-def cache_fingerprint(args):
-    """Fingerprint the compilers and template files that affect output."""
-    digest = hashlib.sha256(b"notes-site-cache-v2\0")
-    paths = [Path(__file__).resolve()]
-    for executable in (args.comrak, args.ypst, "typst"):
-        resolved = shutil.which(executable)
-        if not resolved:
-            raise ValueError(f"Executable not found: {executable}")
-        paths.append(Path(resolved).resolve())
-    if args.typst_font_path:
-        path = Path(args.typst_font_path).resolve()
-        paths.extend(sorted(path.rglob("*")) if path.is_dir() else [path])
-    for path in paths:
-        if path.is_file():
-            digest.update(str(path.name).encode("utf-8"))
-            with path.open("rb") as file:
-                while chunk := file.read(1024 * 1024):
-                    digest.update(chunk)
-    return digest.hexdigest()
-
-
-def cached_changes(cache, fingerprint):
+def cached_changes(cache):
     try:
         metadata = json.loads((cache / "metadata.json").read_text(encoding="utf-8"))
-        if metadata["fingerprint"] != fingerprint or not (cache / "site" / "_shared").is_dir():
+        if not (cache / "site" / "_shared").is_dir():
             return None
         result = subprocess.run(["git", "diff", "--no-renames", "--name-only", "-z", metadata["commit"], "--"], cwd=ROOT, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         untracked = subprocess.run(["git", "ls-files", "-z", "--others", "--exclude-standard"], cwd=ROOT, check=True, stdout=subprocess.PIPE)
-        return {os.fsdecode(item).replace("\\", "/") for item in (result.stdout + untracked.stdout).split(b"\0") if item}
+        changed = {os.fsdecode(item).replace("\\", "/") for item in (result.stdout + untracked.stdout).split(b"\0") if item}
+        return changed
     except (OSError, KeyError, ValueError, subprocess.CalledProcessError):
         return None
 
@@ -92,8 +71,17 @@ def inputs(output):
         ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--deduplicate"],
         cwd=ROOT, check=True, stdout=subprocess.PIPE,
     )
+    assets = ROOT / "attach/tmp"
+    if not (assets / ".git").exists():
+        raise ValueError("Missing assets checkout at attach/tmp; run .github/setup.py")
+    attached = subprocess.run(
+        ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--deduplicate"],
+        cwd=assets, check=True, stdout=subprocess.PIPE,
+    )
+    names = list(result.stdout.split(b"\0"))
+    names.extend(b"attach/tmp/" + name for name in attached.stdout.split(b"\0") if name)
     files = []
-    for name in result.stdout.split(b"\0"):
+    for name in names:
         if not name:
             continue
         relative = Path(os.fsdecode(name))
@@ -151,12 +139,11 @@ def build(args):
     files = inputs(output)
     entries = plan(files)
     cache = Path(args.cache_dir).resolve() if getattr(args, "cache_dir", None) else None
-    fingerprint = cache_fingerprint(args) if cache else None
-    changed = cached_changes(cache, fingerprint) if cache and not getattr(args, "full", False) else None
+    changed = cached_changes(cache) if cache and not getattr(args, "full", False) else None
     if changed is not None:
         print(f"Incremental build: {len(changed)} changed paths", flush=True)
     elif cache:
-        print("Full build: cache unavailable, incompatible, or explicitly bypassed", flush=True)
+        print("Full build: cache unavailable or explicitly bypassed", flush=True)
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix=".notes-site-build-", dir=output.parent) as temporary:
         stage = Path(temporary) / "site"
@@ -183,11 +170,9 @@ def build(args):
                     url = dest.parent.as_posix() + "/"
                     manifest.append({"source": source.as_posix(), "url": url, "kind": kind})
                     continue
-                compiler = args.ypst if kind == "Typst" else args.comrak
+                compiler = "ypst" if kind == "Typst" else "cmrak"
                 command = [compiler, "compile", str(ROOT / source), "--root", str(ROOT),
                            "--site-root", str(stage)]
-                if kind == "Typst" and args.typst_font_path:
-                    command.extend(["--", "--font-path", str(Path(args.typst_font_path).resolve())])
                 print(f"Compiling {source}", flush=True)
                 started = time.monotonic()
                 result = subprocess.run(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace")
@@ -247,7 +232,7 @@ def build(args):
             if old.exists():
                 shutil.rmtree(old)
             next_cache.rename(old)
-        (cache / "metadata.json").write_text(json.dumps({"commit": commit, "fingerprint": fingerprint}) + "\n", encoding="utf-8", newline="\n")
+        (cache / "metadata.json").write_text(json.dumps({"commit": commit}) + "\n", encoding="utf-8", newline="\n")
     report = Path(args.report).resolve() if args.report else output.parent / "site-build-report.json"
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(json.dumps({"published": len(manifest), "failed": failures, "durations": durations, "reused": reused}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
@@ -258,13 +243,10 @@ def build(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", default=str(ROOT / "_site"))
-    parser.add_argument("--cmrak", "--comrakk", "--comrak", dest="comrak", default="cmrak", help="path to the cmrak executable")
-    parser.add_argument("--ypst", default="ypst", help="path to the ypst executable")
-    parser.add_argument("--typst-font-path", help="path to additional Typst fonts")
     parser.add_argument("--report", help="path to JSON build report")
-    parser.add_argument("--cache-dir", help="directory for incremental build state")
     parser.add_argument("--full", action="store_true", help="recompile every document")
     args = parser.parse_args()
+    args.cache_dir = os.environ.get("SITE_CACHE_DIR")
     try:
         build(args)
     except (OSError, ValueError, subprocess.CalledProcessError) as error:

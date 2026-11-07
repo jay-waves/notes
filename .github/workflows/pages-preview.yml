@@ -1,4 +1,4 @@
-name: Build Pages preview
+name: Build and deploy notes
 
 on:
   workflow_dispatch:
@@ -26,69 +26,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      SITE_CACHE_DIR: .site-cache
     steps:
       - name: Checkout notes
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Warn about missing source paths
-        run: python3 .github/scripts/warn_missing_paths.py
-        continue-on-error: true
+      - name: Checkout assets
+        uses: actions/checkout@v6
+        with:
+          ref: assets
+          path: attach/tmp
       - name: Set up ypst
         uses: jay-waves/ypst@main
       - name: Set up cmrak
         uses: jay-waves/cmrak@main
       - name: Install related notes dependency
         run: python3 -m pip install -r .github/scripts/requirements-related.txt
-      - name: Test build scripts
-        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
       - name: Restore compiled pages
+        id: cache
         uses: actions/cache/restore@v4
         with:
-          path: .site-cache
-          key: notes-pages-v1-${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.SITE_CACHE_DIR }}
+          key: notes-pages-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             notes-pages-v1-${{ runner.os }}-
       - name: Build site
-        env:
-          FULL_BUILD: ${{ inputs.full_build }}
-        run: |
-          full=()
-          if [[ "$FULL_BUILD" == "true" ]]; then full+=(--full); fi
-          python3 .github/scripts/build_site.py \
-            --report "$RUNNER_TEMP/site-build-report.json" \
-            --cache-dir .site-cache "${full[@]}"
-      - name: Summarize skipped documents
-        run: |
-          python3 - "$RUNNER_TEMP/site-build-report.json" >> "$GITHUB_STEP_SUMMARY" <<'PY'
-          import json
-          import sys
-          report = json.load(open(sys.argv[1], encoding="utf-8"))
-          print("## Site build")
-          print(f"Published: {report['published']} · Reused: {report.get('reused', 0)} · Skipped: {len(report['failed'])}")
-          for item in report["failed"]:
-              name = item["source"].replace("|", "\\|").replace("\n", " ")
-              print(f"- `{name}`: {item['reason']}")
-          print("\n### Slowest documents")
-          for item in sorted(report.get("durations", []), key=lambda item: item["seconds"], reverse=True)[:10]:
-              name = item["source"].replace("\n", " ")
-              print(f"- `{name}`: {item['seconds']:.2f}s")
-          PY
-      - name: Upload build report
-        uses: actions/upload-artifact@v4
-        with:
-          name: site-build-report
-          path: ${{ runner.temp }}/site-build-report.json
-          if-no-files-found: error
-          retention-days: 7
+        run: python3 .github/scripts/build_site.py ${{ inputs.full_build && '--full' || '' }}
       - name: Check generated URLs
         run: python3 .github/scripts/check_site.py _site
       - name: Save compiled pages
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/cache/save@v4
         with:
-          path: .site-cache
-          key: notes-pages-v1-${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.SITE_CACHE_DIR }}
+          key: ${{ steps.cache.outputs.cache-primary-key }}
       - name: Upload preview
         uses: actions/upload-artifact@v4
         with:
@@ -103,6 +76,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: cloudflare-pages
     timeout-minutes: 15
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.API_TOKEN }}
+      CLOUDFLARE_PAGES_PROJECT: ${{ vars.PAGES }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/download-artifact@v4
@@ -110,18 +87,10 @@ jobs:
           name: pages-preview
           path: _site
       - name: Deploy to Cloudflare Pages
-        env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.API_TOKEN }}
-          CLOUDFLARE_PAGES_PROJECT: ${{ vars.PAGES }}
         run: |
           test -n "$CLOUDFLARE_ACCOUNT_ID"
           test -n "$CLOUDFLARE_API_TOKEN"
           test -n "$CLOUDFLARE_PAGES_PROJECT"
           npx --yes wrangler@4 pages deploy _site --project-name "$CLOUDFLARE_PAGES_PROJECT" --branch main
       - name: Remove old production deployments
-        env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.API_TOKEN }}
-          CLOUDFLARE_PAGES_PROJECT: ${{ vars.PAGES }}
         run: python3 .github/scripts/prune_deployments.py

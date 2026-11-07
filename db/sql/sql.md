@@ -36,7 +36,19 @@ CRUD: Create & Read & Update & Delete Data
 * Location Plan(Query Tree): 关注查询语义信息，进行语句的关系代数优化。
 * Execution Plan(Execution Code): 关注物理执行开销。
 
-<mermaid src="charts/sql-1.mmd"></mermaid>
+```mermaid
+flowchart TD
+    A[*SQL Query] --> B[Parsing & Syntax Analysis]
+    B --> C[Semantic Analysis<br/>Schema Check <br/> Name Resolution]
+    C --> D[*Logical Plan]
+    D --> E[Query Optimization]
+    E --> F[*Execution Plan]
+    F --> G[Code Generation]
+    G --> H[Query Execution Engine]
+
+    C <---> S[(System Catalog / Metadata)]
+    E <---> S
+```
 
 Category | Commands | Purpose 
 --------|----------|---------

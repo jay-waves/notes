@@ -6,6 +6,7 @@
 /.blogs/
 /.work/
 /.zed/
+.env
 
 ~$*.ppt*
 *.ppt.bak
@@ -20,6 +21,8 @@
 /.notes-site-build-*/
 /site-build-report.json
 /.site-cache/
+# Separate assets branch, mapped here as a worktree.
+/attach/tmp/
 __pycache__/
 
 # 系统文件

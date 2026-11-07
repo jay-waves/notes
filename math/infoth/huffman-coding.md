@@ -1,6 +1,3 @@
----
-math-engine: mathjax
----
 
 ## 哈夫曼 (Huffman) 编码
 
@@ -18,3 +15,29 @@ math-engine: mathjax
 - 读1进入左子树
 - 读0进入右子树
 - 若到达叶子节点, 则译出一个符号.
+
+## Truncated Huffman Coding
+
+Huffman Coding 只能约束平均编码长度 $\sum p_i l_i$ 最小，但是可能出现**低频符号的编码长度
+非常长**的问题。Huffman Coding 要求编码必须是**前缀无歧义 (Prefix-free)** 的，在按符号概率
+构建树时，容易出现非常不平衡的树。
+
+Huffman Coding 在无明确分隔符的情况下，对二进制码进行编码。Truncated Huffman Coding 则将
+所有低频符号合并到某个符号（以 `ESC` 为例），每当读取 `ESC` 时，向后读取一个固定长度。所有
+低频符号都编码在这个固定长度里。
+
+```mermaid
+flowchart TD
+    R((Root)) --> A[0, A]
+    R --> N1[1]
+    N1 --> B[10, B]
+    N1 --> N2[11]
+    N2 --> C[110, C]
+    N2 --> N3[111]
+    N3 --> D[1110, D]
+    N3 --> ESC[1111, ESC<br/>read following 2 bits]
+    ESC --> E[111100, E]
+    ESC --> F[111101, F]
+    ESC --> G[111110, G]
+    ESC --> X[111111, Reserved]
+```

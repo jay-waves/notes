@@ -11,7 +11,7 @@
 
 等效解密: (此处输入 $\oplus$ 的密钥应为 $P^{-1}(K)$) $$P^{-1}\to\oplus\to[S^{-1}\to P^{-1}\to \oplus]\to [S^{-1}\to P^{-1}\to \oplus]\to S^{-1}\to \dots$$ 
 
-$P$ 是应为[有限域](../../../../math/algebra/域/有限域.md)上的线性变换, 满足加法同态性: $P(K\oplus X)=P(K)\oplus P(x)$, 其逆变换 $P^{-1}$ 同理. 
+$P$ 是应为[有限域](../../../../math/algebra/field/finite-field.md)上的线性变换, 满足加法同态性: $P(K\oplus X)=P(K)\oplus P(x)$, 其逆变换 $P^{-1}$ 同理. 
 
 **等效解密的结构和加密结构更加类似.** 当然, 由于逆运算和原运算区别也较大, 结构相同不代表代码容易复用.
 

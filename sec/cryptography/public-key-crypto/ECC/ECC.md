@@ -1,7 +1,7 @@
 
 ## 椭圆曲线密码学 ECC
 
-对于给定曲线, 选定曲线上基点 $G$. 基点 $G$ 是曲线点集群的某个子群的生成元, 当其阶 $n$ ($[n]G=\mathcal{O}$) 足够大时, 存在[**椭圆曲线群上的离散对数困难问题 (ECDLP)**](https://notes.jay-waves.cn/math/algebra/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF/). ECC 是建立在 ECDLP 上的公钥密码体制. 换言之, 该公钥密码的单陷门函数为: $P=[d]G$, 给定公钥 $G,P$, 求出私钥 $d$ 是困难的.
+对于给定曲线, 选定曲线上基点 $G$. 基点 $G$ 是曲线点集群的某个子群的生成元, 当其阶 $n$ ($[n]G=\mathcal{O}$) 足够大时, 存在[**椭圆曲线群上的离散对数困难问题 (ECDLP)**](https://notes.jay-waves.cn/math/algebra/elliptic-curve/elliptic-curve.typ/). ECC 是建立在 ECDLP 上的公钥密码体制. 换言之, 该公钥密码的单陷门函数为: $P=[d]G$, 给定公钥 $G,P$, 求出私钥 $d$ 是困难的.
 
 ### ECC 公钥加密
 

@@ -1,3 +1,7 @@
+
+
+$ J(theta) = 1/N sum_(i=1)^N ell(f_theta(x_i), y_i), quad theta <- theta - eta nabla_theta J. $
+
 ## Transformer 
 
 gradient-based learning applied to document recognition 

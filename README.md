@@ -60,6 +60,28 @@
 
 详见 [个人代码风格描述](attach/personal-coding-styles.md)
 
+- C 代码使用 Linux Kernel 风格
+- Go 代码使用 Google 风格.
+- C++ 代码使用标准库风格, 即全小写.
+- Python 使用 pep8-style 风格.
+
+- 避免过深缩进。
+- 函数不超过 20 行。
+- 函数式风格，默认纯函数和不可变数据，精简中间状态。
+- 代码行长度控制在 100 可视字符以内，全角近似认为两字符。
+- 立刻优化和测试性能，不要指望重构。
+- 较少不必要的细节，文档、注释、测试、分析集中在一起。
+- README 是集中索引，信息渐进式披露。
+
+> Keep it simple and stupid
+
+### Charts
+
+- 使用 [Paul Tol Muted](https://sronpersonalpages.nl/~pault/) 风格的色彩。低饱和度、有灰阶区分度。
+- 折线图：
+    - 数据点使用不同符号区分数据系列。
+    - 数据点使用空心描边样式。
+
 ### Reference
 
 - 仓库整体使用 [CC-BY](license.md) 许可证，部分摘录文章或原创文章使用不同版权许可的，在文章开头标明
