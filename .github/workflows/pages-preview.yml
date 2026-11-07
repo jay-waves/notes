@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: assets
-          path: attach/tmp
+          path: attach/img
       - name: Set up ypst
         uses: jay-waves/ypst@main
       - name: Set up cmrak

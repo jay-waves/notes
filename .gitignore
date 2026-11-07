@@ -22,7 +22,7 @@
 /site-build-report.json
 /.site-cache/
 # Separate assets branch, mapped here as a worktree.
-/attach/tmp/
+/attach/img/
 __pycache__/
 
 # 系统文件

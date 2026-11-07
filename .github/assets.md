@@ -1,6 +1,6 @@
 # 附件分支
 
-`assets` 是独立历史的附件分支，本地通过 worktree 映射到 `attach/tmp/`。
+`assets` 是独立历史的附件分支，本地通过 worktree 映射到 `attach/img/`。
 主分支忽略这个目录；笔记仍使用本地相对路径引用附件。
 CI 将 `assets` 检出到同一目录，附件随站点部署，不再依赖 R2。
 
@@ -15,12 +15,12 @@ python .github/scripts/assets.py setup
 也可运行 `python .github/setup.py`，同时更新本地 Typst 模板。
 已有 worktree 时，setup 不覆盖文件或自动拉取更新。
 
-将附件放进 `attach/tmp/` 后，在主仓库根目录执行：
+将附件放进 `attach/img/` 后，在主仓库根目录执行：
 
 ```text
-git -C attach/tmp add .
-git -C attach/tmp commit -m "Update assets"
-git -C attach/tmp push -u origin assets
+git -C attach/img add .
+git -C attach/img commit -m "Update assets"
+git -C attach/img push -u origin assets
 ```
 
 主分支正常提交笔记和代码。`git add .` 不会把附件混入主分支。

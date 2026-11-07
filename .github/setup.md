@@ -12,7 +12,7 @@ python -m pip install -r .github/scripts/requirements-related.txt
 python .github/setup.py
 ```
 
-附件分支映射到 `attach/tmp/`，日常提交和历史清理见 [附件分支](assets.md)。
+附件分支映射到 `attach/img/`，日常提交和历史清理见 [附件分支](assets.md)。
 模板从最新 release 的独立 ZIP 下载，直接覆盖本地包内对应文件，保留本地字体等资源。
 安装标记与当前 ypst 编译器匹配，避免下次编译覆盖模板。
 更换 ypst 编译器后，重新运行本脚本。

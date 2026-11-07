@@ -71,15 +71,15 @@ def inputs(output):
         ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--deduplicate"],
         cwd=ROOT, check=True, stdout=subprocess.PIPE,
     )
-    assets = ROOT / "attach/tmp"
+    assets = ROOT / "attach/img"
     if not (assets / ".git").exists():
-        raise ValueError("Missing assets checkout at attach/tmp; run .github/setup.py")
+        raise ValueError("Missing assets checkout at attach/img; run .github/setup.py")
     attached = subprocess.run(
         ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--deduplicate"],
         cwd=assets, check=True, stdout=subprocess.PIPE,
     )
     names = list(result.stdout.split(b"\0"))
-    names.extend(b"attach/tmp/" + name for name in attached.stdout.split(b"\0") if name)
+    names.extend(b"attach/img/" + name for name in attached.stdout.split(b"\0") if name)
     files = []
     for name in names:
         if not name:

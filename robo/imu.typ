@@ -531,7 +531,7 @@ $
 至此，ESKF 的总体流程如下：
 
 
-#image("../attach/tmp/imu-eskf.svg", width: 100%)
+#image("../attach/img/imu-eskf.svg", width: 100%)
 
 // #align(center, diagram(
 //   node((0, 0), align(center)[

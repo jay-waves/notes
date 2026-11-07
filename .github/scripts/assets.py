@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Manage the assets branch mapped to attach/tmp."""
+"""Manage the assets branch mapped to attach/img."""
 import argparse
 from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
-WORKTREE = ROOT / "attach/tmp"
+WORKTREE = ROOT / "attach/img"
 REF = "refs/heads/assets"
 
 
@@ -17,13 +17,13 @@ def git(*args, cwd=None):
 
 def check_worktree():
     if WORKTREE.is_symlink() or not (WORKTREE / ".git").is_file():
-        raise ValueError("attach/tmp must be the assets worktree; run assets.py setup")
+        raise ValueError("attach/img must be the assets worktree; run assets.py setup")
     top = Path(git("rev-parse", "--show-toplevel", cwd=WORKTREE)).resolve()
     branch = git("symbolic-ref", "HEAD", cwd=WORKTREE)
     common = git("rev-parse", "--path-format=absolute", "--git-common-dir", cwd=WORKTREE)
     expected = git("rev-parse", "--path-format=absolute", "--git-common-dir")
     if top != WORKTREE.resolve() or branch != REF or Path(common).resolve() != Path(expected).resolve():
-        raise ValueError("attach/tmp is not this repository's assets worktree")
+        raise ValueError("attach/img is not this repository's assets worktree")
 
 
 def setup():
@@ -43,7 +43,7 @@ def setup():
 def reset_history(push=False, dry_run=False):
     check_worktree()
     if git("status", "--porcelain", cwd=WORKTREE):
-        raise ValueError("Commit or remove pending changes in attach/tmp before resetting history")
+        raise ValueError("Commit or remove pending changes in attach/img before resetting history")
     old = git("rev-parse", REF)
     expected = ""
     if push:
@@ -72,7 +72,7 @@ def reset_history(push=False, dry_run=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("setup", help="create or verify the assets worktree at attach/tmp")
+    commands.add_parser("setup", help="create or verify the assets worktree at attach/img")
     reset = commands.add_parser("reset-history", help="replace assets history with one current snapshot")
     reset.add_argument("--push", action="store_true", help="also replace remote history using force-with-lease")
     reset.add_argument("--dry-run", action="store_true", help="preview without changing commits or pushing")
