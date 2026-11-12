@@ -49,6 +49,7 @@
 - 允许的 Markdown 扩展语法：HTML、Table、Katex、Footnote、YAML Preamble 
 - 全角标点符号应位于 Markdown 标记之外，如 **粗体之后再逗号**，避免渲染异常。
 - 可以使用 Mermaid 流程图，但是不保证样式稳定。
+- 文内标题在片段链接时采用 slugified 模式，如 `Hello World` 记为 `#hello-world`
 
 ### Naming
 

@@ -24,6 +24,14 @@
 
 ## 名词表
 
+Position 头寸。在金融领域指款项、资金周转情况，也引申为交易中的“持仓”
+
+Hedging / Speculation / Arbitrage: 金融衍生物的三种目的 套期保值（对冲）/ 投机 / 套利。
+
+Speculation (投机): 是指预测未来价格变化 (Price Movement)
+
+Arbitrage (套利): 则是利用不同市场价格差 (Price Discrepancy). 
+
 *FD 定期存款* 
 
 *MM 货币基金* 

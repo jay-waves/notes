@@ -7,22 +7,27 @@ Yield Curve 使用一些 Liquid Market 工具来绘制未来的利率报价曲�
 ## Discount Factor 
 
 let:
-* $t$ Year Fraction (ACT/365)
-* $r$ Market Interest Rate, FRA Forward Rate or Swap Par Rate
+* $\alpha$ Year Fraction (ACT/365)
 * $D$ Discount Factor
 * Annual Compounding 
 
-Deposit:
+Deposit: (market Interest rate $r$)
 
-$$D = \frac{1}{1+rt}$$
+$$D = \frac{1}{1+r_i \alpha_i}$$
 
-FRA: 
+FRA: (Forward Rate $F$)
 
-$$D_E = \frac{D_S}{1+rt}$$
+$$D_{i} = \frac{D_{i-1}}{1+F_i \alpha_i}$$
 
-IRS: (每季度支付一次固定利息)
+Par swap:
 
-$$D_n = \frac{1-r\sum^{n-1}_{i=1}t_i D_i}{1+ r t_n}$$
+$$K \sum_i \alpha_i D_i = 1- D_n$$
+
+$$D_n=\frac{1-K\sum_{i=1}^{n-1}\alpha_iD_i}{1+K\alpha_n}$$
+
+Coupon bond: 
+
+$$D_n=\frac{P-\sum_{i=1}^{n-1}C_iD_i}{M+C_n}$$
 
 ## Bootstrapping
 
@@ -30,13 +35,15 @@ $$D_n = \frac{1-r\sum^{n-1}_{i=1}t_i D_i}{1+ r t_n}$$
 
 ### Zero Coupon Rate 
 
+Zero-Coupon (零息) 就是指某个金融产品中途不支付任何利息，到期一次性收回本息。
+因此，年化零息利率 (Zero-Coupon Rate, Spot Rate) 满足： 
+
 $$
-DF_t=\frac{1}{(1+ZC_t)^{days/365}}
+    D(t) (1 + z(t))^\alpha = 1
 $$
 
-等价于：
-
-$$ZC_t = (\frac{1}{DF_t})^{365/days}-1$$
+对于不同期限 $\alpha = 1, 2,  3\ y$ , 市场给出的定价可能不同。连在一起被称为 (**Spot) Zero Coupon Yield
+Curve (即期零息收益率曲线)**.
 
 ### Spot Discount Factor Curve
 
@@ -54,11 +61,4 @@ $$ZC_t = (\frac{1}{DF_t})^{365/days}-1$$
 MM 存款、FRA 远期利率和 IRS 平价互换利率报价。FRA 按远期区间的结束期限标示，
 横轴期限为分类刻度，间距不代表实际时间间隔。各数值仅供示意，并非自举计算结果。
 
-## Bond Pricing 
-
-$$PV = \sum^n_{i=1}C_i D_i + PD_n$$
-
-* $C_i$ 每期 Coupon Cashflow 
-* $D_i$ 对应付款日期的 DF
-* $D_n$ 到期日 DF
 

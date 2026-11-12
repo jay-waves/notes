@@ -1,12 +1,8 @@
 (() => {
     const script = document.currentScript;
     const root = new URL('../../', script.src);
-    let loaded = false;
-    let touchY = null;
 
-    async function reveal(amount) {
-        if (loaded || amount <= 0 || window.scrollY + window.innerHeight < document.documentElement.scrollHeight - 2) return;
-        loaded = true;
+    async function reveal() {
         try {
             const response = await fetch(new URL('related-notes.json', script.src));
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -31,15 +27,8 @@
             panel.append(paragraph);
             (document.querySelector('main#content') || document.body).append(panel);
         } catch (error) {
-            loaded = false;
             console.error('Could not load related notes:', error);
         }
     }
-    window.addEventListener('wheel', event => reveal(event.deltaY), { passive: true });
-    window.addEventListener('touchstart', event => { touchY = event.touches[0].clientY; }, { passive: true });
-    window.addEventListener('touchmove', event => {
-        const next = event.touches[0].clientY;
-        if (touchY !== null) reveal(touchY - next);
-        touchY = next;
-    }, { passive: true });
+    reveal();
 })();

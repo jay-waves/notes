@@ -32,5 +32,11 @@ Start with first principles. Understand the real objective, investigate the root
 proven best practices. Address problems at their source instead of patching symptoms or applying 
 superficial workarounds.
 
+## [Mattpocock's skills](https://github.com/mattpocock/skills)
+
+1. Shared Glossary — Build a common language to reduce ambiguity and align understanding.
+2. Context Pointers & Progressive Disclosure — Load the right knowledge only when needed, keeping context focused and lightweight.
+3. Lessons Learned — Turn bugs and failures into reusable rules to prevent repeated mistakes.
+4. Deep Modules — Hide complex behavior behind simple interfaces to reduce system complexity.
 
 

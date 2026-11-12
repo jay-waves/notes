@@ -19,9 +19,9 @@ Avoid excessive caveats, defensive language, and unnecessary assumptions.
 
 ## Site Workflow (.github)
 
-- Markdown: use `comrakk`; supported extensions include tables, KaTeX, footnotes,
-  YAML front matter, HTML, `<mermaid>` diagrams, and `<chartist>` charts.
-- Typst: use `@local/ypst-template:0.1.0` and `ypst` for HTML export.
+- Markdown: use `cmrak`; supported extensions include tables, KaTeX, footnotes,
+  YAML front matter, HTML, `<mermaid>` diagrams,.
+- Typst: use `@local/ypst-template:0.1.0` and [`ypst`](https://github.com/jay-waves/ypst) for HTML export.
   Use native Typst syntax and the template's helpers; see the template README.
 - Build the site with `.github/scripts/build_site.py`; its CLI options are listed in `--help`.
 - Changes to images, bibliographies, Typst imports, charts, and other dependencies do not
@@ -40,42 +40,18 @@ Avoid excessive caveats, defensive language, and unnecessary assumptions.
 
 ## Markdown
 
-- Compile with `comrakk`. It renders math with KaTeX, code with highlight.js,
+- Compile with [`cmrak`](https://github.com/jay-waves/cmrak). It renders math with KaTeX, code with highlight.js,
   Chartist charts, and Mermaid with Pele.
-- Use `<mermaid>...</mermaid>` or `<mermaid src="charts/flow.mmd"></mermaid>`
+- Use ```mermaid``` or `<mermaid>...</mermaid>` or `<mermaid src="charts/flow.mmd"></mermaid>`
   for diagrams.
-- Use a standalone tag for Chartist charts:
-
-  ```html
-  <chartist src="charts/example.js" width="75%" caption="Description"></chartist>
-  ```
 
   The path is relative to the Markdown file. See the comrakk repository examples for details.
-- Run `comrakk compile note.md --standalone` to check a document.
+- Run `cmrak compile note.md --standalone` to check a document.
 
 ## Typst
 
 - Import `template` and any needed helpers from `@local/ypst-template:0.1.0`, then use
     `#show: template`. Place `#set document(...)` before the show rule.
-- `ypst` supports `#mermaid` and `#chartist` diagrams.
-- Pass Mermaid source directly to `#mermaid`, as a literal string or a fenced
-    `mermaid` code block in its content argument. A filename string is interpreted
-    as diagram text, not loaded as a file. For separate sources, put the whole
-    `#mermaid` call in a `.typ` file and `#include` it.
-- Import `mermaid` from the template. For example:
-
-  ````typst
-  #mermaid(width: 80%, caption: [Workflow])[
-  ```mermaid
-  flowchart LR
-      A[Input] --> B[Output]
-  ```
-  ]
-  ````
-
 - Use `ypst compile main.typ main.html` or
     `ypst compile main.typ main.pdf --pdf` from the document's project directory.
-    ypst pre-renders `#mermaid` to SVG for both outputs; plain Typst uses the
-    template's placeholder. Bare Mermaid code blocks are a separate HTML-only
-    rendering path and remain code in PDF.
 - Use absolute #link(https://notes.jay-waves.cn/..) URLs for links between Typst notes.
