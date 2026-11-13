@@ -49,6 +49,8 @@ SSD 的接口协议:
 - M.2 SATA SSD: 类似 SATA, 更小型化.
 - NVMe SSD: (PCIe 接口), >3GB/s
 
+注意，DRAM 可以按字节寻址。但是 SSD (NVMe, SATA) 和 HDD 都只能按块寻址。
+
 ## RAID
 
 RAID (冗余阵列独立磁盘), 用于将多个物理磁盘驱动器组合为一个逻辑单元, 用于数据冗余和性能改进. RAID 可通过硬件控制器或软件实现.
